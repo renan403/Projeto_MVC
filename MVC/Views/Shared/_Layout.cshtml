@@ -1,0 +1,149 @@
+﻿@model ModelController
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - MVC</title>
+    <link rel="shortcut icon" type="imagex/png" href="https://images.vexels.com/media/users/3/152418/isolated/lists/098366e6994dd75ab46b47cd27b2c9d4-icone-do-planeta-terra.png">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />   
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/MVC.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/icones/"/>    
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm  navbar-dark bg-dark border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <!-- LOGO COM ICONE -->
+                <a class="navbar-brand" style="padding-right:3%; margin-left:3%;" asp-area="" asp-controller="Home" asp-action="Home"><img src="https://images.vexels.com/media/users/3/152418/isolated/lists/098366e6994dd75ab46b47cd27b2c9d4-icone-do-planeta-terra.png" width = "50" /></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <!-- BOTÃO DO CEP -->
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">                       
+                        <li>
+                            <a class="btn btn-outline-info"asp-action=""asp-controller="#" data-bs-toggle="modal" data-bs-target="#exampleModal"> Endereço</a>
+                        </li>                       
+                    </ul>
+
+                    <!-- BARRA DE PESQUISA -->
+                    <nav class="navbar navbar-dark bg-dark ">
+                        <div class="container-fluid  " style="border-color:black">
+                            <form class="d-flex " method="post" >                               
+                               <div class="input-group">                            
+                                  <input size="80" type="search"  class="form-control" placeholder="Pesquisar " TextMode="Password" id="password" aria-label="Search">
+                                  <button  class="input-group-text  btn-outline-dark " style="background:orange; border-color:orange" id="basic-addon2"><img src="~/icones/search.svg" style="width:25px;height:25px" alt="" /></button>
+                               </div>
+                            </form>
+                        </div>
+                    </nav>    
+
+
+                    <!-- DROPDOWN DE LOGIN-->
+                    <div class="dropdown">
+                       <button class="btn btn-outline-info dropdown-toggle" style="margin-right:20px" type="button" id="dropdownMenuButton2"  aria-expanded="false">
+                         Espaço login
+                       </button>
+                       @if(false){
+                            
+                        
+                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
+                        <li><a class="dropdown-item" href="#">Sua conta</a></li>
+                        <li><a class="dropdown-item" href="#">Seus Pedidos</a></li>                       
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#">Trocar de conta</a></li>
+                        <li><a class="dropdown-item" href="#">Sair</a></li>
+                            </ul>
+                        }
+                        else{
+                            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
+                              <li><a class="dropdown-item" asp-action="Login" asp-controller="Login">Login</a></li>                                          
+                              <li><hr class="dropdown-divider"></li>
+                              <li><a class="dropdown-item" asp-action="CriarConta" asp-controller="Login">Criar conta</a></li>                       
+                            </ul>
+                        }
+                    </div>
+
+
+                    <!-- BOTÃO DE COMPRA -->
+                   <ul class="navbar-nav flex-grow-1 ">                        
+                        <li class="nav-item">                        
+                            <a class="btn btn-outline-info text-orange" asp-controller="Login" asp-action="Carrinho" >
+                            <svg xmlns="http://www.w3.org/2000/svg" width="23" height="25" fill="currentColor" class="bi bi-cart2" viewBox="0 0 16 16"> <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/></svg><path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/></svg> 
+                              <span class="position-absolute badge rounded-pill bg-dark spamHome " >
+                                10
+                               <span class="visually-hidden">Carrinho</span>
+                               </span>
+                            </a>
+                        </li>                                               
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="todasTelas">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+    <footer class="border-top footer text-muted">
+        
+        <div class="container">                 
+            &copy; @DateTime.Today.Year - MVC &emsp;&emsp;&emsp;
+            <a href="#">Condições de uso</a>&emsp;&emsp;&emsp;
+            <a href="#">Políticas de Privacidade</a>&emsp;&emsp;&emsp;
+            <a href="#">Ajuda</a>&emsp;&emsp;&emsp;
+            <a href="#">Quem somos</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)  
+</body>
+</html>
+
+<!-- POP-UP DO CEP -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header" >
+          <div class="ajusteModalCep">      
+              <h5 class="modal-title" style="margin-left:60px" id="exampleModalLabel">Escolha sua localização</h5>
+          </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" >
+        <div class="ajusteModalCep">    
+                    @if(true == false)
+                    {
+                        <h3> Espaço para criar Login</h3>
+
+                    }
+                    else
+                    {
+                        <p>LOGADO</p>
+                    }
+        </div>
+      </div>
+      <form method="post" >
+          <div class="modal-footer">
+            <div class="ajusteModalCep"> 
+                <div class="input-group input-group-sm mb-1" >
+                    <h4>cep&emsp; </h4> 
+                        <input name="cep1"  id="inputcep" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" size="10" maxlength="5"/> 
+                        <p id="pcep"> &nbsp; </p> 
+                        <input name="cep2" size="5" id="inputcep" type="text" maxlength="3" onkeypress="return event.charCode >= 48 && event.charCode <= 57"/>
+                    <button id="pcep" type="submit" class="btn btn-dark" style="border-radius:10px;margin-left:20px;">
+                        Confirmar 
+                    </button>           
+                </div>
+            </div>  
+          </div>
+      </form>
+    </div>
+  </div>
+</div>

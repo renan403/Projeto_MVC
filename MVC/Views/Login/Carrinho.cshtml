@@ -1,0 +1,78 @@
+﻿@{
+    ViewBag.Title = "Carrinho";
+}
+<div class="mesmaLinha">
+ 
+    
+    <div class="boxCarrinho">
+        <h3>Carrinho de compras</h3>
+        <hr class="dropdown-divider">      
+        <div style="display:block;">
+            <!--Uma box do carrinho-->
+            <div class="mesmaLinha">
+                <img src="~/img/galaxia/galaxia1.jpg" style="widht:140px;height:140px" alt="img"/>
+                <div class="display:block;">
+                    <h4>Nome Produto</h4>
+                    <p>Descrição produto</p>
+                     <select class="form-select  btn-dark btn-sm" style="margin-left:2%;width:30%;" aria-label="Default select example">             
+                      <option value="0">0</option>
+                      <option value="1" selected>1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                   </select>
+                </div> 
+                <p> valor produto:</p>
+             </div>
+             <!--  <hr class="dropdown-divider">  
+
+           Uma box do carrinho
+             <div class="mesmaLinha" style="margin-top:1%">
+                <img src="~/img/galaxia/galaxia1.jpg" style="widht:140px;height:140px" alt="img"/>
+                <div class="display:block;">
+                    <h4>Nome Produto</h4>
+                    <p>Descrição produto</p>
+                    <select class="form-select  btn-dark btn-sm" style="margin-left:2%;width:30%;" aria-label="Default select example">             
+                      <option value="0">0</option>
+                      <option value="1" selected>1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                   </select>
+                </div>
+             </div>-->
+        </div>
+         <hr class="dropdown-divider">  
+          <!--Uma box do valor total-->
+        <div class="mesmaLinha">
+            <hr class="dropdown-divider">         
+            <h6 style="margin-left:70%">Subtotal (1 item):</h6>
+            <h6>&nbsp;80,00</h6>
+        </div>
+    </div>
+
+     <!--Uma box do carrinho lateral-->
+    <div class="boxValorTotal">
+      <div class="bordaCar">
+           <div class="mesmaLinha ajustCarLat">
+          
+                <h5>Subtotal (1 item):</h5>
+                <h5><strong>80,00</strong></h5>
+                
+          </div>
+           <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+           <label class="form-check-label" for="flexCheckDefault">
+    Este pedido contém um presente
+  </label>
+          <div class="botaoCarrinho">  
+              @if(true){
+                    <a asp-controller="Produtos" asp-action="ComprarProd" class="btn btn-outline-dark">Finalizar pedido</a>
+                    
+                }else{
+                    <a asp-controller="Login" asp-action="Login" class="btn btn-outline-dark">Finalizar pedido</a>
+                }
+            </div>
+      </div>
+    </div>
+</div>
+
+
+        

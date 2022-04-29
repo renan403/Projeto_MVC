@@ -1,0 +1,52 @@
+﻿@{
+    ViewBag.title = "Produtos";
+
+}
+
+<div class=" mesmaLinha">
+    <div class="boximgProd mesmaLinha ">
+        <div class="boxImgProdPequena ">
+          <a ><img  onmouseover="img1()" src="~/img/galaxia/galaxia1.jpg" alt="produto1"></a>
+          <a ><img  onmouseover="img2()" src="~/img/galaxia/galaxia2.jpg" alt="produto1"></a>
+          <a ><img  onmouseover="img3()" src="~/img/galaxia/galaxia3.jpg" alt="produto1"></a>
+        </div>
+        <div class="boxImgProdGrande  ">
+            <img id="img" src="~/img/galaxia/galaxia1.jpg" alt="produto1">
+        </div>   
+    </div>
+    <div class="boxDescricao" style="display: block;">
+        <h2> nome do produto</h2>
+        <hr class="dropdown-divider">
+        <h3>R$ 200.00</h3>
+         <h6 style="font-size:13px">De:<s style="color:gray;"> R$ 250.00</s></h6>
+        <p>descrição do produto</p>
+        <div class="">
+
+        </div>
+    </div>
+    <div class="boxValorEentrega" style="display: block;">
+        <h2>valor e entrega</h2>
+        <hr class="dropdown-divider">
+         <p>descrição do produto</p>  
+         <div class="botoesProd">
+         <a asp-action="Carrinho" asp-controller="Login" class="btn btn-outline-info btn-sm">Add no carrinho</a>
+            @if (true)
+            {
+                 <a asp-action="ComprarProd" asp-controller="Produtos"  class="btn btn-outline-info btn-sm">comprar</a>
+            }else{
+                 <a asp-action="Login" asp-controller="Login"  class="btn btn-outline-info btn-sm">comprar</a>
+            }
+
+         </div>
+    </div>
+</div>
+<div class="boxDescricaoDetalhada" style="display: block;">
+        <h2> Descrição detalhada</h2>
+        <hr class="dropdown-divider">
+        <p>descrição do produto</p>
+</div>
+<div class="boxOutrosProd" style="display: block;">
+        <h2> Outros Produtos</h2>
+        <hr class="dropdown-divider">
+        <p>descrição do produto</p>
+</div>

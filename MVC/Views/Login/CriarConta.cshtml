@@ -1,0 +1,61 @@
+﻿@model ModelController
+
+@{
+    ViewBag.title = "Criar conta";
+}
+<div style="width:auto;height:550px">
+    <form>
+         <div class=" mb-3" style="width:40%;margin:auto">
+           <div class="card border-info  mb-3" style="height:100%">
+               <div class="card-header"><h3>Criar conta</h3></div>
+                   <div class="card-body">
+                       <div class="mb-1">
+                            <label for="InputNome" class="form-label"><strong>Seu nome</strong></label>
+                            <input name="nome" id="InputNome" type="text"  class="form-control" placeholder="Seu nome">
+           
+                        </div>
+                        <div class="mb-1">
+                            <label for="InputEmail" class="form-label"><strong>E-mail</strong></label>
+                            <input name="email" id="InputEmail" type="email" class="form-control" placeholder="Exemplo@exemplo.com" aria-describedby="EmailCadastrado">
+           
+                        </div>
+                        <div class="mb-1">
+                             <label for="exampleInputPassword1" class="form-label" ><strong>Senha</strong></label>
+                              <div class="input-group mb-3">
+                                  <input name="senha" id="passwordCriar" type="password"class="form-control" placeholder="Pelo menos 8 caracteres" aria-label="Senha" aria-describedby="descriSenha">
+                                  <span class="input-group-text" id="basic-addon2"><img id="olhoSenha" onmouseout="mostrarSenha()" onmouseup="mostrarSenha()" onmousedown="ocultarSenha()" src="~/icones/eye.svg" alt="" /></span>
+                              </div>
+                        </div>                      
+                       <!-- <div id="descriSenha" class="form-text">&nbsp;&ImaginaryI; As senhas devem ter pelo menos 8 caracteres.</div>-->
+                        <div class="mb-1">
+                             <label for="exampleInputPassword1" class="form-label" ><strong>Confirme sua senha</strong></label>
+                             <div class="input-group">
+                                 <input name="confSenha" id="passwordConf" type="password" class="form-control" placeholder="Confirme sua senha" aria-describedby="descriConfSenha" >                      
+                                 <span class="input-group-text" id="basic-addon2">
+                                     <img id="olhoConf" onmouseout="mostrarConf()" onmouseup="mostrarConf()" onmousedown="ocultarConf()" src="~/icones/eye.svg" alt="" />
+                                 </span>
+                               
+                             </div>
+                         </div>
+                          @if(Model.Error == "Vazio"){
+                                 <div id="descriConfSenha" class="form-text">&nbsp;&ImaginaryI; As senhas devem ter pelo menos 8 caracteres. </div>
+                            }else if (Model.Error == "Divergente")
+                            {
+                                <div id="descriConfSenha" class="form-text" style="color:red;">&nbsp;&ImaginaryI; As senhas não Confere </div>
+                            }else if (Model.Error == "Cadastrado")
+                            {
+                                <div id="EmailCadastrado" class="form-text" style="color:red;">&nbsp;&ImaginaryI; As senhas não Confere </div>
+                            }else if (Model.Error == "pass")
+                            {
+                                @Url.ActionLink("Login","Login");
+                            }
+
+                    <br />
+                        <button type="submit" style="width:100%;" class="btn btn-primary btn-sm mb-1">Confirmar</button>            
+                        <hr class="dropdown-divider"  style="width:100%" />
+                        <p> Você já tem uma conta? &nbsp;<a asp-action="Login" asp-controller="Login">Faça Login</a></p>     
+                    </div>
+            </div> 
+        </div> 
+    </form>
+</div>

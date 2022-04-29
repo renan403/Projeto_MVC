@@ -1,0 +1,41 @@
+﻿@{
+     ViewBag.title = "Login";
+}
+<div style="width:auto;height:500px">
+    <form>
+        <div class=" mb-3" style="width:40%;margin:auto">
+           <div class="card border-info  mb-3" style="height:100%">
+               <div class="card-header"><h3>Fazer login</h3></div>
+               <div class="card-body">
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label"><strong>Email</strong></label>
+                        <input type="email" class="form-control" id="exampleInputEmail1"  TextMode="Email" placeholder="Seu Email" >           
+                        <div class=" mb-3">
+                            <label for="exampleInputPassword1" class="form-label" ><strong>Senha</strong></label>
+                            <div class="input-group">                            
+                             <input type="password" class="form-control" placeholder="Sua senha " TextMode="Password" id="password">
+                              <span class="input-group-text" id="basic-addon2"><img id="olho" onmouseout="mostrar()" onmouseup="mostrar()" onmousedown="ocultar()" src="~/icones/eye.svg" alt="" /></span>
+                            </div>
+                         
+                         
+                         </div>
+                        <button type="submit" style="width:100%;" class="btn btn-primary btn-sm">Confirmar</button> 
+                        <p><br/>Ao continuar, você concorda com as <a href="#">Condições de uso</a> do APP.</p>
+                        <a href="#">Precisa de ajuda?</a>
+                   </div>
+               </div>
+          </div>
+          <div class="adpHr"style="width:100%;margin:auto">
+            <hr><p style="color:grey;">&ensp;  Novo no app?  &ensp;</p><hr>
+          </div>
+         <div style="width:100%;margin:auto;text-align:center">
+         <button type="submit" style="width:100%" class="btn btn-outline-secondary btn-sm" asp-action="CriarConta" asp-controller="Login">Criar sua conta</button> 
+         </div>
+       </div>
+    </form>
+</div>
+
+
+
+  
+    

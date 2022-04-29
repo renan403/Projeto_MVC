@@ -1,0 +1,116 @@
+﻿@{
+     ViewBag.title = "Pagamento";
+}
+
+<div class="mesmaLinha">
+ 
+    
+    <div class="boxCarrinho">
+             
+        <div style="display:block;">
+            <!--Uma box do carrinho-->
+          <div class="container">
+              <div class="row">
+                 <div class="col order-first">
+                  <h5>Endereço de entrega</h5> 
+                </div>  
+                <div class="col">
+                  <p>informações do endereço aqui</p>
+                </div>
+                <div class="col order-last">
+                  <a href="#">alterar</a>
+                </div>  
+             </div>
+          </div>
+          <hr class="dropdown-divider">  
+          <div class="container">
+              <div class="row">
+                 <div class="col order-first">
+                  <h5>Método de pagamento</h5> 
+                </div>  
+                <div class="col">
+                  <p>informações de pagamento aqui</p>
+                </div>
+                <div class="col order-last">
+                  <a href="#">alterar</a>
+                </div>
+   
+             </div>
+         </div>
+         <hr class="dropdown-divider">  
+          <div class="container">
+              <div class="row">
+                 <div class="col order-first">
+                  <h5>Revisar Itens </h5> 
+                </div>  
+                <div class="col">
+                  <p>criar box de itens</p>
+                </div>
+                <div class="col order-last">
+                  <a href="#">alterar</a>
+                </div>
+   
+             </div>
+         </div>
+         <hr class="dropdown-divider">  
+         <div class="container">
+              <div class="row">
+                 <div class="col order-first" style="display:flex;">
+                  <h6 >Subtotal (1 item):</h6>
+                  <h6>&nbsp;80,00</h6>
+                </div> 
+                 <div class="col">
+                 
+                </div>
+                <div class="col order-last">
+                    <button  class="btn btn-outline-dark"> finalizar compra</button>
+                </div>
+                
+   
+             </div>
+         </div>
+
+        </div>
+         
+          <!--Uma box do valor total-->
+        <div class="mesmaLinha">
+            <hr class="dropdown-divider">         
+            
+            
+        </div>
+    </div>
+
+     <!--Uma box do carrinho lateral-->
+    <div class="boxValorTotal">
+      <div class="bordaCar">
+          <div class="botaoCarrinho">  
+              @if(true){
+                    <a asp-controller="Produtos" asp-action="ComprarProd" class="btn btn-outline-dark">Finalizar pedido</a>
+                    
+                }else{
+                    <a asp-controller="Login" asp-action="Login" class="btn btn-outline-dark">Finalizar pedido</a>
+                }
+            </div>
+           <div class="mesmaLinha ajustCarLat">
+          
+                <h5>Subtotal (1 item):</h5>
+                <h5><strong>80,00</strong></h5>
+                
+          </div>
+           <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+           <label class="form-check-label" for="flexCheckDefault">
+    Este pedido contém um presente
+  </label>
+          
+      </div>
+    </div>
+</div>
+
+
+        
+
+
+
+
+
+
