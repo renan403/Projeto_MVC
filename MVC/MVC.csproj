@@ -15,10 +15,10 @@
 
   <ItemGroup>
     <Reference Include="Email">
-      <HintPath>..\..\Dll_MVC\Email\Email\bin\Debug\Email.dll</HintPath>
+      <HintPath>Dll\Email.dll</HintPath>
     </Reference>
     <Reference Include="Seguranca_v2">
-      <HintPath>..\..\Dll_MVC\Seguranca_v2\Seguranca_v2\bin\Debug\Seguranca_v2.dll</HintPath>
+      <HintPath>Dll\Seguranca_v2.dll</HintPath>
     </Reference>
   </ItemGroup>
 
