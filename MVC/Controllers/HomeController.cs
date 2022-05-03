@@ -8,6 +8,7 @@ namespace MVC.Controllers
     public class HomeController : Controller
     {
         ModelController model = new ModelController();
+        [HttpPost,HttpGet]
         public async Task<IActionResult> Home(string? pesquisa, string? cep1, string? cep2)
         {          
             

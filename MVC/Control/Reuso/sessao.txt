@@ -1,0 +1,38 @@
+﻿
+//No CSHTML
+
+@using Microsoft.AspNetCore.Http
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+<h5>@HttpContextAccessor.HttpContext.Session.GetString("SessaoNome") </h5>
+
+//INSERIR VALOR NA CONTROLLER 
+
+HttpContext.Session.SetString("SessaoNome", "renan");
+
+            var info = new ModelController
+            {
+                Nome = "renan"
+            };
+            HttpContext.Session.SetString("sessaoUser", JsonConvert.SerializeObject(info));
+
+
+
+//TIRAR VALOR NA CONTROLLER 
+
+ var userInfo = JsonConvert.DeserializeObject<ModelController>
+                  (HttpContext.Session.GetString("sessaoUser"));
+
+                  return View(userInfo);
+
+            ========================================================================       
+            try
+            {
+                var userInfo = JsonConvert.DeserializeObject<ModelController>
+                (HttpContext.Session.GetString("sessaoUser"));
+                return View(userInfo);
+            }
+            catch (Exception e)
+            {
+                Response.Redirect("/Login/ErrorLogin");
+               
+            }

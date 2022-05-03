@@ -2,64 +2,61 @@
 using Microsoft.AspNetCore.Mvc;
 using MVC.Models;
 using System.Diagnostics;
-using MVC.Control.InfoDAO;
+
+using Newtonsoft.Json;
+using Microsoft.Extensions.Primitives;
 
 namespace MVC.Controllers
 {
     public class LoginController : Controller
     {   
-        ModelController model = new ModelController();
-        Data data = new Data();
-        Salvar salvar = new Salvar();
+
+        [HttpPost]
+        [HttpGet]
         public async Task<ActionResult> Login()
         {
            
             return View();
         }
-        public async Task<IActionResult> CriarConta(string nome, string email, string senha,string confSenha)
-        {
-            try
-            {
-                if (senha != null)
-                {
-                    if (senha == confSenha)
-                    {
-                        using (Salvar salvar = new Salvar())
-                        {
-                           bool resultado = await data.RegisterUser(nome, email, salvar.Criptografar(senha));
-                            if (resultado == false)
-                            {
-                                model.Error = "Cadastrado";
-                            }
-                        }
-                        
-                    }
-                    else
-                    {
-                        model.Error = "Divergente";
-                    }
-                   
-                }
-                else
-                {
-                    model.Error = "Vazio";
-                }
-               
 
-            }
-            catch (Exception)
-            {
 
-                throw;
-            }
-            
-            return View(model);
-        }
-        public IActionResult Carrinho()
+        
+        public async Task<ActionResult> Teste()
         {
             return View();
         }
         
+
+        
+        [HttpGet]
+        public IActionResult CriarConta()
+        {         
+            return View(); 
+        }
+        [HttpPost]
+        public IActionResult CriarConta(Usuario model)
+        {
+            //if(string.IsNullOrEmpty(model.Nome)){ ModelState.AddModelError("nome" , "Campo Nome não pode ser Vazio");}
+            //if(string.IsNullOrEmpty(model.Email)){ ModelState.AddModelError("email", "Campo Email não pode ser Vazio");}
+           // if(string.IsNullOrEmpty(model.Senha)){ ModelState.AddModelError("senha", "Campo Senha não pode ser Vazio");}
+            if(model.ConfSenha != model.Senha){ ModelState.AddModelError("ConfSenha", "Senhas estão diferentes");}
+
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction("Login", "Login");
+            }
+            return View(model); 
+        }
+        
+        
+        public IActionResult Carrinho()
+        {
+            return View();
+        }
+        public IActionResult ErrorLogin()
+        {
+            return View();
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

@@ -28,17 +28,17 @@ namespace MVC.Control.DataBase
             public async Task<bool> IsUserExists(string email)
             {
                 var user = (await client.Child("Usuarios")
-                    .OnceAsync<Models.ModelController>())
+                    .OnceAsync<Models.Usuario>())
                     .Where(u => u.Object.Email == email)
                     .FirstOrDefault();
                 return (user != null);
             }
-            public async Task<bool> RegisterUser(string name,string email, byte[] senha)
+            public async Task<bool> RegisterUser(string name,string email, string senha)
             {
                 if (await IsUserExists(name) == false)
                 {
                     await client.Child("Usuarios")
-                        .PostAsync(new Models.ModelController()
+                        .PostAsync(new Models.Usuario()
                         {
                             Nome = name,
                             Senha = senha,

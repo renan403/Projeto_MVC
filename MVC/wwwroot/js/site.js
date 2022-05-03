@@ -1,5 +1,6 @@
 ﻿
 
+
 function Avaliar(estrela) {
     var url = window.location;
     url = url.toString()
@@ -150,4 +151,24 @@ function mostrarConf() {
 function ocultarConf() {
     document.getElementById('olhoConf').src = '../icones/eye-off.svg';
     document.getElementById('passwordConf').type = 'text';
+}
+
+function ValidaCriaConta() {
+    var ObjNome = document.getElementById("nome");
+    var ObjEmail = document.getElementById("email");
+    var ObjSenha = document.getElementById("senha");
+    if (!ObjNome.checkValidity()) {
+        document.getElementById("validNome")
+            .innerHTML = inpObj.validationMessage;
+    }
+    if (!ObjEmail.checkValidity()) {
+        document.getElementById("validEmail")
+            .innerHTML = ObjEmail.validationMessage;
+    }
+    if (!ObjSenha.checkValidity()) {
+        document.getElementById("validSenha")
+            .innerHTML = ObjSenha.validationMessage;
+    }
+
+
 }
