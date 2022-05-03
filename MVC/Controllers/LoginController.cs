@@ -36,9 +36,6 @@ namespace MVC.Controllers
         [HttpPost]
         public IActionResult CriarConta(Usuario model)
         {
-            //if(string.IsNullOrEmpty(model.Nome)){ ModelState.AddModelError("nome" , "Campo Nome não pode ser Vazio");}
-            //if(string.IsNullOrEmpty(model.Email)){ ModelState.AddModelError("email", "Campo Email não pode ser Vazio");}
-           // if(string.IsNullOrEmpty(model.Senha)){ ModelState.AddModelError("senha", "Campo Senha não pode ser Vazio");}
             if(model.ConfSenha != model.Senha){ ModelState.AddModelError("ConfSenha", "Senhas estão diferentes");}
 
             if (ModelState.IsValid)
