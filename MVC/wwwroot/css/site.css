@@ -1,23 +1,120 @@
 
 
 /* adaptação bootstrap*/
+
 :root {
     --bs-teste-rgb: 0, 0, 0;
 }
+
 .bg-dark {
     --bs-bg-opacity: 1;
     background-color: rgba(var(--bs-teste-rgb), var(--bs-bg-opacity)) !important;
 }
+
 .btn-dark {
     --bs-bg-opacity: 1;
     background-color: rgba(var(--bs-teste-rgb), var(--bs-bg-opacity)) !important;
 }
 
+.link-primary {
+    text-decoration: none;
+    color: darkblue;
+}
+    .link-primary:hover {
+        --bs-bg-opacity: 1;
+        color: rgba(255,69,0,0.60);
+    }
+.link-dark {
+    text-decoration: none;
+}
+    .link-dark:hover {
+        --bs-bg-opacity: 1;
+        color: rgba(255,69,0,0.60);
+    }
+.border-info {
+    border-color: orange !important;
+}
+
+.btn-primary {
+    margin-top: 2%;
+    color: black;
+   
+    border-color:rgba(0,0,0,0.55) ;
+    background-color: rgb(232,163,0);
+    
+}
+    .btn-primary:hover {
+        margin-top: 2%;
+        background-color: rgb(240,140,9);
+        color: black;
+        border-color: rgba(0,0,0,0.25);
+        
+    }
+    .btn-primary:focus + .btn-primary, .btn-primary:focus {
+        color: black;
+        background-color: rgb(240,140,9);
+        border-color: rgba(0,0,0,0.25);
+        box-shadow: 0 0 0 0.25rem rgba(0, 0, 0, 0.5);
+    }
+    .btn-check:checked + .btn-primary, .btn-check:active + .btn-primary, .btn-primary:active, .btn-primary.active, .show > .btn-primary.dropdown-toggle {
+        color: black;
+        background-color: rgb(240,140,9);
+        box-shadow: 0 0 0 0.25rem rgba(0, 0, 0, 0.5);
+    }
+    .btn-check:focus + .btn-primary, .btn-primary:focus {
+        color: black;
+        background-color: rgb(240,140,9);
+        border-color: rgba(0,0,0,0.25);
+        box-shadow: 0 0 0 0.25rem rgba(0, 0, 0, 0.5);
+    }
+    .btn-primary:disabled, .btn-primary.disabled {
+        color: black;
+        background-color: rgb(240,140,9);
+        border-color: rgba(0,0,0,0.25);
+        box-shadow: 0 0 0 0.25rem rgba(0, 0, 0, 0.5);
+    }
+
+.btn-outline-primary {
+    margin-top: 2%;
+    color: white;
+    border-color: rgb(232,163,0);
+}
+    .btn-outline-primary:hover {
+        margin-top: 2%;
+        background-color: rgb(240,140,9);
+        color: black;
+        border-color: rgba(0,0,0,0.25);
+    }
+    .btn-outline-primary:focus + .btn-outline-primary, .btn-outline-primary:focus {
+        color: black;
+        background-color: rgb(240,140,9);
+        border-color: rgba(0,0,0,0.25);
+        box-shadow: 0 0 0 0.25rem rgba(0, 0, 0, 0.5);
+    }
+    .btn-check:checked + .btn-outline-primary, .btn-check:active + .btn-outline-primary, .btn-outline-primary:active, .btn-outline-primary.active, .show > .btn-outline-primary.dropdown-toggle {
+        color: black;
+        background-color: rgb(240,140,9);
+        box-shadow: 0 0 0 0.25rem rgba(0, 0, 0, 0.5);
+    }
+    .btn-check:focus + .btn-outline-primary, .btn-outline-primary:focus {
+        color: black;
+        background-color: rgb(240,140,9);
+        border-color: rgba(0,0,0,0.25);
+        box-shadow: 0 0 0 0.25rem rgba(0, 0, 0, 0.5);
+    }
+    .btn-outline-primary:disabled, .btn-outline-primary.disabled {
+        color: black;
+        background-color: rgb(240,140,9);
+        border-color: rgba(0,0,0,0.25);
+        box-shadow: 0 0 0 0.25rem rgba(0, 0, 0, 0.5);
+    }
+
+
+
 .btn-outline-info {
     color: orange;
     border-color: orange;
 }
-
     .btn-outline-info:hover {
         color: black;
         border-color: orange;
@@ -27,6 +124,8 @@
     .btn-outline-info:focus {
         box-shadow: 0 0 0 0.25rem rgba(0, 0, 0, 0.5);
     }
+
+
     .text-orange {
         --bs-text-opacity: 1;
         color: orange !important;
@@ -36,8 +135,24 @@
         color: rgba(var(--bs-teste-rgb), var(--bs-bg-opacity)) !important;
     }
 
+.form-control:focus { 
+    border-color: rgba(232,163,0, 0.30);
+    box-shadow: 0 0 0 0.25rem rgba(232,163,0, 0.30);
+}
 
-    /* adaptação bootstrap*/
+.rodape {
+    margin-top:7.5%;
+    background-image: linear-gradient( to bottom, black, black );
+}
+.teste{
+    text-align:center
+}
+.cardConta {
+    width: 20rem;
+    height: 10rem;
+}
+   
+/* adaptação bootstrap*/
 .todasTelas {
     margin: 0 10px 0 10px
 }
@@ -49,40 +164,44 @@
     margin-top: 12px;
 }
 
-
 body {
     margin-bottom: 7.5%;
-    background-color: rgba(192, 192, 192,.80);
+    background-color: black;
+    background-image: linear-gradient( to bottom,transparent,rgba(79,79,79,0.100), rgba(255,140,0,0.20),rgba(255,140,0,0.30));
 }
+
 .mesmaLinha {
     display: flex;
-    
+}
+.letraP {
+    font-size: small;
 }
 
 
+/*  Login */
+.boxErroLogin {
+   
+    border-radius: 5px;
+    margin-bottom: 2%;
+    display:flex;
+    background-color:white;
+}
+/********************************/
+/* Home */
+.boxCarosel {
+    margin: auto 7.5% auto 7.5%;
+}
 
-
-    /*  Login */
-    /********************************/
-    /* Home */
-    .boxCarosel {
-        margin: 0 7.5% 0 7.5%
-    }
 .columnHome {
     width: 22rem;
+    margin-left: auto;
+    margin-right: auto
 }
 
 /* Home fim */
 /* Carrinho */
 
-.boxCarrinho {
-    background-color: white;
-    border-radius: 20px;
-    width: 75%;
-    height: 10%;
-    margin: 1% 0 0 1%;
-    padding: 10px 10px 10px 10px;
-}
+.boxCarrinho:
 .boxValorTotal {  
     margin: 1% 0 0 3%;
     
@@ -227,43 +346,75 @@ body {
 
 
 
+.dropdown:hover > .dropdown-menu {
+    display: block;
+}
 
+/* ini: Preloader */
 
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: black; /* cor do background que vai ocupar o body */  
+    z-index: 999; /* z-index para jogar para frente e sobrepor tudo */
+}
+
+    #preloader .inner {
+        position: absolute;
+        top: 50%; /* centralizar a parte interna do preload (onde fica a animação)*/
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+@keyframes animarBola {
+    0% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    16% {
+        -webkit-transform: scale(0.1);
+        transform: scale(0.1);
+        opacity: 0.7;
+    }
+
+    33% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+/* end: Preloader */
 
 html {
     font-size: 14px;
-}
 
-@media (min-width: 768px) {
-    html {
-        font-size: 16px;
-    }
 }
 html {
     position: relative;
     min-height: 100%;
 }
 
-
-
-
-/* // Small devices (landscape phones, 576px and up) */
-@media (max-width: 576px) {
+@media only screen and (max-device-width: 576px) {
     :root {
         --screenSize: "small";
         --containerSize: 550px;
     }
-}
 
-.dropdown:hover > .dropdown-menu {
-    display: block;
 }
-}
-/* // Medium devices (tablets, 768px and up) */
 @media (max-width: 768px) {
     :root {
         --screenSize: "medium";
         --containerSize: 750px;
+    }
+    html {
+        font-size: 16px;   
+        position: relative;
+        min-height: 100%;
     }
 
     .boxCarosel {
@@ -284,7 +435,6 @@ html {
         width: 27rem;
     }
 }
-/* // Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
     :root {
         --screenSize: "large";
@@ -292,8 +442,6 @@ html {
     }
    
 }
-
-/* // Extra large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) {
     :root {
         --screenSize: "extra large";

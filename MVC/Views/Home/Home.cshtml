@@ -1,227 +1,228 @@
-﻿@model ModelController
+﻿@model ModelLogin
 @{
     ViewData["Title"] = "Início";
 }
+@Html.AntiForgeryToken()
 <div class="boxCarosel">
-<div class="row row-cols-1 row-cols-md-3 g-4">
-<div class="conteiner" >
-  <div class="col" >
-    <div class="card mb-3 columnHome">
-      <div id="carouselExampleIndicators1" class="carousel slide" data-bs-ride="carousel">
-      <div class="carousel-indicators">
-        <button type="button" data-bs-target="#carouselExampleIndicators1" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators1" data-bs-slide-to="1" aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators1" data-bs-slide-to="2" aria-label="Slide 3"></button>
-      </div>
-      <div class="carousel-inner">
-        <div class="carousel-item active">
-          <img src="~/img/galaxia/galaxia1.jpg" class="d-block w-100" alt="...">
-        </div>
-        <div class="carousel-item">
-          <img src="~/img/galaxia/galaxia2.jpg" class="d-block w-100" alt="...">
-        </div>
-        <div class="carousel-item">
-         <a ><img src="~/img/galaxia/galaxia3.jpg" class="d-block w-100" alt="..."></a>
-        </div>
-      </div>
-          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators1" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-          </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators1" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-          </button>
-      </div>
-          <div class="card-body">
-          <h5 class="card-title">Galaxias</h5>
-          <p class="card-text">Algumas Galaxias</p>
-          <a asp-area="" asp-controller ="Produtos" asp-action="Produtos" class="btn btn-primary">Olhar</a>
-      </div>
-    </div>
-  </div>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="conteiner" >
+          <div class="col" >
+            <div class="card mb-3 columnHome">
+              <div id="carouselExampleIndicators1" class="carousel slide" data-bs-ride="carousel">
+              <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators1" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators1" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators1" data-bs-slide-to="2" aria-label="Slide 3"></button>
+              </div>
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <img src="~/img/galaxia/galaxia1.jpg" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                  <img src="~/img/galaxia/galaxia2.jpg" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                 <a ><img src="~/img/galaxia/galaxia3.jpg" class="d-block w-100" alt="..."></a>
+                </div>
+              </div>
+                  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators1" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                  </button>
+                  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators1" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                  </button>
+              </div>
+                  <div class="card-body">
+                  <h5 class="card-title">Galaxias</h5>
+                  <p class="card-text">Algumas Galaxias</p>
+                  <a asp-area="" asp-controller ="Produtos" asp-action="Produtos" class="btn btn-primary">Olhar</a>
+              </div>
+            </div>
+          </div>
 
-<!------------------------------------------------------------------------------------------->
-   <div class="col">
-    <div class="card mb-3 columnHome" >
-      <div id="carouselExampleIndicators2" class="carousel slide" data-bs-ride="carousel">
-      <div class="carousel-indicators">
-        <button type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide-to="1" aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide-to="2" aria-label="Slide 3"></button>
-      </div>
-      <div class="carousel-inner">
-        <div class="carousel-item active">
-          <img src="~/img/galaxia/galaxia4.jpg" class="d-block w-100" alt="...">
-        </div>
-        <div class="carousel-item">
-          <img src="~/img/galaxia/galaxia5.jpg" class="d-block w-100" alt="...">
-        </div>
-        <div class="carousel-item">
-         <a ><img src="~/img/galaxia/galaxia6.jpg" class="d-block w-100" alt="..."></a>
-        </div>
-      </div>
-          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-          </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-          </button>
-      </div>
-          <div class="card-body">
-          <h5 class="card-title">Galaxias</h5>
-          <p class="card-text">Algumas Galaxias</p>
-          <a asp-area="" asp-controller ="Produtos" asp-action="Produtos" class="btn btn-primary">Olhar</a>
-      </div>
-    </div>
-  </div>
-<!------------------------------------------------------------------------------------------->
-  <div class="col">
-    <div class="card mb-3 columnHome">
-      <div id="carouselExampleIndicators3" class="carousel slide" data-bs-ride="carousel">
-      <div class="carousel-indicators">
-        <button type="button" data-bs-target="#carouselExampleIndicators3" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators3" data-bs-slide-to="1" aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators3" data-bs-slide-to="2" aria-label="Slide 3"></button>
-      </div>
-      <div class="carousel-inner">
-        <div class="carousel-item active">
-          <img src="~/img/galaxia/galaxia6.jpg" class="d-block w-100" title="teste" alt="galaxia">
-        </div>
-        <div class="carousel-item">
-          <img src="~/img/galaxia/galaxia8.png" class="d-block w-100" alt="...">
-        </div>
-        <div class="carousel-item">
-         <a ><img src="~/img/galaxia/galaxia9.jpg" class="d-block w-100" alt="..."></a>
-        </div>
-      </div>
-          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators3" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-          </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators3" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-          </button>
-      </div>
-          <div class="card-body">
-          <h5 class="card-title">Galaxias</h5>
-          <p class="card-text">Algumas Galaxias</p>
-          <a asp-area="" asp-controller ="Produtos" asp-action="Produtos" class="btn btn-primary">Olhar</a>
-      </div>
-    </div>
-  </div>
+        <!------------------------------------------------------------------------------------------->
+           <div class="col">
+            <div class="card mb-3 columnHome" >
+              <div id="carouselExampleIndicators2" class="carousel slide" data-bs-ride="carousel">
+              <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide-to="2" aria-label="Slide 3"></button>
+              </div>
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <img src="~/img/galaxia/galaxia4.jpg" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                  <img src="~/img/galaxia/galaxia5.jpg" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                 <a ><img src="~/img/galaxia/galaxia6.jpg" class="d-block w-100" alt="..."></a>
+                </div>
+              </div>
+                  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                  </button>
+                  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                  </button>
+              </div>
+                  <div class="card-body">
+                  <h5 class="card-title">Galaxias</h5>
+                  <p class="card-text">Algumas Galaxias</p>
+                  <a asp-area="" asp-controller ="Produtos" asp-action="Produtos" class="btn btn-primary">Olhar</a>
+              </div>
+            </div>
+          </div>
+        <!------------------------------------------------------------------------------------------->
+          <div class="col">
+            <div class="card mb-3 columnHome">
+              <div id="carouselExampleIndicators3" class="carousel slide" data-bs-ride="carousel">
+              <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators3" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators3" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators3" data-bs-slide-to="2" aria-label="Slide 3"></button>
+              </div>
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <img src="~/img/galaxia/galaxia6.jpg" class="d-block w-100" title="teste" alt="galaxia">
+                </div>
+                <div class="carousel-item">
+                  <img src="~/img/galaxia/galaxia8.png" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                 <a ><img src="~/img/galaxia/galaxia9.jpg" class="d-block w-100" alt="..."></a>
+                </div>
+              </div>
+                  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators3" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                  </button>
+                  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators3" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                  </button>
+              </div>
+                  <div class="card-body">
+                  <h5 class="card-title">Galaxias</h5>
+                  <p class="card-text">Algumas Galaxias</p>
+                  <a asp-area="" asp-controller ="Produtos" asp-action="Produtos" class="btn btn-primary">Olhar</a>
+              </div>
+            </div>
+          </div>
   
-<!------------------------------------------------------------------------------------------->
-  <div class="col">
-    <div class="card mb-2 columnHome">
-      <div id="carouselExampleIndicators4" class="carousel slide" data-bs-ride="carousel">
-      <div class="carousel-indicators">
-        <button type="button" data-bs-target="#carouselExampleIndicators4" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators4" data-bs-slide-to="1" aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators4" data-bs-slide-to="2" aria-label="Slide 3"></button>
-      </div>
-      <div class="carousel-inner">
-        <div class="carousel-item active">
-          <img src="~/img/galaxia/galaxia10.jpg" class="d-block w-100" alt="...">
-        </div>
-        <div class="carousel-item">
-          <img src="~/img/galaxia/galaxia11.jpg" class="d-block w-100" alt="...">
-        </div>
-        <div class="carousel-item">
-         <a ><img src="~/img/galaxia/galaxia12.jpg" class="d-block w-100" alt="..."></a>
-        </div>
-      </div>
-          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators4" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-          </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators4" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-          </button>
-      </div>
-          <div class="card-body">
-          <h5 class="card-title">Galaxias</h5>
-          <p class="card-text">Algumas Galaxias</p>
-          <a asp-area="" asp-controller ="Produtos" asp-action="Produtos" class="btn btn-primary">Olhar</a>
-      </div>
+        <!------------------------------------------------------------------------------------------->
+          <div class="col">
+            <div class="card mb-2 columnHome">
+              <div id="carouselExampleIndicators4" class="carousel slide" data-bs-ride="carousel">
+              <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators4" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators4" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators4" data-bs-slide-to="2" aria-label="Slide 3"></button>
+              </div>
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <img src="~/img/galaxia/galaxia10.jpg" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                  <img src="~/img/galaxia/galaxia11.jpg" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                 <a ><img src="~/img/galaxia/galaxia12.jpg" class="d-block w-100" alt="..."></a>
+                </div>
+              </div>
+                  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators4" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                  </button>
+                  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators4" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                  </button>
+              </div>
+                  <div class="card-body">
+                  <h5 class="card-title">Galaxias</h5>
+                  <p class="card-text">Algumas Galaxias</p>
+                  <a asp-area="" asp-controller ="Produtos" asp-action="Produtos" class="btn btn-primary">Olhar</a>
+              </div>
+            </div>
+          </div>
+        <!------------------------------------------------------------------------------------------->
+          <div class="col">
+            <div class="card mb-2 columnHome">
+              <div id="carouselExampleIndicators5" class="carousel slide" data-bs-ride="carousel">
+              <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators5" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators5" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators5" data-bs-slide-to="2" aria-label="Slide 3"></button>
+              </div>
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <img src="~/img/galaxia/galaxia.jpg" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                  <img src="~/img/galaxia/galaxia13.jpg" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                 <a ><img src="~/img/galaxia/galaxia14.jpg" class="d-block w-100" alt="..."></a>
+                </div>
+              </div>
+                  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators5" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                  </button>
+                  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators5" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                  </button>
+              </div>
+                  <div class="card-body">
+                  <h5 class="card-title">Galaxias</h5>
+                  <p class="card-text">Algumas Galaxias</p>
+                  <a asp-area="" asp-controller ="Produtos" asp-action="Produtos" class="btn btn-primary">Olhar</a>
+              </div>
+            </div>
+          </div>
+        <!------------------------------------------------------------------------------------------->
+          <div class="col">
+            <div class="card mb-2 columnHome ">
+              <div id="carouselExampleIndicators6" class="carousel slide" data-bs-ride="carousel">
+              <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators6" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators6" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators6" data-bs-slide-to="2" aria-label="Slide 3"></button>
+              </div>
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <img src="~/img/galaxia/galaxia15.jpg" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                  <img src="~/img/galaxia/galaxia16.jpg" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                 <a ><img src="~/img/galaxia/galaxia17.jpg" class="d-block w-100" alt="..."></a>       
+                </div>
+              </div>
+                  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators6" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                  </button>
+                  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators6" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                  </button>
+              </div>
+                  <div class="card-body">
+                  <h5 class="card-title">Galaxias</h5>
+                  <p class="card-text">Algumas Galaxias</p>
+                  <a asp-area="" asp-controller ="Produtos" asp-action="Produtos" class="btn btn-primary">Olhar</a>
+              </div>
+            </div>
+          </div>
+          </div>
     </div>
-  </div>
-<!------------------------------------------------------------------------------------------->
-  <div class="col">
-    <div class="card mb-2 columnHome">
-      <div id="carouselExampleIndicators5" class="carousel slide" data-bs-ride="carousel">
-      <div class="carousel-indicators">
-        <button type="button" data-bs-target="#carouselExampleIndicators5" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators5" data-bs-slide-to="1" aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators5" data-bs-slide-to="2" aria-label="Slide 3"></button>
-      </div>
-      <div class="carousel-inner">
-        <div class="carousel-item active">
-          <img src="~/img/galaxia/galaxia.jpg" class="d-block w-100" alt="...">
-        </div>
-        <div class="carousel-item">
-          <img src="~/img/galaxia/galaxia13.jpg" class="d-block w-100" alt="...">
-        </div>
-        <div class="carousel-item">
-         <a ><img src="~/img/galaxia/galaxia14.jpg" class="d-block w-100" alt="..."></a>
-        </div>
-      </div>
-          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators5" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-          </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators5" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-          </button>
-      </div>
-          <div class="card-body">
-          <h5 class="card-title">Galaxias</h5>
-          <p class="card-text">Algumas Galaxias</p>
-          <a asp-area="" asp-controller ="Produtos" asp-action="Produtos" class="btn btn-primary">Olhar</a>
-      </div>
-    </div>
-  </div>
-<!------------------------------------------------------------------------------------------->
-  <div class="col">
-    <div class="card mb-2 columnHome ">
-      <div id="carouselExampleIndicators6" class="carousel slide" data-bs-ride="carousel">
-      <div class="carousel-indicators">
-        <button type="button" data-bs-target="#carouselExampleIndicators6" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators6" data-bs-slide-to="1" aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators6" data-bs-slide-to="2" aria-label="Slide 3"></button>
-      </div>
-      <div class="carousel-inner">
-        <div class="carousel-item active">
-          <img src="~/img/galaxia/galaxia15.jpg" class="d-block w-100" alt="...">
-        </div>
-        <div class="carousel-item">
-          <img src="~/img/galaxia/galaxia16.jpg" class="d-block w-100" alt="...">
-        </div>
-        <div class="carousel-item">
-         <a ><img src="~/img/galaxia/galaxia17.jpg" class="d-block w-100" alt="..."></a>       
-        </div>
-      </div>
-          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators6" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-          </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators6" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-          </button>
-      </div>
-          <div class="card-body">
-          <h5 class="card-title">Galaxias</h5>
-          <p class="card-text">Algumas Galaxias</p>
-          <a asp-area="" asp-controller ="Produtos" asp-action="Produtos" class="btn btn-primary">Olhar</a>
-      </div>
-    </div>
-  </div>
-  </div>
-</div>
 </div>

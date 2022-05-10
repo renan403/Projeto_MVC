@@ -1,4 +1,4 @@
-﻿@model Usuario
+﻿@model ModelUsuario
 
 @{
     ViewBag.title = "Criar conta";
@@ -8,10 +8,10 @@
 
 
 
-
+@Html.AntiForgeryToken()
 
 <div style="width:auto;height:100%">
-    @using(Html.BeginForm(FormMethod.Post))
+    @using(Html.BeginForm(FormMethod.Post,new { enctype = "application/x-www-form-urlencoded" }))
 {   @Html.ValidationSummary(true)
          <div class=" mb-3" style="width:40%;margin:auto">
            <div class="card border-info  mb-3" style="height:100%">
@@ -20,19 +20,19 @@
                        <div class="mb-1">
 
                             <label for="InputNome" class="form-label"><strong>Seu nome</strong></label>
-                            @Html.TextBoxFor(m => m.Nome, "", new {@class="form-control",@placeholder="nome",@type="text",@id="nome",@oninvalid="setCustomValidity('Campo deve possuir 6 caracteres!')",@oninput="setCustomValidity('')"}) 
+                            @Html.TextBoxFor(m => m.Nome, "", new {@class="form-control letraP",@placeholder="nome",@type="text",@id="nome",@oninvalid="setCustomValidity('Campo deve possuir 6 caracteres!')",@oninput="setCustomValidity('')"}) 
                             @Html.ValidationMessageFor(m => m.Nome,"", new {@class="text-danger",@id="validNome"})
                            
                         </div>                       
                         <div class="mb-1">                        
                             <label for="InputEmail" class="form-label"><strong>E-mail</strong></label>
-                            @Html.TextBoxFor(m => m.Email, "", new{@class="form-control" , @placeholder="Exemplo@exemplo.com",@type="email"})
+                            @Html.TextBoxFor(m => m.Email, "", new{@class="form-control letraP" , @placeholder="Exemplo@exemplo.com",@type="email"})
                             @Html.ValidationMessageFor(m => m.Email, "",new {@class="text-danger",@id="validEmail"})
                         </div>
                         <div class="mb-1">
                              <label for="exampleInputPassword1" class="form-label" ><strong>Senha</strong></label>
                               <div class="input-group mb-3">
-                                  @Html.TextBoxFor(m => m.Senha, "", new{@class="form-control", @id="passwordCriar", @placeholder="Pelo menos 8 caracteres", @type ="password"})
+                                  @Html.TextBoxFor(m => m.Senha, "", new{@class="form-control letraP", @id="passwordCriar", @placeholder="Pelo menos 8 caracteres", @type ="password"})
                                   <span class="input-group-text" id="basic-addon2"><img id="olhoSenha" onmouseout="mostrarSenha()" onmouseup="mostrarSenha()" onmousedown="ocultarSenha()" src="~/icones/eye.svg" alt="" /></span>                               
                               </div>
                               @Html.ValidationMessageFor(m => m.Senha, "",new {@class="text-danger",@id="validSenha"})
@@ -41,7 +41,7 @@
                         <div class="mb-1">
                              <label for="exampleInputPassword1" class="form-label" ><strong>Confirme sua senha</strong></label>
                              <div class="input-group">
-                                 @Html.TextBoxFor(m => m.ConfSenha,"",new{@class="form-control",@id="passwordConf", @type="password",@placeholder="Confirme sua senha"})
+                                 @Html.TextBoxFor(m => m.ConfSenha,"",new{@class="form-control letraP",@id="passwordConf", @type="password",@placeholder="Confirme sua senha"})
                                  <span class="input-group-text" id="basic-addon2">
                                      <img id="olhoConf" onmouseout="mostrarConf()" onmouseup="mostrarConf()" onmousedown="ocultarConf()" src="~/icones/eye.svg" alt="" />
                                  </span>   
@@ -54,7 +54,7 @@
                     <button onclick="ValidaCriaConta()" style="width:100%;" class="btn btn-primary btn-sm mb-1"  >Confirmar</button>
                     <span id="validacao" aria-hidden="true"></span>
                         <hr class="dropdown-divider"  style="width:100%" />
-                        <p> Você já tem uma conta? &nbsp;<a asp-action="Login" asp-controller="Login">Faça Login</a></p>     
+                        <p> Você já tem uma conta? &nbsp;<a asp-action="Login" asp-controller="Login" class="link-primary">Faça Login</a></p>     
                     </div>
             </div> 
         </div> 

@@ -4,15 +4,23 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - MVC</title>
+    <title>@ViewData["Title"]</title>
     <link rel="shortcut icon" type="imagex/png" href="https://images.vexels.com/media/users/3/152418/isolated/lists/098366e6994dd75ab46b47cd27b2c9d4-icone-do-planeta-terra.png">
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />   
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/MVC.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/icones/"/>    
 </head>
-<body>
+<body>  
+    <div id="preloader">
+        <div class="inner">
+          <div class="spinner-border text-warning" role="status">
+            <span class="sr-only">Carregando...</span>
+          </div>
+        </div>
+    </div>
     <header>
+        
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm  navbar-dark bg-dark border-bottom box-shadow mb-3">
             <div class="container-fluid">
                 <!-- LOGO COM ICONE -->
@@ -34,8 +42,8 @@
                         <div class="container-fluid  " style="border-color:black">
                             <form class="d-flex " method="post" >                               
                                <div class="input-group">                            
-                                  <input size="80" type="search"  class="form-control" placeholder="Pesquisar " TextMode="Password" id="password" aria-label="Search">
-                                  <button  class="input-group-text  btn-outline-dark " style="background:orange; border-color:orange" id="basic-addon2"><img src="~/icones/search.svg" style="width:25px;height:25px" alt="" /></button>
+                                  <input size="100" type="search"  class="form-control" style="" placeholder="Pesquisar " TextMode="Password" id="password" aria-label="Search">
+                                  <button  class="input-group-text  btn-outline-dark " style="background:orange; border-color:orange; margin-right:20%" id="basic-addon2"><img src="~/icones/search.svg" style="width:25px;height:25px" alt="" /></button>
                                </div>
                             </form>
                         </div>
@@ -44,18 +52,26 @@
 
                     <!-- DROPDOWN DE LOGIN-->
                     <div class="dropdown">
-                       <button class="btn btn-outline-info dropdown-toggle" style="margin-right:20px" type="button" id="dropdownMenuButton2"  aria-expanded="false">
-                         Espaço login
-                       </button>
-                       @if(false){
+                       
+                       @if(ViewData["nomeUser"] != null)
+                       {
+                           <a class="btn btn-outline-info dropdown-toggle" style="margin-right:20px;" asp-action="SuaConta" asp-controller="Conta" id="dropdownMenuButton2"  aria-expanded="false">@ViewData["nomeUser"].ToString()</a>
+                          
+                       }                           
+                       else
+                       {
+                           <a class="btn btn-outline-info dropdown-toggle " style="margin-right:20px" asp-action="Login" asp-controller="Login" id="dropdownMenuButton2"  aria-expanded="false">Fazer Login</a>
+                       }
+                       
+                       @if(ViewData["nomeUser"] != null){
                             
                         
                         <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
-                        <li><a class="dropdown-item" href="#">Sua conta</a></li>
+                        <li><a class="dropdown-item" asp-action="SuaConta" asp-controller="Conta" >Sua conta</a></li>
                         <li><a class="dropdown-item" href="#">Seus Pedidos</a></li>                       
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="#">Trocar de conta</a></li>
-                        <li><a class="dropdown-item" href="#">Sair</a></li>
+                        <li><a class="dropdown-item" href="/Home/Home/Sair">Sair</a></li>
                             </ul>
                         }
                         else{
@@ -89,7 +105,7 @@
             @RenderBody()
         </main>
     </div>
-    <footer class="border-top footer text-muted">
+    <footer class="border-top footer rodape ">
         
         <div class="container">                 
             &copy; @DateTime.Today.Year - MVC &emsp;&emsp;&emsp;
@@ -103,6 +119,7 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)  
+    <script src="~/js/preLoader.js"></script>  
 </body>
 </html>
 
@@ -118,14 +135,14 @@
       </div>
       <div class="modal-body" >
         <div class="ajusteModalCep">    
-                    @if(true == false)
+                    @if(ViewData["nomeUser"] == null)
                     {
-                        <h3> Espaço para criar Login</h3>
+                        <a href="/Login/Login">Faça login</a>
 
                     }
                     else
                     {
-                        <p>LOGADO</p>
+                        <p>@ViewData["nomeUser"]</p>
                     }
         </div>
       </div>
@@ -134,9 +151,9 @@
             <div class="ajusteModalCep"> 
                 <div class="input-group input-group-sm mb-1" >
                     <h4>cep&emsp; </h4> 
-                        <input name="cep1"  id="inputcep" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" size="10" maxlength="5"/> 
+                        <input class="input1"  name="cep1"  id="inputcep" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" size="10" maxlength="5"/> 
                         <p id="pcep"> &nbsp; </p> 
-                        <input name="cep2" size="5" id="inputcep" type="text" maxlength="3" onkeypress="return event.charCode >= 48 && event.charCode <= 57"/>
+                        <input class="input2" name="cep2" size="5" id="inputcep" type="text" maxlength="3" onkeypress="return event.charCode >= 48 && event.charCode <= 57"/>
                     <button id="pcep" type="submit" class="btn btn-dark" style="border-radius:10px;margin-left:20px;">
                         Confirmar 
                     </button>           

@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 namespace MVC.Models
 {
-    public class Usuario
+    public class ModelUsuario
     {
-        [Key]
+        
         [Required(ErrorMessage = "Insira seu nome")]
         [StringLength(100, ErrorMessage = "Campo Login: aceita no máximo 100 caracteres.")]
         public string? Nome { get; set; }
@@ -16,9 +16,11 @@ namespace MVC.Models
 
         [Required(ErrorMessage = "Senha deve conter no mínimo 8 caracteres")]
         [MinLength(8, ErrorMessage = "O campo {0} deve ter no mínimo {1} caracteres")]
-        public string? Senha { get; set; }
-             
-        public string? ConfSenha { get; set; }
+        public string? Senha { get; set; }            
+        public string? ConfSenha { get; set; }       
+        public string? Codigo { get; set; }   
+        public string? Message { get; set; }
+        public bool? Ativo { get; set; }
     }
 }
 

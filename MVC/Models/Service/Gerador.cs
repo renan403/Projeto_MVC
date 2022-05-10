@@ -1,9 +1,18 @@
-﻿namespace MVC.Models
+﻿namespace MVC.Models.Service
 {
-    public class Chave:IDisposable
+    public class Gerador:IDisposable
     {
-        protected const string chave = "S_g4#/=O09ds032*-4/Çvp9)4,!F6pX";
         private bool disposedValue;
+
+        public string aleatorios()
+        {
+            var rand = new Random();
+            var allChar = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            var numAlea = new string(Enumerable.Repeat(allChar, 6).Select(letra =>letra[rand.Next(allChar.Length)]).ToArray());
+
+
+            return numAlea;
+        }
 
         protected virtual void Dispose(bool disposing)
         {
@@ -21,7 +30,7 @@
         }
 
         // // TODO: override finalizer only if 'Dispose(bool disposing)' has code to free unmanaged resources
-        // ~Chave()
+        // ~Gerador()
         // {
         //     // Não altere este código. Coloque o código de limpeza no método 'Dispose(bool disposing)'
         //     Dispose(disposing: false);

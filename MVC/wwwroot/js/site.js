@@ -126,13 +126,15 @@ function img3() {
 }
 
 //Função olho
+
+//Login
 function mostrar() {
     document.getElementById('olho').src = '../icones/eye.svg';
-    document.getElementById('password').type = 'password';
+    document.getElementById('passwordLogin').type = 'password';
 }
 function ocultar() {
     document.getElementById('olho').src = '../icones/eye-off.svg';
-    document.getElementById('password').type = 'text';
+    document.getElementById('passwordLogin').type = 'text';
 }
 
 // Criar Contas
@@ -152,7 +154,6 @@ function ocultarConf() {
     document.getElementById('olhoConf').src = '../icones/eye-off.svg';
     document.getElementById('passwordConf').type = 'text';
 }
-
 function ValidaCriaConta() {
     var ObjNome = document.getElementById("nome");
     var ObjEmail = document.getElementById("email");
@@ -172,3 +173,4 @@ function ValidaCriaConta() {
 
 
 }
+

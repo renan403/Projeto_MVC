@@ -1,0 +1,42 @@
+﻿@model ModelUsuario
+@{
+    ViewBag.title = "Confirmação de Email";
+  
+}
+
+
+@Html.AntiForgeryToken()
+<div style="width:auto;height:100%"> 
+
+    @using(Html.BeginForm(FormMethod.Post ,new { enctype = "application/x-www-form-urlencoded" }))
+{   @Html.ValidationSummary(true)
+        <div class=" mb-3" style="width:30%;margin:auto">
+            <div class="card border-info  mb-3" style="height:100%">
+                <div class="card-header">
+                    <h4>Verificar o endereço de e-mail</h4>
+                </div>
+                <div class="card-body">
+                    <p >Para verificar seu email, enviamos um código para @Model.Email <a href="#" class="link-primary">( Alterar )</a> </p>
+                    <div class="mb-1">
+                            <label for="InputNome" class="form-label"><strong >Inserir o código</strong></label>
+                            @Html.TextBoxFor(m => m.Codigo, "", new {@class="form-control letraP",@placeholder="Código",@Required="Required",@type="text",@oninvalid="setCustomValidity('Este campo deve ser preenchido')",@oninput="setCustomValidity('')",@autocomplete="off"}) 
+                            @if(Model.Message.Contains("Sucesso") == true)
+                            {                          
+                                @Html.ValidationMessageFor(m => m.Codigo,"", new {@class="text-success"})   
+                            }
+                            else if(Model.Message.Contains("Errado") == true)
+                            {
+                                @Html.ValidationMessageFor(m => m.Codigo,"", new {@class="text-danger"})
+                            }
+                            
+                    </div>                                                 
+                    <button  style="width:100%;" class="btn btn-primary btn-sm mb-1" >Crie sua conta</button>
+                    <p><br/>Ao criar conta, você concorda com as <a class="link-primary" href="#">Condições de uso</a> do APP.</p>
+                    <div style="text-align:center;"> 
+                        <a class="link-primary"  >@Html.ActionLink("Reenviar código","EnviarEmail","Login",new{id="#"},new { enctype = "application/x-www-form-urlencoded"})</a>
+                    </div>
+                    </div>
+            </div> 
+        </div> 
+    }
+</div>

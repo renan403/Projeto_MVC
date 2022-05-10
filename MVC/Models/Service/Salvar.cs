@@ -1,9 +1,8 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
-using MVC.Models;
 using Seguranca_v2;
 
-namespace MVC.Control.InfoDAO
+namespace MVC.Models.Service
 {
     public class Salvar:Chave
     {

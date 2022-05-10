@@ -1,5 +1,5 @@
-﻿using MVC.Control.DataBase;
-namespace MVC.Control.Carga
+﻿
+namespace MVC.Models.Service
 
 {
     public class Login
