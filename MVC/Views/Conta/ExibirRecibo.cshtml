@@ -1,0 +1,109 @@
+﻿@{
+    Layout = "LayoutNota";
+    
+}
+
+<div class="Box">
+ <div class="bordaBox">
+        <h6> Detalhes do pedido nº [numero do pedido ]</h6>
+        <a href="#" onClick="window.print()">Imprima esta página para seus registros.</a>
+ </div>   
+    <p style="top:2%">
+        Pedido feito: [data do pedido]                       <br />
+        Número de pedido: [numero do pedido] <br />
+        Total do pedido: R$ [valor]
+         
+    </p>
+
+<div class="card border-dark text-dark bg-light mb-3" style="width: 100%;">
+  <div  class="BoxRecibo"><h6 style="margin:0.5% 0 0.5% 0">Enviado em [dia que foi enviado]</h6></div>
+ 
+  <div >
+   <table class="table table-borderless">
+      <thead>
+        <tr >
+          <th scope="col">Itens pedidos</th>
+          <th style="text-align:right;" scope="col">Preço</th>     
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td scope="row">
+               <p><small>[n°] unidade(s) de:[nome do produto]</small></p> 
+               <small>Vendido por: [nome do vendedor] <a class="text-decoration-none">(perfil do vendedor)</a></small>
+               <p ><small>Condição: [condiçao]</small></p>
+          </td>
+          <td style="text-align:right;">
+              R$ [valor]
+          </td>     
+        </tr>
+        <tr class="bordered"></tr>
+        <tr>
+          <td scope="row"><p><strong>Endereço de envio:</strong> <br />
+            <small>[nome do user]</small> <br />
+            <small>[rua e numero]</small><br />
+            <small>[cidade , uf cep]</small><br />
+            <small>[pais]</small></p>
+            <p><strong>Opção de entrega:</strong> <br />
+            <small>[tipo de envio]</small></td>  
+        </tr>
+      </tbody>
+    </table>     
+  </div>
+
+</div>
+<div class="card bordarPreta text-dark bg-light mb-3" style="width: 100%;">
+  <div  class="BoxRecibo"><h6 style="margin:0.5% 0 0.5% 0">Informações de pagamento</h6></div>
+ 
+  <div>
+   <table class="table table-borderless">
+      <thead>
+        <tr >
+          <th scope="col">Método de pagamento:</th>
+          <th style="text-align:right;" scope="col">Preço</th>     
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td scope="row">
+            <p><strong>Endereço de cobrança:</strong> <br />
+            <small>[nome do user]</small> <br />
+            <small>[rua e numero]</small><br />
+            <small>[cidade , uf cep]</small><br />
+            <small>[pais]</small></p>
+            <p class="BoxRecibo"><strong>Opção de entrega:</strong> <br />
+            <small>[tipo de envio]</small>
+          </td>
+          <td style="text-align:right;">
+            <p>
+            <small>Subtotal do(s) item(ns):[valor]</small> <br />
+            <small>Frete e manuseio:R$ [valor]</small><br />
+            <small>-----</small><br />
+            <small>Total:R$[valor]</small><br />
+            <small>-----</small><br />
+            <small>Total geral:R$[valor]</small>
+            </p>            
+          </td>     
+        </tr>     
+      </tbody>
+    </table>   
+  </div>
+   <div class="card-footer bg-transparent border-dark">
+        <table class="table table-borderless">
+          <tbody>
+            <tr>
+              <th scope="row">Transações</th>
+              <td style="text-align:right;">[forma de pagamento]: [dia do pagamento]: R$ [valor]</td>     
+            </tr>
+            <tr>  
+          </tbody>
+        </table>
+    </div>
+
+</div>
+ <div class="bordaBox">
+        <h5>Observação: esta não é uma nota fiscal eletrônica</h5>
+ </div>  
+</div>
+
+

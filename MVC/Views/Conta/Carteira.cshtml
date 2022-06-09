@@ -1,0 +1,91 @@
+﻿@{
+    ViewBag.title = "Carteira";
+}
+
+<div class="mb-3 " style="width:70%;margin:auto;">
+
+<nav style="--bs-breadcrumb-divider: '  ';" aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item "><a class="text-decoration-none text-white bordaBottom" href="">Carteira</a></li>
+    <li class="breadcrumb-item "><a class="text-decoration-none text-white" asp-action="Transacoes" asp-controller="Conta">Transações</a></li>   
+  </ol>
+</nav>
+</div>
+<hr class="hrNav" />
+<div class="mb-3 " style="width:70%;margin:auto;">
+     <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a class="text-warning text-decoration-none" asp-action="SuaConta" asp-controller="Conta">Sua Conta</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Seus Pagamentos</li>
+        <li class="breadcrumb-item active" aria-current="page">Carteira</li>
+      </ol>
+    </nav>
+    <h4 style="color:orange">Carteira</h4>
+    <h5 style="color:orange">Cartões e contas</h5>
+<div style="display:flex;">
+    <div class="card" style="width: 20rem;">
+      <div class="card">
+       <div> 
+           <button type="button" class="btn btn-lg " style="display:flex;"  >           
+                 <img src="~/img/visa.jpg" width="110"/> 
+                 <div>
+                     <h6>Visa Debito Brasil</h6>
+                     <p style="font-size:12px">Cartão de crédito terminando em ••••5605 </p>
+                 </div>
+           </button>
+            <hr>          
+           <div class="BoxCard " style="display:flex;margin-left:4%;">      
+                 <a asp-action="AddEndereco" asp-controller="Conta" >
+                      <div class="btn-group btn-group-sm" role="group" aria-label="...">
+                        <div class="card border-warning mb-3">                 
+                          <div class="card-body imgAddCard" >
+                            <img style="margin-top:0" src="~/icones/plus.png"/>
+                          </div>
+                        </div>
+                     </div>
+                 </a>   
+                 <div style="margin-left:5%;margin-right:5%;">
+                    <a href="#" class="text-decoration-none">
+                         Adicione um método de pagamento
+                    </a>
+                 </div>         
+           </div>    
+       </div>
+      </div>
+    </div>
+    <div class="card" style="width: 35rem;margin-left:5%;">
+        <div class="card-body">
+            <div style="display:flex;">
+                      <img src="~/img/visa.jpg" width="250"/>                              
+                 <div style="margin-left:2%">
+                     <h4>Visa Debito Brasil</h4>
+                     <p style="font-size:15px">Cartão de crédito terminando em ••••5605 </p>
+                     <a class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#exampleModal" href="#">Editar</a>
+                 </div>
+            </div>
+       </div>
+    </div>
+</div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="card border-success mb-3" style="max-width: 20rem;">
+              <div class="card-header bg-transparent border-success">Header</div>
+              <div class="card-body text-success">
+                <h5 class="card-title">Success card title</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              </div>
+              <div class="card-footer bg-transparent border-success">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary">Save changes</button>
+              </div>
+            </div>
+          
+        
+        </div>
+      </div>
+  </div>
+</div>

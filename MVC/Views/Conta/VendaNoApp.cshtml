@@ -1,0 +1,46 @@
+﻿@model ModelEndereço
+@{
+    ViewBag.Title = "Venda no app";
+}
+<div class="container">
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+      <div class="col columnHome">
+          <div class="card shadow-sm">
+
+            <div class="card-body">              
+              <div >                                          
+                  <button class="btn btn-dark btn-sm dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                    Categoria do produto
+                  </button>
+                  <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">                 
+                    <li><a class="dropdown-item active" href="#">Computadores e informática</a></li>
+                    <li><a class="dropdown-item" href="#">Eletrônicos, TV e Áudio</a></li>                    
+                    <li><a class="dropdown-item" href="#">Games e Consoles</a></li>
+                  </ul>               
+              </div>
+               <div class="input-group input-group-sm mb-3">
+                    <div class="mb-3">  
+                     <strong>  @Html.Label("","Marca do produto",new{@for="exampleInputEmail1" ,@class="form-label"})</strong>
+                       @Html.TextBoxFor(m => m.Endereco,"",new{@class="form-control",@type="text"})
+                    </div>
+                    <div class="mb-3">  
+                     <strong>  @Html.Label("","Modelo do produto",new{@for="exampleInputEmail1" ,@class="form-label"})</strong>
+                       @Html.TextBoxFor(m => m.Endereco,"",new{@class="form-control",@type="text"})
+                    </div>
+                    <div class="mb-3">  
+                     <strong>  @Html.Label("","Nome do produto",new{@for="exampleInputEmail1" ,@class="form-label"})</strong>
+                       @Html.TextBoxFor(m => m.Endereco,"",new{@class="form-control",@type="text"})
+                    </div>
+                    <div class="mb-3">  
+                     <strong>  @Html.Label("","Descriçao do produto",new{@for="exampleInputEmail1" ,@class="form-label"})</strong>
+                       @Html.TextBoxFor(m => m.Endereco,"",new{@class="form-control",@type="text"})
+                    </div>
+
+               </div>
+                
+            </div>
+          </div>
+      </div>
+  </div>
+</div>
+       

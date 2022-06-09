@@ -1,7 +1,32 @@
-
-
+.bordarParaTest {
+    border: dotted;
+    border-color: red;
+    border-width: 1px
+}
+.bordaBottom {
+    border-bottom: 2px solid orange;
+    border-radius: 7px
+}
+fontsmall{
+    font-size:smaller
+}
+.alinhacentro {
+    z-index: 1;
+}
+.text-overflow {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.TamanhoCep {
+    width: 80%;
+    margin: 0 auto;
+    margin-bottom:2%;
+}
+.hrNav {
+    border-bottom: 1px solid orange;
+}
 /* adaptação bootstrap*/
-
 :root {
     --bs-teste-rgb: 0, 0, 0;
 }
@@ -24,12 +49,13 @@
         --bs-bg-opacity: 1;
         color: rgba(255,69,0,0.60);
     }
+
 .link-dark {
     text-decoration: none;
 }
     .link-dark:hover {
         --bs-bg-opacity: 1;
-        color: rgba(255,69,0,0.60);
+        color: rgba(255,69,0,0.90);
     }
 .border-info {
     border-color: orange !important;
@@ -79,30 +105,30 @@
     color: white;
     border-color: rgb(232,163,0);
 }
-    .btn-outline-primary:hover {
+.btn-outline-primary:hover {
         margin-top: 2%;
         background-color: rgb(240,140,9);
         color: black;
         border-color: rgba(0,0,0,0.25);
     }
-    .btn-outline-primary:focus + .btn-outline-primary, .btn-outline-primary:focus {
+.btn-outline-primary:focus + .btn-outline-primary, .btn-outline-primary:focus {
         color: black;
         background-color: rgb(240,140,9);
         border-color: rgba(0,0,0,0.25);
         box-shadow: 0 0 0 0.25rem rgba(0, 0, 0, 0.5);
     }
-    .btn-check:checked + .btn-outline-primary, .btn-check:active + .btn-outline-primary, .btn-outline-primary:active, .btn-outline-primary.active, .show > .btn-outline-primary.dropdown-toggle {
+.btn-check:checked + .btn-outline-primary, .btn-check:active + .btn-outline-primary, .btn-outline-primary:active, .btn-outline-primary.active, .show > .btn-outline-primary.dropdown-toggle {
         color: black;
         background-color: rgb(240,140,9);
         box-shadow: 0 0 0 0.25rem rgba(0, 0, 0, 0.5);
     }
-    .btn-check:focus + .btn-outline-primary, .btn-outline-primary:focus {
+.btn-check:focus + .btn-outline-primary, .btn-outline-primary:focus {
         color: black;
         background-color: rgb(240,140,9);
         border-color: rgba(0,0,0,0.25);
         box-shadow: 0 0 0 0.25rem rgba(0, 0, 0, 0.5);
     }
-    .btn-outline-primary:disabled, .btn-outline-primary.disabled {
+.btn-outline-primary:disabled, .btn-outline-primary.disabled {
         color: black;
         background-color: rgb(240,140,9);
         border-color: rgba(0,0,0,0.25);
@@ -124,7 +150,14 @@
     .btn-outline-info:focus {
         box-shadow: 0 0 0 0.25rem rgba(0, 0, 0, 0.5);
     }
-
+    .text-Laranja{
+        --bs-text-opacity: 1;
+        color: orange !important;
+    }
+        .text-Laranja:hover {
+            --bs-text-opacity: 1;
+            color: darkorange
+        }
 
     .text-orange {
         --bs-text-opacity: 1;
@@ -139,9 +172,12 @@
     border-color: rgba(232,163,0, 0.30);
     box-shadow: 0 0 0 0.25rem rgba(232,163,0, 0.30);
 }
+.form-select:focus {
+    border-color: rgba(232,163,0, 0.30);
+    box-shadow: 0 0 0 0.25rem rgba(232,163,0, 0.30);
+}
 
 .rodape {
-    margin-top:7.5%;
     background-image: linear-gradient( to bottom, black, black );
 }
 .teste{
@@ -151,11 +187,14 @@
     width: 20rem;
     height: 10rem;
 }
+footer {
+    position:center;
+    bottom: 0;
+    
+}
    
 /* adaptação bootstrap*/
-.todasTelas {
-    margin: 0 10px 0 10px
-}
+
 .spamHome {
     color: white;
     border: solid;
@@ -165,9 +204,10 @@
 }
 
 body {
-    margin-bottom: 7.5%;
+    background-attachment:fixed;
     background-color: black;
     background-image: linear-gradient( to bottom,transparent,rgba(79,79,79,0.100), rgba(255,140,0,0.20),rgba(255,140,0,0.30));
+    
 }
 
 .mesmaLinha {
@@ -175,10 +215,123 @@ body {
 }
 .letraP {
     font-size: small;
+} 
+/* Pagamentos */
+
+.BoxCard {
+    width: 100%;
+    
+    margin-bottom:1%
+}
+.BoxCardCad {
+    text-align: center;
+    margin: auto;
+    width: 100%;
+    height: 50px;
+}
+.imgAddCard {
+    text-align: center;
+    margin: auto;
+    width: 110px;
+    height: 50px;
+}
+.imgCardCad {
+    text-align: center;
+    margin: auto;
+    width: 250px;
+    
 }
 
 
+/* Endereço */
+.botaoEnderecoInicio {
+    width: 200px
+}
+.boxModalEnd {
+    border: 1px solid orange; 
+    background-color:rgb(254,248,242);
+    border-radius:5px;
+    
+}
+.bot {
+    width: 43%;
+    position: absolute;
+    bottom: 4%;
+    left: 17%;
+}
+.spanCep {
+    position: absolute;
+    right: 15px;
+    bottom: 4%
+}
+.spanBotaoEnd {
+    z-index:1;  
+    left: 50%;
+    font-size: x-small
+}
+.boxEndereco {
+    height: 200px;
+}
+.botaoCheck {
+    border-color: rgba(0,0,0, 0.30);
+    box-shadow: 0 0 0 0.01rem #fff;
+    background-color: white
+}.botaoCheck:checked {
+    border-color: rgba(0,0,0, 0.30);
+    box-shadow: 0 0 0 0.01rem #fff;
+    background-color: black
+}.botaoCheck:focus {
+        border-color: rgba(0,0,0, 0.30);
+        box-shadow: 0 0 0 0.01rem #fff;        
+    }
+
+
+.imgAddEnd {
+    text-align: center;
+    margin: auto;
+    width: 250px;
+    height: 230px;
+}
+.EndAddPadrao{
+ 
+    width: 250px;
+    height: 230px;
+}
+.EndAddNaoPadrao {
+    width: 250px;
+    height: 192px;
+}
+.distTop{
+    margin-top:0.5%
+}
+.btnEndCompra {
+    border-radius: 20px;
+    border: solid;
+    border-width: 1px;
+}
+    .btnEndCompra:hover {
+        border-radius: 20px;
+        border: solid;
+        border-width: 1px;
+        border-color: coral;
+    }
+
+.btnEnd {
+    margin-top: 2%;
+    width: 80%
+}
+
 /*  Login */
+.bordaBottomLogin {
+    border-bottom: 1px solid orange;
+    border-radius: 50px
+}
+.bordaTerra {
+    border-top: 1px solid rgba(0,0,255, .7);
+    border-left: 2px solid rgba(0,0,255, .7);
+    border-bottom: 1px solid rgba(0,0,255, .7);
+}
+
 .boxErroLogin {
    
     border-radius: 5px;
@@ -188,23 +341,33 @@ body {
 }
 /********************************/
 /* Home */
-.boxCarosel {
-    margin: auto 7.5% auto 7.5%;
+.semBordaEsquerda {
+    border-radius: 0 5px 5px 0;   
 }
+.semBordaDireita {
+    border-radius: 5px 0 0 5px;
+}
+    .boxCarosel {
+        margin: auto 7.5% auto 7.5%;
+    }
 
 .columnHome {
     width: 22rem;
     margin-left: auto;
     margin-right: auto
 }
-
+.boxConta {
+    margin-top: 5%
+}
 /* Home fim */
 /* Carrinho */
 
-.boxCarrinho:
-.boxValorTotal {  
+
+.boxCarrinho{
+    background-color:white;
+}
+.boxValorTotal {
     margin: 1% 0 0 3%;
-    
 }
 .botaoCarrinho {
     padding-top: 10%;
@@ -348,6 +511,7 @@ body {
 
 .dropdown:hover > .dropdown-menu {
     display: block;
+    position:absolute
 }
 
 /* ini: Preloader */
@@ -392,67 +556,58 @@ body {
 
 html {
     font-size: 14px;
-
-}
-html {
     position: relative;
     min-height: 100%;
 }
 
-@media only screen and (max-device-width: 576px) {
-    :root {
-        --screenSize: "small";
-        --containerSize: 550px;
-    }
 
+/* responsivo do bootstrap*/
+.bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
 }
-@media (max-width: 768px) {
-    :root {
-        --screenSize: "medium";
-        --containerSize: 750px;
-    }
-    html {
-        font-size: 16px;   
-        position: relative;
-        min-height: 100%;
-    }
 
-    .boxCarosel {
-        margin: 0 25% 0 25%
+@media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+        font-size: 3.5rem;
     }
 }
-@media (max-width: 865px) {
-    :root {
-        --screenSize: "medium";
-        --containerSize: 750px;
-    }
 
-    .boxCarosel {
-        margin: 0 25% 0 25%
-    }
-
-    .columnHome {
-        width: 27rem;
-    }
+.b-example-divider {
+    height: 3rem;
+    background-color: rgba(0, 0, 0, .1);
+    border: solid rgba(0, 0, 0, .15);
+    border-width: 1px 0;
+    box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
 }
-@media (min-width: 992px) {
-    :root {
-        --screenSize: "large";
-        --containerSize: 970px;
-    }
+
+.bi {
+    vertical-align: -.125em;
+    fill: currentColor;
+}
+/*******************************/
+
+.social-svg a {
+    text-decoration: none;
+}
+
+svg[aria-label="Github"] {
+    background: #131313;
+    border-radius: 20px;
+}
+svg[aria-label="Twitter"] {
+    background: #55acee;
+    border-radius: 5px;
+}
+svg[aria-label="Facebook"] {
+    background: #3b5998;
+    border-radius: 20px;
+}
+
+.social-svg svg[role="img"] {
    
-}
-@media (min-width: 1200px) {
-    :root {
-        --screenSize: "extra large";
-        --containerSize: 1170px;
-    }
-
-    .boxCarosel {
-        margin: 0 7.5% 0 7.5%
-    }
-
-    .columnHome {
-        width: 22rem;
-    }
+    fill: white;
 }

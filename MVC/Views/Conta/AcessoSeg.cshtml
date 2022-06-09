@@ -1,0 +1,48 @@
+﻿@model ModelLogin
+@{
+    ViewBag.title = "Segurança";
+}
+
+<main class="mb-3 " style="width:50%;margin:auto;">
+    <nav style="--bs-breadcrumb-divider: '>'; margin-left:1.5%" aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a class="text-warning text-decoration-none" asp-action="SuaConta" asp-controller="Conta">Sua Conta</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Segurança</li>
+      </ol>
+    </nav>
+  <div class="album py-2 ">
+    <div class="container">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-1 g-3">
+        <div class="col">
+          <div class="card shadow-sm">
+            <div class="card-header">
+                <h4>Acesso e Segurança</h4>
+            </div>
+            <div class="card-body">
+              <p class="card-text"><strong>Nome:&nbsp;</strong> @Model.Nome</p>
+              <div class="d-flex justify-content-end align-items-center">               
+                <small class="text-muted"><button type="button" class="btn btn-sm btn-primary">Editar</button></small>
+              </div>
+              <hr />
+              <p class="card-text"><strong>E-mail:&nbsp;</strong> @Model.Email</p>
+              <div class="d-flex justify-content-end align-items-center">               
+                <small class="text-muted"><button type="button" class="btn btn-sm btn-primary">Editar</button></small>
+              </div>
+              <hr />
+              <p class="card-text"><strong>Senha:&nbsp;</strong> ********</p>
+              <div class="d-flex justify-content-end align-items-center">               
+                <small class="text-muted"><button type="button" class="btn btn-sm btn-primary">Editar</button></small>
+              </div>
+              <hr />
+              <div class="d-grid gap-2 col-6 mx-auto">
+                  <button class="btn btn-primary btn-sm me-md-2">Concluído</button>
+              </div>
+            </div>
+          </div>
+        </div>         
+      </div>
+    </div>
+  </div>
+</main>
+
+

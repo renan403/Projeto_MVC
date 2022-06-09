@@ -1,0 +1,102 @@
+﻿
+@{
+    ViewBag.title = "Seus pedidos";
+    
+}
+
+
+<!-- ENTREGUE -->
+
+<div style="max-width:80%;margin:auto;border-radius:20px">
+    <nav aria-label="breadcrumb " style="margin-left:0.5%">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a class="text-warning text-decoration-none" asp-action="SuaConta" asp-controller="Conta">Sua Conta</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Pedidos</li>
+      </ol>
+    </nav>
+</div>
+
+<div class="card text-dark bg-light mb-3" style="max-width:80%;margin:auto;border-radius:20px">   
+    @if(true == true){
+          <div class="card-header">
+            <div class="row justify-content-md-center">
+                <div class="col col-lg-2 ">PEDIDO REALIZADO<br />[data do pedido]</div>
+                <div class="col-2 ">TOTAL<br /> R$[valor da compra]</div>
+                <div class="col-4  ">ENVIAR PARA <br /> <a  onmouseover="PopOver()" data-bs-toggle="popover" data-trigger="focus hover" data-bs-placement="bottom" data-bs-container="body" data-bs-content="And here's some amazing content. It's very engaging. Right?" class="text-decoration-none" href="#"> [email do usuario]</a></div>
+                <div class="col-4 ">PEDIDO Nº [numero do pedido] <br />
+                <a class="text-decoration-none" asp-action="ExibirRecibo" asp-controller="Conta">Exibir Recibo</a>    
+                </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">Entregue [dia da semana]</h5>
+            <h6 class="">Assinado por:[nome de quem recebeu]</h6>
+            <div class="row" style="margin-top:2%">
+            <div class="col-sm-8"><div class="row">
+                <div class="col-6 col-md-4" >
+                    <a href="#"><img src="~/img/galaxia/galaxia.jpg" width="170px" height="100px" style="border-radius:20px" alt="nome do produto" title="[nome do produto]"/></a>
+                </div>
+                <div class="col-md-8">
+                    <a class="text-decoration-none" href="#">[nome do produto]</a>
+                    <p>Elegível para devolução até [data por extenso]</p>
+                    <button class="btn btnEndCompra"><img src="~/icones/sacola-de-compras.png" widht="25px" height="25px"/>&nbsp;Compra novamente</button>
+                </div>            
+              </div>
+            </div>
+            <div class="col-sm-4 " style="text-align: center" > 
+                <button class="btn btn-primary btn-sm btnEnd" >Rastrear pacote </button>
+                 <div class="w-100"></div>
+                <button class="btn btn-primary btn-sm btnEnd" >Devolver produto</button>   
+                 <div class="w-100"></div>
+                <button class="btn btn-primary btn-sm btnEnd" >Avaliar produto </button>
+                 <div class="w-100"></div>
+                <button class="btn btn-primary btn-sm btnEnd" >Avaliar vendedor</button>
+            </div>
+           </div>
+         </div>  
+       <!-- ENVIANDO -->
+    }else if (false == false){
+          <div class="card-header">
+            <div class="row justify-content-md-center">
+                <div class="col col-lg-2 ">PEDIDO REALIZADO<br />[data do pedido]</div>
+                <div class="col-2 ">TOTAL<br /> R$[valor do pedido]</div>
+                <div class="col-4 ">ENVIAR PARA <br /> <a class="text-decoration-none" onclick="PopOver()" onmouseover="PopOver()" data-trigger="focus hover" data-bs-content="And here's some amazing content. It's very engaging. Right?" data-bs-toggle="popover" data-bs-placement="bottom" data-bs-container="body">[email do usuario]</a></div>
+                <div class="col-4 ">PEDIDO Nº [numero do pedido] <br />
+                <a class="text-decoration-none" href="#">Exibir detalhes do pedido</a> |
+                <a class="text-decoration-none" href="#">Exibir recibo</a>  
+                </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">Previsão de entrega [dia da semana]</h5>
+            <p class=""><strong>Vendido por: </strong><a class="text-decoration-none" href="#"> [nome da loja de quem vendeu]</a></p>
+            <div class="row" style="margin-top:2%">
+            <div class="col-sm-8"><div class="row">
+                <div class="col-6 col-md-4" >
+                    <img src="~/img/galaxia/galaxia.jpg" width="170px" height="100px" style="border-radius:20px"/>
+                </div>
+                <div class="col-md-8">
+                    <a class="text-decoration-none" href="#">[nome do produto]</a>
+                    <p>Valor: [valor do produto]</p>
+                    <button class="btn btnEndCompra"><img src="~/icones/sacola-de-compras.png" widht="25px" height="25px"/>&nbsp;Compra novamente</button>
+                </div>            
+              </div>
+            </div>
+            <div class="col-sm-4 " style="text-align: center" > 
+                <button class="btn btn-primary btn-sm btnEnd" >Rastrear pacote </button>
+                 <div class="w-100"></div>
+                <button class="btn btn-primary btn-sm btnEnd" >Cancelar pedido</button>   
+                 <div class="w-100"></div>
+                <button class="btn btn-primary btn-sm btnEnd" >Vizualizar ou editar</button>
+            </div>
+            <hr  style="margin-top:2%">
+            <a class="text-decoration-none" href="#">Arquivar pedido</a>
+           </div>
+         </div>  
+    }
+ </div>
+<script>
+function PopOver(){
+    $('[data-bs-toggle="popover"]').popover({ trigger: 'hover focus' });   
+};
+</script>

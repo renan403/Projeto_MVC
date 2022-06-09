@@ -1,0 +1,72 @@
+html,
+body {
+  height: 100%;
+}
+
+.submit-olho {
+    position: absolute;
+    top:30%;
+    right: 2%;
+    z-index: 10;
+    border: none;
+    background: transparent;
+    outline: none;
+}
+.submit-line {
+    position: relative;
+    width: 100%;
+}
+
+    .submit-line input {
+        width: 100%;
+    }
+
+.submit-lupa {
+    position: absolute;
+    top: 0;
+    right: 180px;
+    z-index: 10;
+    border: none;
+    background: transparent;
+    outline: none;
+}
+.tamanhoLupa {
+    width: 80%;
+}
+
+.submit-linha {
+    position: relative;
+    width: 80%;
+}
+
+    .submit-linha input {
+        width: 80%;
+    }
+
+
+.form-signin {
+  width: 100%;
+  max-width: 500px;
+  padding: 15px;
+  margin: auto;
+}
+
+.form-signin .checkbox {
+  font-weight: 400;
+}
+
+.form-signin .form-floating:focus-within  {
+  z-index: 2;
+}
+
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}

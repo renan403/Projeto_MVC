@@ -1,0 +1,27 @@
+﻿.bordarParaTest {
+    border: solid;
+    border-color: black;
+    border-width: 1px
+}
+
+tr.bordered {
+    border-bottom: 1px solid #000;
+   
+}
+.bordarPreta {
+    border: 1px solid #000;
+}
+div.BoxRecibo {
+   
+    border-bottom: 1px solid black;
+}
+div.bordaBox, div.BoxRecibo {
+    margin: auto;
+    width: 100%;
+    text-align: center;
+}
+div.Box {
+    max-width: 80%;
+    margin: auto;
+    margin-top: 2%
+}

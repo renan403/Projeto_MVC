@@ -13,5 +13,6 @@ namespace MVC.Models
         public string? Senha { get; set; }
         public bool? Ativo { get; set; }
         public string? Nome { get; set; }
+        public string? Resposta { get; set; }
     }
 }

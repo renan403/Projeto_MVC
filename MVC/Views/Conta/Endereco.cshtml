@@ -1,0 +1,90 @@
+﻿@using Firebase.Database
+@model IReadOnlyCollection<FirebaseObject<ModelEndereço>>
+@{
+    ViewBag.Title = "Endereço";
+}
+
+@Html.AntiForgeryToken()
+
+<div class="mb-3 " style="width:80%;margin:auto;">
+    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a class="text-warning text-decoration-none" asp-action="SuaConta" asp-controller="Conta">Sua Conta</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Endereço</li>
+      </ol>
+    </nav>
+    <div class="card text-dark bg-light mb-3" style="height:100%">
+      <div class="card-header">
+          <h4>Seus Endereços</h4>
+      </div>
+
+      <div class="album py-5 bg-light">
+        <div class="container">
+
+          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">    
+              <div class="col">
+                   <a asp-action="AddEndereco" asp-controller="Conta" class="text-black">
+                      <div class="card shadow-sm border-warning boxEndereco">
+                         <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Adicionar</title><rect width="100%" height="100%" fill="#fff"/><text x="50%" y="50%" font-size="3rem" fill="#000" dy=".3em">+</text></svg>    
+                      </div>
+                   </a>
+             </div>
+             @foreach (var item in Model)
+              {   
+                        @if(item.Object.Padrao == false)
+                        {
+                            <div class="col">
+                               <div class="card shadow-sm  border-warning boxEndereco" >             
+                                 <div class="card-body " >              
+                                   <p class="card-text">             
+                                       <strong>@item.Object.Nome </strong>                 <br />
+                                               @item.Object.Endereco, @item.Object.Numero  <br />
+                                               @item.Object.Cidade, @item.Object.UF        <br />
+                                               @item.Object.Cep                            <br />
+                                               @item.Object.Pais                           <br />
+                                               Telefone: @item.Object.Telefone  
+                                   </p>
+                                   <div class="d-flex justify-content-between align-items-center">
+                                     <div class="btn-group">
+                             
+                                        @Html.ActionLink("Alterar","AlterarEndereco","Conta",new{Key=$"{item.Key}&Alterar"},new{@class="btn btn-sm btn-outline-dark"})
+                                        @Html.ActionLink("Excluir","AlterarEndereco","Conta",new{Key=$"{item.Key}&Excluir"},new{@class="btn btn-sm btn-outline-dark"})
+                            
+                                     </div>
+                                  <!--   <small class="text-muted">9 mins</small>-->
+                                   </div>
+                                 </div>
+                               </div>
+                             </div>                           
+                        }else{
+                            <div class="col">
+                               <div class="card shadow-sm  border-warning boxEndereco" >             
+                                 <div class="card-body " >              
+                                   <p class="card-text">             
+                                       <strong>@item.Object.Nome </strong>                 <br />
+                                               @item.Object.Endereco, @item.Object.Numero  <br />
+                                               @item.Object.Cidade, @item.Object.UF        <br />
+                                               @item.Object.Cep                            <br />
+                                               @item.Object.Pais                           <br />
+                                               Telefone: @item.Object.Telefone  
+                                   </p>
+                                   <div class="d-flex justify-content-between align-items-center">
+                                     <div class="btn-group">
+                             
+                                        @Html.ActionLink("Alterar","AlterarEndereco","Conta",new{Key=$"{item.Key}&Alterar"},new{@class="btn btn-sm btn-outline-dark"})
+                                        @Html.ActionLink("Excluir","AlterarEndereco","Conta",new{Key=$"{item.Key}&Excluir"},new{@class="btn btn-sm btn-outline-dark"})
+                            
+                                     </div>
+                                  <!--   <small class="text-muted">9 mins</small>-->
+                                   </div>
+                                 </div>
+                               </div>
+                             </div>  
+                        }                      
+              }                 
+          </div>
+        </div>
+      </div>     
+      <br />
+   </div> 
+</div>

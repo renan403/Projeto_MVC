@@ -1,131 +1,173 @@
-﻿
+﻿@using Firebase.Database
+@{
+   
+}
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Projeto mvc">
+    <meta name="author" content="Renan Carlos">
+    <meta http-equiv="cache-control" content="Private" />
+    <meta http-equiv="content-language" content="pt-br" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta name="keywords" content="MVC, Projeto, Estudo, Aprendendo">
+   <!--<meta name="robots" content="all">-->
+
     <title>@ViewData["Title"]</title>
     <link rel="shortcut icon" type="imagex/png" href="https://images.vexels.com/media/users/3/152418/isolated/lists/098366e6994dd75ab46b47cd27b2c9d4-icone-do-planeta-terra.png">
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />   
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/MVC.styles.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/icones/"/>    
+    <link rel="stylesheet" href="~/icones/"/>  
+    <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/signin.css" asp-append-version="true"/>
+
 </head>
 <body>  
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+      <symbol id="facebook" viewBox="0 0 16 16">
+        <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/>
+      </symbol>
+      <symbol id="twitter" viewBox="0 0 16 16">
+        <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"/>
+      </symbol>
+      <symbol id="github" viewBox="0 0 50 50">
+        <path d="M32.9 50q-1.7 0-1.7-1.5V42c0-2.3-.8-3.8-1.7-4.6 5.6-.6 11.4-2.7 11.4-12.3 0-2.7-1-4.9-2.6-6.7.3-.6 1.1-3.2-.2-6.6 0 0-2.1-.7-6.8 2.6-2-.6-4.1-.8-6.2-.8-2.1 0-4.3.3-6.2.8-4.8-3.2-6.9-2.6-6.9-2.6-1.4 3.4-.5 6-.2 6.6-1.6 1.7-2.6 4-2.6 6.7 0 9.6 5.8 11.7 11.4 12.3-.7.6-1.4 1.7-1.6 3.3-1.4.6-5 1.7-7.3-2.1 0 0-1.3-2.4-3.8-2.6 0 0-2.4 0-.2 1.5 0 0 1.6.8 2.8 3.6 0 0 1.5 4.4 8.4 2.9v4.5q0 1.5-1.7 1.5z"/><path class="octoholes" d="M9.5 37.2c-.1.1-.2.2-.4.1s-.3-.3-.2-.4c.1-.1.2-.2.4-.1s.3.2.2.4zm-.3-.3M10.6 38.3c-.1.1-.4.1-.5-.1-.2-.2-.2-.4-.1-.5.1-.1.3-.1.5.1.1.2.2.4.1.5zm-.3-.3M11.5 39.7c-.2.1-.4 0-.6-.2-.2-.2-.2-.5 0-.6.2-.1.4 0 .6.2.2.3.2.5 0 .6zm0 0M12.9 41.1c-.1.2-.4.1-.6-.1-.2-.2-.3-.5-.1-.6.1-.2.4-.1.6.1.2.2.2.5.1.6zm0 0M14.7 41.9c-.1.2-.3.3-.6.2-.3-.1-.5-.3-.4-.5.1-.2.3-.3.6-.2.3.1.5.3.4.5zm0 0M16.8 42.1c0 .2-.2.4-.5.4s-.5-.2-.5-.4.2-.4.5-.4c.2 0 .5.2.5.4zm0 0M18.7 41.7c0 .2-.2.4-.5.5-.3.1-.6-.1-.6-.3 0-.2.2-.4.5-.5.3 0 .5.1.6.3zm0 0"/>
+      </symbol>
+    </svg>
     <div id="preloader">
         <div class="inner">
           <div class="spinner-border text-warning" role="status">
-            <span class="sr-only">Carregando...</span>
+            <span class="sr-only"></span>
           </div>
         </div>
     </div>
-    <header>
+   <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow border-bottom">
+
+          <div class="navbar-brand col-md-3 col-lg-2 me-0 px-3">
+               <a style="margin-left:30%;border-radius:100%; " title="Inicio" asp-area="" asp-controller="Home" asp-action="Home"><img style="border-radius:100%;" class="bordaTerra" src="https://images.vexels.com/media/users/3/152418/isolated/lists/098366e6994dd75ab46b47cd27b2c9d4-icone-do-planeta-terra.png" width = "50" /></a>
+          </div>
+          <button class="navbar-toggler d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
         
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm  navbar-dark bg-dark border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <!-- LOGO COM ICONE -->
-                <a class="navbar-brand" style="padding-right:3%; margin-left:3%;" asp-area="" asp-controller="Home" asp-action="Home"><img src="https://images.vexels.com/media/users/3/152418/isolated/lists/098366e6994dd75ab46b47cd27b2c9d4-icone-do-planeta-terra.png" width = "50" /></a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <!-- BOTÃO DO CEP -->
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">                       
-                        <li>
-                            <a class="btn btn-outline-info" asp-action="" asp-controller="#" data-bs-toggle="modal" data-bs-target="#exampleModal"> Endereço</a>
-                        </li>                       
-                    </ul>
 
-                    <!-- BARRA DE PESQUISA -->
-                    <nav class="navbar navbar-dark bg-dark ">
-                        <div class="container-fluid  " style="border-color:black">
-                            <form class="d-flex " method="post" >                               
-                               <div class="input-group">                            
-                                  <input size="100" type="search"  class="form-control" style="" placeholder="Pesquisar " TextMode="Password" id="password" aria-label="Search">
-                                  <button  class="input-group-text  btn-outline-dark " style="background:orange; border-color:orange; margin-right:20%" id="basic-addon2"><img src="~/icones/search.svg" style="width:25px;height:25px" alt="" /></button>
-                               </div>
-                            </form>
-                        </div>
-                    </nav>    
-
-
-                    <!-- DROPDOWN DE LOGIN-->
-                    <div class="dropdown">
-                       
-                       @if(ViewData["nomeUser"] != null)
-                       {
-                           <a class="btn btn-outline-info dropdown-toggle" style="margin-right:20px;" asp-action="SuaConta" asp-controller="Conta" id="dropdownMenuButton2"  aria-expanded="false">@ViewData["nomeUser"].ToString()</a>
-                          
-                       }                           
-                       else
-                       {
-                           <a class="btn btn-outline-info dropdown-toggle " style="margin-right:20px" asp-action="Login" asp-controller="Login" id="dropdownMenuButton2"  aria-expanded="false">Fazer Login</a>
-                       }
-                       
-                       @if(ViewData["nomeUser"] != null){
-                            
-                        
-                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
-                        <li><a class="dropdown-item" asp-action="SuaConta" asp-controller="Conta" >Sua conta</a></li>
-                        <li><a class="dropdown-item" href="#">Seus Pedidos</a></li>                       
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#">Trocar de conta</a></li>
-                        <li><a class="dropdown-item" href="/Home/Home/Sair">Sair</a></li>
-                            </ul>
-                        }
-                        else{
-                            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
-                              <li><a class="dropdown-item" asp-action="Login" asp-controller="Login">Login</a></li>                                          
-                              <li><hr class="dropdown-divider"></li>
-                              <li><a class="dropdown-item" asp-action="CriarConta" asp-controller="Login">Criar conta</a></li>                       
-                            </ul>
-                        }
-                    </div>
-
-
-                    <!-- BOTÃO DE COMPRA -->
-                   <ul class="navbar-nav flex-grow-1 ">                        
-                        <li class="nav-item">                        
-                            <a class="btn btn-outline-info text-orange" asp-controller="Login" asp-action="Carrinho" >
-                            <svg xmlns="http://www.w3.org/2000/svg" width="23" height="25" fill="currentColor" class="bi bi-cart2" viewBox="0 0 16 16"> <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/></svg><path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/></svg> 
-                              <span class="position-absolute badge rounded-pill bg-dark spamHome " >
-                                10
-                               <span class="visually-hidden">Carrinho</span>
-                               </span>
-                            </a>
-                        </li>                                               
-                    </ul>
-                </div>
+          <div class="d-flex" >
+              <input size="90" type="text" class="form-control form-control-dark semBordaDireita" placeholder="Pesquisar " aria-label="Search" aria-describedby="BarraDePesquisa">
+              <a href="#">
+              <span class="input-group-text semBordaEsquerda" id="BarraDePesquisa"  style="background:orange; border-color:orange;"><img src="~/icones/search.svg" style="width:22px;height:23px" alt="" /></span>
+              </a>
+          </div>
+          @if(ViewData["nomeUser"] as string == "")
+            {
+                <a  class="nav-link bordaBottomLogin px-5 text-Laranja " style="width:150px" data-bs-toggle="modal" data-bs-target="#ModalEndereco">           
+                     <div class="text-overflow" >Endereço</div>
+                </a>
+            }
+            else if(ViewBag.RNCUC[0] == "Cadastre") 
+            {
+                 <a  class="nav-link bordaBottomLogin px-3 text-Laranja " style="width:150px" asp-action="AddEndereco" asp-controller="Conta">           
+                    <div >Cadastrar endereço</div>
+            </a>
+            }else if (ViewBag.RNCUC[0] == "Sem endereço")
+            {
+                <a  class="nav-link bordaBottomLogin px-3 text-Laranja " style="width:150px" asp-action="AddEndereco" asp-controller="Conta">           
+                        <div >Cadastrar endereço</div>
+                </a>
+            }
+            else
+            {
+                <a href="#" title="Endereço padrão">
+                    <div class="navbar-nav">
+                        <div class="nav-item text-nowrap">
+                          <div class="nav-link bordaBottomLogin px-3 text-Laranja  botaoEnderecoInicio d-flex letraP position-relative " data-bs-toggle="modal" data-bs-target="#ModalEndereco"> 
+                              <div >
+                                  <span class="position-absolute spanBotaoEnd translate-middle text-opacity-50 text-light" style="white-space: nowrap;">
+                                    <span class="">Seu endereço padrão</span>                
+                                  </span>                  
+                                  <img src="~/icones/location.png" width="15px">
+                                  <div class="bot text-overflow" >
+                                     <span >@ViewBag.RNCUC[2]</span>
+                                  </div>             
+                                  <div class="spanCep " >
+                                      <span style="white-space:nowrap">@ViewBag.RNCUC[4]</span>
+                                  </div>
+                              </div>
+                           </div>
+                       </div>
+                   </div>
+              </a>
+            }
+       
+          <div class="navbar-nav">
+            <div class="nav-item text-nowrap">
+               <div class="dropdown ">                       
+                  @if(ViewData["nomeUser"] as string != "")
+                  {
+                      <a class="nav-link bordaBottomLogin dropdown-toggle px-5 text-Laranja" style="margin-right:20px;" asp-action="SuaConta" asp-controller="Conta" id="dropdownMenuButton2"  aria-expanded="false">@ViewData["nomeUser"].ToString()</a>                 
+                  }                           
+                  else
+                  {
+                      <a class="nav-link bordaBottomLogin dropdown-toggle px-5  text-Laranja" style="margin-right:20px" asp-action="Login" asp-controller="Login" id="dropdownMenuButton2"  aria-expanded="false">Fazer Login</a>
+                  }                  
+                  @if(ViewData["nomeUser"] as string != "")
+                  {                                                 
+                     <ul class="dropdown-menu dropdown-menu-dark" style="margin-left:7%" aria-labelledby="dropdownMenuButton2">
+                       <li><a class="dropdown-item" asp-action="SuaConta" asp-controller="Conta" >Sua conta</a></li>
+                       <li><a class="dropdown-item" asp-action="SeusPedidos" asp-controller="Conta">Seus Pedidos</a></li>                       
+                       <li><hr class="dropdown-divider"></li>
+                       <li><a class="dropdown-item" href="#">Trocar de conta</a></li>
+                       <li><a class="dropdown-item" href="/Home/Home/Sair">Sair</a></li>
+                     </ul>
+                   }
+                   else
+                   {
+                     <ul class="dropdown-menu dropdown-menu-dark" style="margin-left:7%" aria-labelledby="dropdownMenuButton2">
+                       <li><a class="dropdown-item" asp-action="Login" asp-controller="Login">Login</a></li>                                          
+                       <li><hr class="dropdown-divider"></li>
+                       <li><a class="dropdown-item" asp-action="CriarConta" asp-controller="Login">Criar conta</a></li>                       
+                     </ul>
+                   }
+               </div>
             </div>
-        </nav>
+          </div>
     </header>
-    <div class="todasTelas">
+    <div>
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
-    </div>
-    <footer class="border-top footer rodape ">
-        
-        <div class="container">                 
-            &copy; @DateTime.Today.Year - MVC &emsp;&emsp;&emsp;
-            <a href="#">Condições de uso</a>&emsp;&emsp;&emsp;
-            <a href="#">Políticas de Privacidade</a>&emsp;&emsp;&emsp;
-            <a href="#">Ajuda</a>&emsp;&emsp;&emsp;
-            <a href="#">Quem somos</a>
-        </div>
-    </footer>
+    </div>        
+      <footer class="text-muted py-5 mt-3  ">
+          <div class="container border-top py-2">
+            <p class="float-end mb-1">     
+                 <!-- <li class="ms-3"><a class="link-light social-svg" href="#"><svg role="img" class="bi" width="30" height="30" aria-label="Twitter"><title>Twitter</title><use xlink:href="#twitter"/></svg></a></li> -->
+                  <a class="link-light social-svg" href="https://github.com/renan403"><svg role="img" class="bi" width="30" height="30" aria-label="Github"><title>Github</title> <use xlink:href="#github" /></svg></a>
+                 <!-- <li class="ms-3"><a class="link-light social-svg" href="#"><svg role="img" class="bi" width="30" height="30" aria-label="Facebook"><title>Facebook</title><use xlink:href="#facebook"/></svg></a></li>-->      
+            </p>
+            <p class="mb-1">Bem vindo ao meu projeto</p>
+            <p class="mb-0">Desenvolvido por mim <a href="https://github.com/renan403">Renan</a> com intuito de aprimorar meus conhecimentos em C# principalmente.</p>
+          </div>
+        </footer>
+
+    
+    <script src="/docs/5.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)  
     <script src="~/js/preLoader.js"></script>  
+    <script src="~/js/preencheCep.js"></script>  
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 </body>
 </html>
 
 <!-- POP-UP DO CEP -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
+
+<div class="modal fade" id="ModalEndereco" tabindex="-1" aria-labelledby="ModalEndereco" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-sm">
     <div class="modal-content">
       <div class="modal-header" >
           <div class="ajusteModalCep">      
@@ -135,32 +177,43 @@
       </div>
       <div class="modal-body" >
         <div class="ajusteModalCep">    
-                    @if(ViewData["nomeUser"] == null)
+                    @if(ViewData["nomeUser"] as string == "")
                     {
-                        <a href="/Login/Login">Faça login</a>
+                        <p style="font-size:12px">As opções e velocidade de entrega podem variar de acordo com a região</p>
+                        <a asp-action="Login" asp-controller="Login" class="btn btn-outline-dark">Faça login</a>
 
                     }
                     else
                     {
-                        <p>@ViewData["nomeUser"]</p>
+                        <a class="text-decoration-none text-dark" asp-action="Endereco" asp-controller="Conta" title="Seu endereço padrão">
+                           <div class="boxModalEnd">
+                            <p  ><strong>@ViewBag.RNCUC[5]</strong><br>                      
+                               @ViewBag.RNCUC[0],<strong> @ViewBag.RNCUC[1]</strong><br>
+                               @ViewBag.RNCUC[2], @ViewBag.RNCUC[3] <br>
+                               @ViewBag.RNCUC[4]                    
+                               </p>
+                            <h6  style="text-align:start;"><span class="text-opacity-50 text-dark" style="margin-left: 10px;" >Endereço padrão</span></h6>
+                            </div>
+                        </a>
+                           <a class="text-decoration-none" asp-action="Endereco" asp-controller="Conta">Gerenciar endereços</a>
                     }
         </div>
       </div>
-      <form method="post" >
-          <div class="modal-footer">
+     @*  <div class="adpHr"style="width:100%;margin:auto;color:black;">
+          <hr><p style="rgba(0,0,0,.20);font-size:12px">&ensp;  ou insira um CEP &ensp;</p><hr>
+       </div> 
+      <form method="post">                      
             <div class="ajusteModalCep"> 
                 <div class="input-group input-group-sm mb-1" >
-                    <h4>cep&emsp; </h4> 
-                        <input class="input1"  name="cep1"  id="inputcep" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" size="10" maxlength="5"/> 
-                        <p id="pcep"> &nbsp; </p> 
-                        <input class="input2" name="cep2" size="5" id="inputcep" type="text" maxlength="3" onkeypress="return event.charCode >= 48 && event.charCode <= 57"/>
-                    <button id="pcep" type="submit" class="btn btn-dark" style="border-radius:10px;margin-left:20px;">
-                        Confirmar 
-                    </button>           
+                    <div class="TamanhoCep">    
+                         <div class="input-group">                        
+                            <input name="cep1" id="inputcep" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57 , Tipo(this,'CEP')"  maxlength="9" aria-label="Cep" class="form-control " autocomplete="off">                
+                            <button class="btn btn-dark" type="button" style="border-radius:0 10px 10px 0;" >Salvar</button>
+                         </div>
+                    </div>        
                 </div>
-            </div>  
-          </div>
-      </form>
+            </div>            
+      </form>*@
     </div>
   </div>
 </div>

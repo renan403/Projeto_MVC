@@ -1,0 +1,79 @@
+﻿@model ModelEndereço
+@{
+    ViewBag.Title = "Adicionar endereço";
+
+    List<string> Paises = new List<string>{"Brasil", "Ainda não desenvolvido ..."};
+    //List<string> UF = new List<string> { "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA",
+     //                                    "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO" };
+    
+			            
+}
+@using (Html.BeginForm(FormMethod.Post,new { enctype = "application/x-www-form-urlencoded" }))
+{
+    
+    <div class="mb-3 " style="width:60%;margin:auto;">
+         <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a class="text-warning text-decoration-none" asp-action="SuaConta" asp-controller="Conta">Sua Conta</a></li>
+        <li class="breadcrumb-item"><a class="text-warning text-decoration-none" asp-action="Endereco" asp-controller="Conta">Endereço</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Novo endereço</li>
+      </ol>
+    </nav>
+      <div class="card border-info  mb-3" style="height:100%">
+       <div class="card-header"><h3>Adicionar um novo endereço</h3></div>
+           <div class="card-body">
+              <label for="pais" class="form-label"><strong>País/Região</strong></label>        
+               @Html.DropDownListFor(m => m.Pais,new SelectList(Paises) , "Escolha o pais", new {@class="form-select letraP", @id="pais",@required = "required" })
+
+              <label for="nome" class="form-label distTop"><strong>Nome completo (Nome e Sobrenome)</strong></label>
+              @Html.TextBoxFor(m => m.Nome, "", new {@id="nome", @class="form-control letraP", @TextMode="Text", @placeholder="",@type="text", @Required ="Required",@oninvalid="setCustomValidity('Erro')",@oninput="setCustomValidity('')" })  
+              
+              <label for="telefone" class="form-label distTop"><strong>Telefone</strong></label>
+              @Html.TextBoxFor(m => m.Telefone, "", new {@id="telefone",@class="form-control letraP", @TextMode="Text", @placeholder="",@type="text", aria_describedby="telefone",@autocomplete="off", @onkeypress="Tipo(this,'TELEFONE')", maxlength="14" })  
+              <div class="form-text"> Pode ser usado para auxiliar a entrega </div>       
+             
+              <label for="cep" class="form-label distTop" ><strong>CEP</strong></label>
+              @Html.TextBoxFor(m => m.Cep, "", new { @id="cep", @class="form-control letraP", @TextMode="Text", @placeholder="Exemplo. 12345-000",@type="text", @Required ="Required",@autocomplete="off", maxlength="9", @onkeypress="Tipo(this,'CEP')"})  
+
+              <label for="logradouro" class="form-label distTop"><strong>Endereço</strong></label>
+              @Html.TextBoxFor(m => m.Endereco, "", new {@id="logradouro", @class="form-control letraP", @TextMode="Text", @placeholder="Endereço, caixa postal, nome da empresa, A/C",@type="text", @Required ="Required",@oninvalid="setCustomValidity('Endereço de email inválido. Corrija e tente novamente.')",@oninput="setCustomValidity('')" ,@autocomplete="off"})  
+              
+              <label for="complemento" class="form-label distTop"><strong>Complemento (opcional)</strong></label>
+              @Html.TextBoxFor(m => m.Complemento, "", new {@id="complemento", @class="form-control letraP", @TextMode="Text", @placeholder="Apartamento, sala, conjunto, edifício, andar, etc.",@type="text",@oninvalid="setCustomValidity('Endereço de email inválido. Corrija e tente novamente.')",@oninput="setCustomValidity('')", @style="margin-top:0.5%",@autocomplete="off"})  
+                
+              <label for="numero" class="form-label distTop"><strong>Número</strong></label>
+              @Html.TextBoxFor(m => m.Numero, "", new {@id="numero",@class="form-control letraP", @TextMode="Text", @placeholder="número ou s/n",@type="text", @Required ="Required",@autocomplete="off" })  
+
+              <label for="bairro" class="form-label distTop"><strong>Bairro</strong></label>
+              @Html.TextBoxFor(m => m.Bairro, "", new {@id="bairro", @class="form-control letraP", @TextMode="Text", @placeholder="",@type="text", @Required ="Required",@autocomplete="off" })  
+              
+              <label for="cidade" class="form-label distTop"><strong>Cidade</strong></label>
+              @Html.TextBoxFor(m => m.Cidade, "", new {@id="cidade", @class="form-control letraP", @placeholder="Insira o CEP acima para preencher a Cidade", @TextMode="Text",@type="text", @Required ="Required",@autocomplete="off" , @readonly="true" })  
+                    
+              <div class="input-group mb-3">  
+                  <div style="width:90%;margin-right:2%;">
+                      <label for="estado" class="form-label distTop"><strong>Estado</strong></label>
+                      @Html.TextBoxFor(m => m.Estado, "", new {@id="estado", @class="form-control letraP", @TextMode="Text", @placeholder="Insira o CEP acima para preencher a Estado",@type="text", @Required ="Required",@autocomplete="off", @readonly="true"  }) 
+                  </div>
+                  <div style="width:8%;margin-top:0.4%;">
+                     <label for="uf" class="form-label distTop" ><strong>UF</strong></label>                              
+                     @Html.TextBoxFor(m => m.UF, "", new {@class="form-control letraP ",@id="uf", @readonly="true" })
+                  </div>                  
+              </div> 
+              
+              <div class="form-check">
+                   @Html.CheckBoxFor(m =>m.Padrao, new{@class="botaoCheck form-check-input", @type="checkbox", @id="flexCheckDefault"})
+                  <label class="form-check-label" for="flexCheckDefault">
+                    Tornar este o meu endereço padrão
+                  </label>
+              </div>
+             
+
+          </div>
+          <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+          <button type="submit" style="width:100px;margin-bottom:2%; margin-left:2%" class="btn me-md-4 btn-primary btn-sm">Confirmar</button> 
+          </div>
+      </div>
+    </div>
+
+}
