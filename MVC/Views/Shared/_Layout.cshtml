@@ -1,7 +1,7 @@
 ﻿@using Firebase.Database
-@{
-   
-}
+ @{
+  }
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -17,13 +17,16 @@
 
     <title>@ViewData["Title"]</title>
     <link rel="shortcut icon" type="imagex/png" href="https://images.vexels.com/media/users/3/152418/isolated/lists/098366e6994dd75ab46b47cd27b2c9d4-icone-do-planeta-terra.png">
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />   
+    <link rel="stylesheet" href="~/lib/bootstrap-5.2.0-beta1/dist/css/bootstrap.min.css" />  
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/MVC.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/icones/"/>  
     <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="~/css/signin.css" asp-append-version="true"/>
-
+    <!-- script la em baixo nao funciona -->
+    <script  type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>  
     <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
@@ -61,29 +64,26 @@
               <span class="input-group-text semBordaEsquerda" id="BarraDePesquisa"  style="background:orange; border-color:orange;"><img src="~/icones/search.svg" style="width:22px;height:23px" alt="" /></span>
               </a>
           </div>
-          @if(ViewData["nomeUser"] as string == "")
+          @if(ViewBag.nomeUser == null)
             {
-                <a  class="nav-link bordaBottomLogin px-5 text-Laranja " style="width:150px" data-bs-toggle="modal" data-bs-target="#ModalEndereco">           
-                     <div class="text-overflow" >Endereço</div>
+                <a  class="nav-link bordaBottomLogin px-5 py-2 text-Laranja " style="width:150px" data-bs-toggle="modal" data-bs-target="#ModalEndereco">           
+                     <div class="text-overflow">Endereço</div>
                 </a>
             }
             else if(ViewBag.RNCUC[0] == "Cadastre") 
             {
-                 <a  class="nav-link bordaBottomLogin px-3 text-Laranja " style="width:150px" asp-action="AddEndereco" asp-controller="Conta">           
-                    <div >Cadastrar endereço</div>
-            </a>
-            }else if (ViewBag.RNCUC[0] == "Sem endereço")
+               @Html.ActionLink("Cadastrar endereço","AddEndereco","Conta",null, new {@class="nav-link bordaBottomLogin px-3 py-2 text-Laranja",@style="width:150px"})
+            }
+            else if (ViewBag.RNCUC[0] == "Sem endereço")
             {
-                <a  class="nav-link bordaBottomLogin px-3 text-Laranja " style="width:150px" asp-action="AddEndereco" asp-controller="Conta">           
-                        <div >Cadastrar endereço</div>
-                </a>
+                 @Html.ActionLink("Cadastrar endereço","AddEndereco","Conta",null, new {@class="nav-link bordaBottomLogin px-3 py-2 text-Laranja",@style="width:150px"})
             }
             else
             {
                 <a href="#" title="Endereço padrão">
                     <div class="navbar-nav">
                         <div class="nav-item text-nowrap">
-                          <div class="nav-link bordaBottomLogin px-3 text-Laranja  botaoEnderecoInicio d-flex letraP position-relative " data-bs-toggle="modal" data-bs-target="#ModalEndereco"> 
+                          <div class="nav-link bordaBottomLogin px-3 text-Laranja botaoEnderecoInicio d-flex letraP position-relative " data-bs-toggle="modal" data-bs-target="#ModalEndereco"> 
                               <div >
                                   <span class="position-absolute spanBotaoEnd translate-middle text-opacity-50 text-light" style="white-space: nowrap;">
                                     <span class="">Seu endereço padrão</span>                
@@ -100,47 +100,48 @@
                        </div>
                    </div>
               </a>
-            }
-       
+            }     
           <div class="navbar-nav">
             <div class="nav-item text-nowrap">
                <div class="dropdown ">                       
-                  @if(ViewData["nomeUser"] as string != "")
+                  @if(ViewBag.nomeUser != null)
                   {
-                      <a class="nav-link bordaBottomLogin dropdown-toggle px-5 text-Laranja" style="margin-right:20px;" asp-action="SuaConta" asp-controller="Conta" id="dropdownMenuButton2"  aria-expanded="false">@ViewData["nomeUser"].ToString()</a>                 
+                      @Html.ActionLink($"{@ViewBag.nomeUser}","SuaConta","Conta",null, new {@class="nav-link bordaBottomLogin dropdown-toggle px-5 text-Laranja",@style="margin-right:20px",@id="dropdownMenuButton2",@aria_expanded="false"})
                   }                           
                   else
                   {
-                      <a class="nav-link bordaBottomLogin dropdown-toggle px-5  text-Laranja" style="margin-right:20px" asp-action="Login" asp-controller="Login" id="dropdownMenuButton2"  aria-expanded="false">Fazer Login</a>
+                      @Html.ActionLink("Fazer Login","Login","Login",null, new {@class="nav-link bordaBottomLogin dropdown-toggle px-5 text-Laranja",@style="margin-right:20px",@id="dropdownMenuButton2",@aria_expanded="false"})
                   }                  
-                  @if(ViewData["nomeUser"] as string != "")
+                  @if(ViewBag.nomeUser!= null)
                   {                                                 
                      <ul class="dropdown-menu dropdown-menu-dark" style="margin-left:7%" aria-labelledby="dropdownMenuButton2">
-                       <li><a class="dropdown-item" asp-action="SuaConta" asp-controller="Conta" >Sua conta</a></li>
-                       <li><a class="dropdown-item" asp-action="SeusPedidos" asp-controller="Conta">Seus Pedidos</a></li>                       
-                       <li><hr class="dropdown-divider"></li>
-                       <li><a class="dropdown-item" href="#">Trocar de conta</a></li>
-                       <li><a class="dropdown-item" href="/Home/Home/Sair">Sair</a></li>
+                       <li>@Html.ActionLink("Sua conta","SuaConta","Conta",null, new {@class="dropdown-item"})</li>
+                       <li>@Html.ActionLink("Seus Pedidos","SeusPedidos","Conta",null, new {@class="dropdown-item"})</li>
+                       <li>@Html.ActionLink("Seu Carrinho","Carrinho","Produtos",null, new {@class="dropdown-item position-relative"})</li>
+                       <li><hr class="dropdown-divider text-bg-light"></li>
+                       <li><a class="dropdown-item link-light" href="#">Trocar de conta</a></li>
+                       <li><a class="dropdown-item link-light" href="/Home/Home/Sair">Sair</a></li>
                      </ul>
                    }
                    else
                    {
                      <ul class="dropdown-menu dropdown-menu-dark" style="margin-left:7%" aria-labelledby="dropdownMenuButton2">
-                       <li><a class="dropdown-item" asp-action="Login" asp-controller="Login">Login</a></li>                                          
+                       <li>@Html.ActionLink("Login","Login","Login",null, new {@class="dropdown-item"})</li>                                          
                        <li><hr class="dropdown-divider"></li>
-                       <li><a class="dropdown-item" asp-action="CriarConta" asp-controller="Login">Criar conta</a></li>                       
+                       <li>@Html.ActionLink("Criar conta","CriarConta","Login",null, new {@class="dropdown-item"})</li>                       
                      </ul>
                    }
                </div>
             </div>
           </div>
     </header>
+
     <div>
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>        
-      <footer class="text-muted py-5 mt-3  ">
+      <footer class="text-white mt-3 py-5 fixar-rodape">
           <div class="container border-top py-2">
             <p class="float-end mb-1">     
                  <!-- <li class="ms-3"><a class="link-light social-svg" href="#"><svg role="img" class="bi" width="30" height="30" aria-label="Twitter"><title>Twitter</title><use xlink:href="#twitter"/></svg></a></li> -->
@@ -156,11 +157,12 @@
     <script src="/docs/5.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>  
     @await RenderSectionAsync("Scripts", required: false)  
     <script src="~/js/preLoader.js"></script>  
     <script src="~/js/preencheCep.js"></script>  
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    
 </body>
 </html>
 
@@ -177,10 +179,10 @@
       </div>
       <div class="modal-body" >
         <div class="ajusteModalCep">    
-                    @if(ViewData["nomeUser"] as string == "")
+                    @if(ViewBag.nomeUser == null)
                     {
-                        <p style="font-size:12px">As opções e velocidade de entrega podem variar de acordo com a região</p>
-                        <a asp-action="Login" asp-controller="Login" class="btn btn-outline-dark">Faça login</a>
+                        <p style="font-size:12px">As opções e velocidade de entrega podem variar de acordo com a região</p>             
+                        @Html.ActionLink("Faça login","Login","Login",null, new {@class="btn btn-outline-dark"})
 
                     }
                     else
@@ -194,8 +196,8 @@
                                </p>
                             <h6  style="text-align:start;"><span class="text-opacity-50 text-dark" style="margin-left: 10px;" >Endereço padrão</span></h6>
                             </div>
-                        </a>
-                           <a class="text-decoration-none" asp-action="Endereco" asp-controller="Conta">Gerenciar endereços</a>
+                        </a>                        
+                        @Html.ActionLink("Gerenciar endereços","Endereco","Conta",null, new {@class="text-decoration-none"})
                     }
         </div>
       </div>

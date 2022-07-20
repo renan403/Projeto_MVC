@@ -12,14 +12,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Views\Conta\FinalizarPedido.cshtml~RF161c9f72.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="EntityFramework" Version="6.4.4" />
     <PackageReference Include="FirebaseAdmin" Version="2.3.0" />
     <PackageReference Include="FirebaseAuthentication.net" Version="3.7.2" />
     <PackageReference Include="FirebaseDatabase.net" Version="4.0.7" />
     <PackageReference Include="FirebaseStorage.net" Version="1.0.3" />
-    <PackageReference Include="FluentEmail.Smtp" Version="3.0.2" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.5" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.6" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.1" />
+    <PackageReference Include="ZXing.Net" Version="0.14.0.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -29,6 +33,10 @@
     <Reference Include="Seguranca_v2">
       <HintPath>Dll\Seguranca_v2.dll</HintPath>
     </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\img\Temp\" />
   </ItemGroup>
 
 </Project>

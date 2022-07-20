@@ -1,0 +1,83 @@
+﻿@model ModelProduto
+@{
+    ViewBag.Title = "Carrinho";
+
+}
+
+
+<main>
+  <div class="album py-5">
+    <div class="container">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-1 g-0">                     
+        <div class="col-sm-8 bg-light p-0 bordaPoucoRedonda" style="margin-top:5px" >
+          <div class="card shadow-sm">
+            <div class="card-body">             
+               <div class="card" style="border:none">                
+                 @foreach(var produto in ViewBag.Carrinho)
+                 {   
+                   <div class="d-flex justify-content-between align-items-center">
+                       <div class="col-md-4" >
+                          <a href="~/Produtos/Produtos/@produto[0].IdProduto"> 
+                             <div class="card " style="width:auto;max-width:260px">                  
+                                <img src="@produto[0].UrlImg" class="img-fluid border" style="border-radius:5px;min-height:200px;max-height:201px;" alt="img"/>  
+                             </div> 
+                          </a>   
+                       </div>                      
+                        <div class="col" style="min-height:150px;max-height:151px;">
+                           <div class="d-flex justify-content-between align-items-center">
+                               <h5 style="margin-left:2%"><a href="~/Produtos/Produtos/@produto[0].IdProduto" class="text-decoration-none">@produto[0].NomeProd</a></h5>
+                               <h5 style="margin-right:2%">R$ @produto[0].PrecoProd</h5>
+                           </div>
+                           <span style="margin-left:2%">Vendido por : @produto[0].NomeVendedor </span><br />
+                           <div class="d-flex">
+                              <span style="margin-left:2%">Qtd:</span>
+                              <select onclick="recalcular('@produto[0].IdProduto')" id="@produto[0].IdProduto" class="bg-white btn-sm" style="width:40px;margin-right:2%;margin-left:0.5%;border-radius:5px" aria-label="Default select example">             
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                              </select>
+                              
+                              <div class="vr"></div>
+                              @Html.ActionLink("Excluir","ExcluirCarrinho","Produtos",new{Excluir = $"{produto[2]}", quantia = 6},new {@class="text-decoration-none",@style="margin-left:2%"})
+                              <a href="#" class="text-decoration-none" style="margin-left:2%"> </a>                         
+                           </div>
+                         </div>                                          
+                   </div>  
+                   <hr> 
+                      <script type="text/javascript">
+                       
+                          
+                       var selectElement = document.getElementById('@produto[0].IdProduto');   
+                       var num = @produto[1];
+                       selectElement.value = num.toString();    
+                       	
+                       function recalcular(id){
+                              
+                             document.getElementById(id).addEventListener('change',function(){                           
+                                  var url = '@Url.Action("AlterarCompraProd", "Produtos", new {Excluir = $"carrinho--" })'+ id + '***' + this.value ;
+                                  window.location = url;
+                                  });
+                       }
+                    </script>
+                 }                 
+                 <div class="d-flex justify-content-between align-items-center"> 
+                      @if(@Model.Qtd < 2)
+                      {
+                          <a asp-action="FinalizarCompra" asp-controller="Conta" class="btn btn-sm btn-outline-dark " style="width:200px;"><span>Fechar pedido</span></a>
+                          <span style="font-size:larger">Subtotal (@Model.Qtd item) : <strong>@Model.ValorTotal</strong></span>
+                      }else
+                      {   
+                          <a asp-action="FinalizarCompra" asp-controller="Conta" class="btn btn-sm btn-outline-dark " style="width:200px;"><span>Fechar pedido</span></a>
+                          <span style="font-size:larger">Subtotal (@Model.Qtd itens) : <strong>@Model.ValorTotal</strong></span>
+                      }                            
+                 </div>
+               </div>                  
+            </div>
+          </div>
+        </div>       
+      </div>
+    </div>
+  </div>
+</main>

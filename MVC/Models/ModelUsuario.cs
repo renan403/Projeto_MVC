@@ -19,9 +19,12 @@ namespace MVC.Models
         public string? Senha { get; set; }
         public string? ConfSenha { get; set; }
         public string? Message { get; set; }
-        public bool? Ativo { get; set; }
+        public string? IdUser { get; set; }
+        public string? Erro { get; set; }
+
     }
-    public class ModelEndereço{
+    public class ModelEndereço
+    {
         [Required]
         public string? Pais { get; set; }
         [Required]
@@ -45,6 +48,19 @@ namespace MVC.Models
         public string? Estado { get; set; }
         public bool Padrao { get; set; }
         public string? UF { get; set; }
-    }  
+    }
+    
+    public class ModelCartao
+    {
+        public string? NomeCard { get; set; }
+        public string? NumeroCard { get; set; }
+        public string? DataExpiracao { get; set; }
+        public int? Cvv { get; set; }
+        public string? Bandeira { get; set; }
+        public string? Erro { get; set; } = string.Empty;
+        public string? CaminhoImgBandeira { get; set; }
+        public string? CaminhoImgCartao { get; set; }
+        public bool Padrao { get; set; }
+        public string? QuatroDigCard { get; set; }
+    }
 }
-

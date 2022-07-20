@@ -7,7 +7,7 @@ body {
     position: absolute;
     top:30%;
     right: 2%;
-    z-index: 10;
+    z-index: 1;
     border: none;
     background: transparent;
     outline: none;
@@ -70,3 +70,15 @@ body {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
+
+
+.Bandeira {
+    position: absolute;
+    top: 5px;
+    right: 15px;
+    z-index: 10;
+    border: none;
+    background: transparent;
+    outline: none;
+}
+

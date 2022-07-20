@@ -1,46 +1,101 @@
-﻿@model ModelEndereço
+﻿@model ModelProduto
 @{
     ViewBag.Title = "Venda no app";
+    List<string> categorias = new List<string>{"Computadores e informática", "Eletrônicos, TV e Áudio","Games e Consoles"};
 }
+
+@Html.AntiForgeryToken()
+
 <div class="container">
-  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-      <div class="col columnHome">
-          <div class="card shadow-sm">
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 g-3">
 
-            <div class="card-body">              
-              <div >                                          
-                  <button class="btn btn-dark btn-sm dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
-                    Categoria do produto
-                  </button>
-                  <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">                 
-                    <li><a class="dropdown-item active" href="#">Computadores e informática</a></li>
-                    <li><a class="dropdown-item" href="#">Eletrônicos, TV e Áudio</a></li>                    
-                    <li><a class="dropdown-item" href="#">Games e Consoles</a></li>
-                  </ul>               
-              </div>
-               <div class="input-group input-group-sm mb-3">
-                    <div class="mb-3">  
-                     <strong>  @Html.Label("","Marca do produto",new{@for="exampleInputEmail1" ,@class="form-label"})</strong>
-                       @Html.TextBoxFor(m => m.Endereco,"",new{@class="form-control",@type="text"})
-                    </div>
-                    <div class="mb-3">  
-                     <strong>  @Html.Label("","Modelo do produto",new{@for="exampleInputEmail1" ,@class="form-label"})</strong>
-                       @Html.TextBoxFor(m => m.Endereco,"",new{@class="form-control",@type="text"})
-                    </div>
-                    <div class="mb-3">  
-                     <strong>  @Html.Label("","Nome do produto",new{@for="exampleInputEmail1" ,@class="form-label"})</strong>
-                       @Html.TextBoxFor(m => m.Endereco,"",new{@class="form-control",@type="text"})
-                    </div>
-                    <div class="mb-3">  
-                     <strong>  @Html.Label("","Descriçao do produto",new{@for="exampleInputEmail1" ,@class="form-label"})</strong>
-                       @Html.TextBoxFor(m => m.Endereco,"",new{@class="form-control",@type="text"})
-                    </div>
-
-               </div>
+      <div class="col " style="margin:auto; margin-top:5%">
+          <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a class="text-warning text-decoration-none" asp-action="SuaConta" asp-controller="Conta">Sua Conta</a></li>      
+            <li class="breadcrumb-item"><a class="text-warning text-decoration-none" asp-action="SeusProdutos" asp-controller="Conta">Seus Produtos</a></li>      
+            <li class="breadcrumb-item active" aria-current="page">Venda seu Produto</li>
+          </ol>
+        </nav>
+          <nav style="--bs-breadcrumb-divider: '  ';" aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item "><a class="text-decoration-none text-white bordaBottom" href="">Vender seu produto</a></li>
+                <li class="breadcrumb-item "><a class="text-decoration-none text-white" asp-action="SeusProdutos" asp-controller="Conta">Seus produtos</a></li> 
                 
+                  
+              </ol>
+            </nav>
+            <hr class="hrNav" />
+          <div class="card shadow-sm" >
+            <div class="card-header" style="text-align:center"> 
+               <h1 class="h3 mb-2 fw-normal">Vender produto</h1>
+            </div>
+            <div class="card-body " >              
+             <form enctype="multipart/form-data" method="post" > 
+                <div class="form-floating py-1">                  
+                      @Html.TextBoxFor(m => m.NomeProd, "", new {@id="NomeProd",@class="form-control form-control-sm letraP",@type="text", @Required ="Required", @placeholder="#",@title="Nome de produto" , @autocomplete="off"})                   
+                     <label class="letraP" for="NomeProd">Nome</label>
+                </div>
+                <div class="form-floating py-1">                  
+                      @Html.TextBoxFor(m => m.MarcaProd, "", new {@id="MarcaProd",@class="form-control form-control-sm letraP",@type="text", @Required ="Required", @placeholder="#",@title="Marca de produto" , @autocomplete="off"})                   
+                     <label class="letraP" for="MarcaProd">Marca</label>
+                </div>                                                              
+                <div class="form-floating py-1"> 
+                      @Html.TextBoxFor(m => m.ModeloProd, "", new {@id="ModeloProd",@class="form-control form-control-sm letraP",@type="text",@Required ="Required", @placeholder="#" ,@title="Modelo de produto", @autocomplete="off" })                           
+                      <label class="letraP" for="ModeloProd">Modelo</label>                                                
+                </div> 
+                <div class="form-floating py-1">                  
+                      @Html.TextBoxFor(m => m.Qtd, "", new {@id="QtdProd",@class="form-control form-control-sm letraP",@type="text", @placeholder="#",@Required ="Required", @title="Quantidade do estoque" ,@onkeypress="return event.charCode >= 48 && event.charCode <= 57", @autocomplete="off"})                   
+                     <label class="letraP" for="QtdProd">Quantidade em estoque</label>
+                </div>
+                <div class="form-floating py-1">                  
+                      @Html.TextBoxFor(m => m.PrecoProd, "", new {@id="PrecoProd",@class="form-control form-control-sm letraP",@type="text",@maxlength="9", @Required ="Required", @placeholder="#",@title="Nome de produto", @onkeypress="return event.charCode >= 48 && event.charCode <= 57,Tipo(this,'MOEDA')",@onchange="Tipo(this,'MOEDA')", @autocomplete="off"})                   
+                     <label class="letraP" for="NomeProd">Preço</label>
+                </div>  
+                <div class="form-floating py-1"> 
+                      @Html.TextBoxFor(m => m.DescriProd, "", new {@id="DescriProd",@class="form-control form-control-sm letraP",@type="text", @placeholder="#",@title="Descrição de produto" , @autocomplete="off"})                           
+                      <label class="letraP" for="DescriProd">Descriçao</label>                                                
+                </div> 
+                 <div class="input-group py-1 mb-3" >
+                   <label class="input-group-text" for="SelectCategoria" >Categoria</label>
+                   @Html.DropDownListFor(m => m.Categoria, new SelectList(categorias),"Escolha...", new {@class ="form-select",@id="SelectCategoria",@Required="required"})
+                </div>  
+                 
+                <div class="mb-3" >
+                      <label  class="form-label">Insira uma foto para seu produto</label>                     
+                      
+                        @Html.TextBoxFor(m => m.ImgArquivo, "", new {@class ="form-control",@id ="formFileSm" ,@name = "file",@type="file",@accept="image/*",@aria_describedby="inputGroupFileAddon04",@aria_label="Upload",@Required="required"})        
+                    <div id="invalido"> 
+                    </div>       
+                </div>
+                <div id="ValidaEnvio" class=" d-grid gap-2 col-6 mx-auto">
+                     <button id="EnviarProd" class="btn btn-primary btn-sm" type="submit">Enviar</button>
+                </div>               
+             </form>
             </div>
           </div>
       </div>
   </div>
 </div>
-       
+
+<script >
+      var _URL = window.URL || window.webkitURL;
+        $("#formFileSm").change(function (e) {
+            
+            var file, img;
+            if ((file = this.files[0])) {
+                img = new Image();
+                img.onload = function () {
+                    if (this.width > (this.height + (this.height * 0.75)) && this.height > 300) {
+                        $("#ValidaEnvio").html('<button id="EnviarProd" class="btn btn-primary btn-sm" type="submit">Enviar</button>');
+                        $("#invalido").html('');                        
+                    }
+                    else {
+                        $("#ValidaEnvio").html('<button id="EnviarProd" class="btn btn-primary btn-sm" disabled type="submit">Enviar</button>');
+                        $("#invalido").html('<span style="color:red">Tamanho de imagem invalido (motivo para não perder a qualidade), largura da imagem deve ser 75% maior que altura exemplo: 1575x900 ou  minimo 525x300</span>');                      
+                    }
+                };
+                img.src = _URL.createObjectURL(file);
+            }
+        }); 
+</script>

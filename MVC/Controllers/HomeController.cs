@@ -7,40 +7,35 @@ namespace MVC.Controllers
 {
     public class HomeController : Controller
     {
-        
+
         public async Task<IActionResult> Home()
         {
-            using (Auth email = new())
+
+            //return RedirectToAction("FinalizarPedido", "Conta");
+            using Auth auth = new();
+         
+
+            using (Data data = new())
             {
-                // await email.CadatrarEmail("renancporto94@gmail.com", "12345678","renan");
-                //await email.LoginEmail("renancporto94@gmail.com", "123456");
-                //await email.DeleteEmail("renancporto94@gmail.com", "12345678");
-                await email.ChangePassword("renancporto94@gmail.com", "123456", "12345");
+                await data.Teste();
+                ViewBag.Produtos = await data.RetornaArrayProdutos();
+
             }
-
-            //using (Data data = new())
-            //{
-            //    await data.Teste();
-
-            //}
-            ViewData["nomeUser"] = HttpContext.Session.GetString("nomeFormatado") ?? "";
-
-            using (EnderecoService end = new())
-            ViewBag.RNCUC = end.RetornoRNCUC(HttpContext.Session.GetString("Endereço") ?? "");
-            
-
+            using (GeralService geral = new())
+            {
+                ViewBag.nomeUser = geral.RetornaNomeNull(HttpContext.Session.GetString("nomeFormatado") ?? "");
+                ViewBag.RNCUC = geral.RetornoRNCUC(HttpContext.Session.GetString("Endereço") ?? "");
+            }
             var sessaoEmail = HttpContext.Session.GetString("SessaoEmail");
-            
-
-
             return View();
         }
         [HttpGet("/Home/Home/Sair")]
         public IActionResult HomeSair()
         {
             HttpContext.Session.SetString("SessaoNome", "");
-            HttpContext.Session.SetString("Endereço", "" );
+            HttpContext.Session.SetString("Endereço", "");
             HttpContext.Session.SetString("nomeFormatado", "");
+            HttpContext.Session.SetString("IdUsuario", "");
             return RedirectToAction("Home", "Home");
         }
 

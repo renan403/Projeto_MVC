@@ -1,0 +1,63 @@
+﻿@model ModelProduto
+@{
+    ViewBag.Title = "Venda no app";
+}
+
+@Html.AntiForgeryToken()
+
+<div class="container">
+     
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 g-3">
+
+      <div class="col " style="margin:auto; margin-top:5%">
+          <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a class="text-warning text-decoration-none" asp-action="SuaConta" asp-controller="Conta">Sua Conta</a></li>      
+            <li class="breadcrumb-item active" aria-current="page">Seus Produtos</li>
+          </ol>
+        </nav>
+          <nav style="--bs-breadcrumb-divider: '  ';" aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item "><a class="text-decoration-none text-white" asp-action="VendaNoApp" asp-controller="Conta">Vender seu produto</a></li> 
+                <li class="breadcrumb-item "><a class="text-decoration-none text-white bordaBottom" href="">Seus produtos</a></li>
+                  
+              </ol>
+            </nav>
+            <hr class="hrNav" />
+          <div class="card shadow-sm" >
+            <div class="card-header" style="text-align:center"> 
+               <h1 class="h3 mb-2 fw-normal">Seu produto</h1>
+            </div>
+            <div class="card-body " >              
+               <form enctype="multipart/form-data" method="post" >       
+                   @foreach ( var produto in ViewBag.Produtos)
+                   {         
+                     <div class="card shadow-sm">         
+                         <a class="link-primary text-decoration-none "  href="~/Produtos/Produtos/@produto.Object.IdProduto">
+                           <img style="width:100%" src="@produto.Object.UrlImg" class="img-fluid border tamanhoPadrao" title="@produto.Object.NomeProd" alt="galaxia">
+                         </a>
+                         <div class="card-body">
+                            <div style="width:100%;height:50px">
+                                <p class="card-text ">                     
+                                       @Html.ActionLink($"{@produto.Object.NomeProd}","Produtos","Produtos",new{id=$"{@produto.Object.IdProduto}"},new { enctype = "application/x-www-form-urlencoded",@class="link-primary text-decoration-none"})
+                                </p>       
+                                 <div class="d-flex justify-content-end align-items-center">
+                                   <small class="precoProd" style="border-radius:5px">&nbsp;R$:@produto.Object.PrecoProd &nbsp;</small>
+                                 </div>
+                            </div>
+                         </div>
+                         <div class="btn-group" role="group" aria-label="Basic example">
+                          <button type="submit" name="botao" value="Deletar&&@produto.Key&&@produto.Object.UrlImg" class="btn btn-outline-dark btn-sm">Deletar</button>
+                          <button type="submit" name="botao" value="Alterar&&@produto.Key&&@produto.Object.UrlImg&&@produto.Object.IdProduto" class="btn btn-outline-dark btn-sm">Alterar</button>
+                       
+                        </div>
+                     </div> 
+                     <br />
+                   }
+               </form>
+            </div>
+          </div>
+      </div>
+  </div>
+</div>
+       

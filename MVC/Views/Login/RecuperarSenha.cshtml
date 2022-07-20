@@ -1,0 +1,42 @@
+﻿@model ModelLogin
+@{
+    ViewBag.title = "Recuperar senha";
+}
+
+<main class="form-signin"  style="margin-bottom:3%;margin-top:10%">
+        @using (Html.BeginForm(FormMethod.Post ,new { enctype = "application/x-www-form-urlencoded"}))
+         {
+         @Html.ValidationSummary()  
+         @if(Model.Resposta == "EMAIL_NOT_FOUND")
+         {
+               <div class="boxErroLogin  card border-info ">                            
+                  <div style="margin: 2% 0 0 2%">
+                     <h5 style="color:rgb(193,55,55)">  <img src="~/icones/exclamation-triangle.svg" style="width:30px; margin:0 0 0 2%"/> Houve um problema</h5>
+                     <p>E-mail não encontrado.</p>
+                  </div>              
+            </div>
+         }
+         else if(Model.Resposta == "UNAUTHENTICATED")
+         {
+              <div class="boxErroLogin  card border-info ">                            
+                  <div style="margin: 2% 0 0 2%">
+                     <h5 style="color:rgb(193,55,55)">  <img src="~/icones/exclamation-triangle.svg" style="width:30px; margin:0 0 0 2%"/> Houve um problema</h5>
+                     <p>E-mail não autenticado</p>
+                  </div>              
+            </div>  
+         }
+            <div class="card border-info  mb-3" style="height:100%;">
+            <div class="card-header"> <h1 class="h3 mb-3 fw-normal">Redefinir senha</h1></div>
+            <div class="card-body">
+              <div class="mb-3">                  
+                   <div class="form-floating">                  
+                       @Html.TextBoxFor(m => m.Email, "", new {@id="floatingInput",@class="form-control letraP", @TextMode="Email", @placeholder="Seu Email",@type="email", @Required ="Required",@oninvalid="setCustomValidity('Endereço de email inválido. Corrija e tente novamente.')",@oninput="setCustomValidity('')",@autocomplete="off" })                   
+                      <label for="floatingInput">Email</label>
+                   </div>                                                                                                                                                                           
+                   <button type="submit" style="width:100%;" class="btn btn-primary btn-sm">Confirmar</button>      
+              </div>
+            </div>
+         </div>
+         }
+         
+</main>

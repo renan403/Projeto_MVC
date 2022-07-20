@@ -87,8 +87,12 @@ function Tipo(seletor, tipoMascara) {
             formataCampo(seletor, '000.000.000-00');
         } else if (tipoMascara == 'CNPJ') {
             formataCampo(seletor, '00.000.000/0000-00');
-        }}, 200);
+        } else if (tipoMascara == 'MOEDA') {
+            MascaraMoeda(seletor)
+        }
+    }, 200);
 }
+
 function formataCampo(campo, Mascara) {
     var er = /[^0-9/ (),.-]/;
     er.lastIndex = 0;
@@ -122,4 +126,13 @@ function formataCampo(campo, Mascara) {
         $(campo).val(texto.substring(0, texto.length - 1));
     }
     return true;
+}
+
+function MascaraMoeda(i) {
+    var v = i.value.replace(/\D/g, '');
+    v = (v / 100).toFixed(2) + '';
+    v = v.replace(".", ",");
+    v = v.replace(/(\d)(\d{3})(\d{3}),/g, "$1.$2.$3,");
+    v = v.replace(/(\d)(\d{3}),/g, "$1.$2,");
+    i.value = v;
 }

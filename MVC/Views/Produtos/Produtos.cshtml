@@ -1,52 +1,298 @@
-﻿@{
+﻿
+@model ModelProduto
+@{
     ViewBag.title = "Produtos";
 
 }
 
-<div class=" mesmaLinha">
-    <div class="boximgProd mesmaLinha ">
-        <div class="boxImgProdPequena ">
-          <a ><img  onmouseover="img1()" src="~/img/galaxia/galaxia1.jpg" alt="produto1"></a>
-          <a ><img  onmouseover="img2()" src="~/img/galaxia/galaxia2.jpg" alt="produto1"></a>
-          <a ><img  onmouseover="img3()" src="~/img/galaxia/galaxia3.jpg" alt="produto1"></a>
-        </div>
-        <div class="boxImgProdGrande  ">
-            <img id="img" src="~/img/galaxia/galaxia1.jpg" alt="produto1">
-        </div>   
-    </div>
-    <div class="boxDescricao" style="display: block;">
-        <h2> nome do produto</h2>
-        <hr class="dropdown-divider">
-        <h3>R$ 200.00</h3>
-         <h6 style="font-size:13px">De:<s style="color:gray;"> R$ 250.00</s></h6>
-        <p>descrição do produto</p>
-        <div class="">
 
-        </div>
-    </div>
-    <div class="boxValorEentrega" style="display: block;">
-        <h2>valor e entrega</h2>
-        <hr class="dropdown-divider">
-         <p>descrição do produto</p>  
-         <div class="botoesProd">
-         <a asp-action="Carrinho" asp-controller="Login" class="btn btn-outline-info btn-sm">Add no carrinho</a>
-            @if (true)
-            {
-                 <a asp-action="ComprarProd" asp-controller="Produtos"  class="btn btn-outline-info btn-sm">comprar</a>
-            }else{
-                 <a asp-action="Login" asp-controller="Login"  class="btn btn-outline-info btn-sm">comprar</a>
-            }
+<div class="album py-5 body">
+    <div class="container">     
+       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+           <div class="col">
+              <div class="card shadow-sm" style="height:256px">         
+                 <div class="card" style="width:auto;margin-top:auto;margin-bottom:auto">                  
+                   <img id="imagemGrande" class="tamanhoPadrao" src="@Model.UrlImg" title="@Model.NomeProd" alt="@Model.NomeProd">                 
+                 </div>                               
+                 
+                 @* <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-0">
+                    <div class="col" >
+                      <div class="card shadow-sm" >
+                         <img class="miniImg" src="~/img/Img.png" title="Possivel mini Imgs - não sera desenvolvido por motivo de limitação"  alt="Possivel mini Imgs - não sera desenvolvido por motivo de limitação">                                                                     
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="card shadow-sm">
+                         <img class="miniImg" src="~/img/Img.png" title="Possivel mini Imgs - não sera desenvolvido por motivo de limitação" alt="Possivel mini Imgs - não sera desenvolvido por motivo de limitação">
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="card shadow-sm">
+                         <img class="miniImg" src="~/img/Img.png" title="Possivel mini Imgs - não sera desenvolvido por motivo de limitação" alt="Possivel mini Imgs - não sera desenvolvido por motivo de limitação">                                           
+                      </div>
+                    </div>
+                     <div class="col">
+                      <div class="card shadow-sm">                       
+                         <img class="miniImg" src="~/img/Img.png" title="Possivel mini Imgs - não sera desenvolvido por motivo de limitação" alt="Possivel mini Imgs - não sera desenvolvido por motivo de limitação">                                                                      
+                      </div>
+                    </div>
+                  </div>      *@                             
+               </div>
+            </div>         
+           <div class="col">
+              <div class="card shadow-sm " style="height:256px">         
+                   <div width="100%">               
+                       <div class="card-body" style="height:155px">
+                           <div style="width:100%;">
+                               <h5 class="card-text ">                     
+                                     @Model.NomeProd
+                               </h5> 
+                                <spam style="font-size:smaller">Marca:</spam>
+                                <a class="link-primary text-decoration-none ">
+                                     @Model.MarcaProd
+                                </a>
+                           </div>  
+                           <hr />
+                           <div class="align-content-end">
+                                <span > 
+                                      Preço: <span style="font-size:medium;color:black;text-shadow:-0.5px -0.5px 0px #cc7000,-0.3px 0.3px 0px #FFA500,0.3px -0.3px 0px #FFA500,0.3px 0px 0px #FFA500;"><strong>  @Model.PrecoProd  </strong></span>
+                                </span>  
+                           </div>
+                           <span>Quantidade disponível:  <span style="font-size:medium;color:black;text-shadow:-0.5px -0.5px 0px #cc7000,-0.3px 0.3px 0px #FFA500,0.3px -0.3px 0px #FFA500,0.3px 0px 0px #FFA500;"><strong>  @Model.Qtd  </strong></span>
+                       </span>
+                                
+                       </div>
 
-         </div>
+                       <div class="card-footer bg-white" style="border:none">
+                           <div class="d-flex"> 
+                              <div class="d-block DivPopOver" >
+                                  <button type="button" class="ImagensPopOver link-cinza-laranja text-decoration-none " onclick="PopOver()" onmouseover="PopOver()"
+                                              data-bs-toggle="popoverSeg" data-bs-placement="bottom"
+                                              data-trigger="focus" 
+                                              data-bs-custom-class="custom-popover"
+                                              data-bs-html="true"
+                                              title="Pagamentos e Segurança "
+                                              data-bs-content="<h6>Cartão de crédito</h6><p>A Amazon aceita todos os principais cartões de crédito: Visa, Mastercard, Elo e American Express.</p><h6>Pix</h6><p>Pagamentos em tempo real, disponível a qualquer dia ou hora. O pagamento via Pix deverá ser feito em até 30 minutos após a finalização do pedido.</p><h6> Boleto bancário </h6><p>Vencimento em 1 dia útil. A data de entrega será alterada devido ao tempo de processamento do Boleto.</p><h6> Sua compra é segura </h6><p> Trabalhamos constantemente para proteger a sua segurança e privacidade. Nosso sistema de segurança de pagamento criptografa suas informações durante a compra. Não compartilhamos os detalhes do seu cartão de crédito com vendedores parceiros e não vendemos suas informações.</p>">
+            
+                                     <img src="~/icones/padlock.png" style="width:40px;height:40px"/>
+                                     <div style="width:80px">
+                                            <span>Pagamentos e Segurança</span>
+                                      </div>                                    
+                                  </button>                            
+                              </div>
+
+                              <div class="d-block DivPopOver">
+                                 <button type="button" class="ImagensPopOver link-cinza-laranja text-decoration-none " onclick="PopOver()" onmouseover="PopOver()"
+                                             data-bs-toggle="popoverEnv" data-bs-placement="bottom"
+                                             data-trigger="focus" 
+                                             data-bs-custom-class="custom-popover"
+                                             title="Envio garantido "
+                                             data-bs-content="Gerenciado diretamente a entrega deste produto. O rastreamento da entrega estará disponível para consulta.">
+
+                                    <img src="~/icones/caminhao.png" style="width:40px;height:40px"/>
+                                    <div style="width:80px">
+                                           <span>Envio garantido</span>
+                                     </div>
+                                   
+                                 </button>  
+                              </div>
+                              <div class="d-block DivPopOver">                                  
+                                   <button type="button" class="ImagensPopOver link-cinza-laranja text-decoration-none " data-bs-toggle="modal" data-bs-target="#ModalDevolucao">
+                                      <img src="~/icones/devolverCompra.png" style="width:40px;height:40px"/>
+                                      <div style="width:80px">
+                                             <span>Política de devolução</span>
+                                       </div>                                    
+                                   </button>  
+                              </div>
+                           </div>
+                       </div>
+                   </div>                  
+              </div>
+           </div>
+            @using (Html.BeginForm(FormMethod.Post, new { enctype = "application/x-www-form-urlencoded" }))
+               {   
+                 <div class="col">
+                  <div class="card shadow-sm" style="height:256px">
+                        <div class="card-body ">
+                          R$ <span style="font-size:large" class="card-text ">                     
+                                 <strong> @Model.PrecoProd </strong>
+                           </span>      
+                            <br />
+                       
+                           <span>Quantidade:            
+                                <select id="select"  name="select" aria-label=".form-select-sm example">
+                                  <option value="1" selected>1</option>
+                                  <option value="2" >2</option>
+                                  <option value="3" >3</option>
+                                  <option value="4" >4</option>
+                                  <option value="5" >5</option>
+                                </select>
+                           </span>
+                           <span id="Erro_Quantia" style="display:none">
+                               Quantia disponível inferior ao selecionado 
+                           </span>
+                           
+                           
+                       <div style="display:flex">
+                            <p style="display:flex">Enviar para:&nbsp; @if(ViewBag.nomeUser == null)
+                                                                        {
+                                                                            <a href="#" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#ModalEndereco">           
+                                                                                 <span class="text-overflow">Logar</span>
+                                                                            </a>
+                                                                        }
+                                                                        else if(ViewBag.RNCUC[0] == "Cadastre") 
+                                                                        {
+                                                                           @Html.ActionLink("Cadastrar endereço","AddEndereco","Conta",null, new {@class="text-decoration-none "})
+                                                                        }
+                                                                        else if (ViewBag.RNCUC[0] == "Sem endereço")
+                                                                        {
+                                                                             @Html.ActionLink("Cadastrar endereço","AddEndereco","Conta",null, new {@class="text-decoration-none "})
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            <a href="#" class="text-decoration-none " title="Endereço padrão">                                                                            
+                                                                              <span class="d-flex " data-bs-toggle="modal" data-bs-target="#ModalEndereco"> 
+                                                                                      <span class=" text-overflow" style="margin-right:2%">
+                                                                                         <span >@ViewBag.RNCUC[2]</span>
+                                                                                      </span>             
+                                                                                      <span style="white-space:nowrap ">@ViewBag.RNCUC[4]</span>  
+                                                                              </span>
+                                                                            </a>
+                                                                        }  
+                            </p>
+                            </div>
+                            Vendido por: <a class="text-decoration-none" href="#">@Model.NomeVendedor</a> <!-- Vendido por -->   
+                            <br />
+                            Enviado por: <a class="text-decoration-none" href="#">@Model.MarcaProd</a> <!-- Enviado por -->
+                     
+                    
+                          
+                       </div>
+                       <div class="card-footer bg-transparent" style="border:none">
+                           <span class="text-danger">@Model.ErroProd</span>
+                           <div class="btn-group">
+                               @if (ViewBag.Logado)
+                                {
+                                     <button id="botaoCarrinho" name="botao" type="submit" class="btn btn-warning btn-sm float-start" style="border: 1px solid #000" value="addCar">Adicionar ao carrinho</button>                                                                                               
+                                     <button id="botaoCompra" name="botao" type="submit" class="btn btn-warning btn-sm" style="border: 1px solid #000" value="Comprar">Comprar</button>                                                                    
+                                 }
+                                 else
+                                 {
+                                     @Html.ActionLink("Adicionar ao carrinho","Login","Login",new{Tela = $"Produtos/Produtos/{@Model.IdProduto}"},new {@class="btn btn-warning btn-sm float-start", @style="border: 1px solid #000"})
+                                     @Html.ActionLink("Comprar","Login","Login",new{Tela = $"Produtos/Produtos/{@Model.IdProduto}"},new {@class="btn btn-warning btn-sm float-start", @style="border: 1px solid #000"})
+                                }
+                       
+                            </div>
+                       </div>                          
+                  </div>
+               </div>
+           
+           }
+        </div>  
+
+        <hr style="color:transparent"/>
+
+         <div class="card">
+          <div class="card-header">
+            <h5>Decrição detalhada</h5>
+          </div>
+          <div class="card-body">
+             <table class="table table-bordered table-striped-columns">
+              <tbody>
+                <tr>
+                  <th scope="row">Fabricante</th>
+                  <td>Depende</td>       
+                </tr>
+                <tr>
+                  <th scope="row">Número de unidades</th>
+                  <td>1</td>
+   
+                </tr>
+                <tr>
+                  <th scope="row">Marca</th>
+                  <td colspan="2">@Model.MarcaProd</td>
+      
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+       <hr style="color:transparent"/>
+        <div class="card">
+          <div class="card-header">
+            <h5>Decrição do produto</h5>
+          </div>
+          <div class="card-body">
+            <p class="card-text">Descrição: @Model.DescriProd</p>
+           
+          </div>
+        </div>
+
     </div>
 </div>
-<div class="boxDescricaoDetalhada" style="display: block;">
-        <h2> Descrição detalhada</h2>
-        <hr class="dropdown-divider">
-        <p>descrição do produto</p>
+<!-- Modal -->
+<div class="modal fade" id="ModalDevolucao" tabindex="-1" aria-labelledby="ModalDevo" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ModalDevo">Política de devolução</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+           <h5>Sobre a nossa política de devolução</h5>
+           <p> Aceitamos a devolução de produtos físicos em até 30 dias a partir da data de recebimento do pedido, com exceção de produtos comestíveis, 
+           cujo prazo para devolução é de até 7 dias após a data de recebimento. Vários vendedores parceiros têm políticas de devolução semelhantes, mas elas podem variar de acordo com o vendedor.</p>
+           
+           <h5>Política de devolução de vendedores terceiros</h5>
+           <p>Quando você faz um pedido cujo produto é anunciado, vendido e enviado diretamente por um vendedor terceiro,
+           sua devolução deve ser enviada para tal vendedor. Você pode solicitar a devolução no Centro de devoluções online e o
+           vendedor responderá com as instruções para devolução no prazo de 2 dias úteis.</p>
+           
+           <h5>Alimentos e Bebidas</h5>
+           <p>A devolução de bebidas e alimentos deve ser solicitada no prazo de até sete dias após o recebimento do pedido.</p>
+           
+           <h5>Ração Animal e Petiscos</h5>
+           <p>A devolução deve ser solicitada no prazo de até sete dias após o recebimento do pedido.</p>
+           
+           <h5>Bebidas Alcoólicas</h5>
+           <p>Bebidas alcoólicas podem ser devolvidas no prazo de até sete dias após o recebimento do pedido, desde que o lacre original do fabricante não tenha sido removido.</p>
+
+           <h5>Gálaxias</h5>
+           <p>Gálaxias podem ser devolvidas no prazo de até 1 ano luz após o recebimento do pedido, desde que a realidade original do fabricante não tenha sido alterada.</p>
+     </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Sair</button>
+      </div>
+    </div>
+  </div>
+
+
 </div>
-<div class="boxOutrosProd" style="display: block;">
-        <h2> Outros Produtos</h2>
-        <hr class="dropdown-divider">
-        <p>descrição do produto</p>
-</div>
+
+
+<script type="text/javascript">
+    function PopOver(){
+        $('[data-bs-toggle="popoverSeg"]').popover({ trigger:'focus'});   
+        $('[data-bs-toggle="popoverEnv"]').popover({ trigger:'focus'}); 
+    };
+
+   $("#select").change(
+    function(e) {
+        var select = document.getElementById('select');
+	    var value = select.options[select.selectedIndex].value;
+        
+        if (value > @Model.Qtd) {
+            document.getElementById("Erro_Quantia").style.color = 'red';
+            document.getElementById("Erro_Quantia").style.display = 'block';
+            document.getElementById("botaoCarrinho").disabled = true;  
+            document.getElementById("botaoCompra").disabled = true;  
+
+        }else{
+            document.getElementById("Erro_Quantia").style.display = 'none';
+            document.getElementById("botaoCarrinho").disabled = false;  
+            document.getElementById("botaoCompra").disabled = false;       
+        }
+    }
+)
+</script>

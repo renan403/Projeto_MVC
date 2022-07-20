@@ -30,61 +30,76 @@
                    </a>
              </div>
              @foreach (var item in Model)
-              {   
-                        @if(item.Object.Padrao == false)
-                        {
-                            <div class="col">
-                               <div class="card shadow-sm  border-warning boxEndereco" >             
-                                 <div class="card-body " >              
-                                   <p class="card-text">             
-                                       <strong>@item.Object.Nome </strong>                 <br />
-                                               @item.Object.Endereco, @item.Object.Numero  <br />
-                                               @item.Object.Cidade, @item.Object.UF        <br />
-                                               @item.Object.Cep                            <br />
-                                               @item.Object.Pais                           <br />
-                                               Telefone: @item.Object.Telefone  
-                                   </p>
-                                   <div class="d-flex justify-content-between align-items-center">
-                                     <div class="btn-group">
+             {
+                @if (item.Object.Padrao)
+                {
+                    
+                 <div class="col">
+                    <div class="card shadow-sm  border-warning boxEndereco" > 
+                      <div class="card-body"> 
+                          
+                        <p class="card-text">             
+                            <strong>@item.Object.Nome </strong>                 <br />
+                                    @item.Object.Endereco, @item.Object.Numero  <br />
+                                    @item.Object.Cidade, @item.Object.UF        <br />
+                                    @item.Object.Cep                            <br />
+                                    @item.Object.Pais                           <br />
+                                    Telefone: @item.Object.Telefone  
+                        </p>
+                        <div class="d-flex justify-content-between align-items-center">
+                          <div class="btn-group">
+                  
+                             @Html.ActionLink("Alterar","AlterarEndereco","Conta",new{Key=$"{item.Key}&Alterar"},new{@class="btn btn-sm btn-outline-dark"})
+                             <button type="button" class="btn btn-sm btn-outline-dark" data-bs-container="body" data-bs-custom-class="popoverButtonEndereco"  data-bs-trigger="focus" data-bs-toggle="popover" data-bs-placement="right" data-bs-content="Necessário colocar outro endereço como padrão">
+                             Excluir
+                            </button>
                              
-                                        @Html.ActionLink("Alterar","AlterarEndereco","Conta",new{Key=$"{item.Key}&Alterar"},new{@class="btn btn-sm btn-outline-dark"})
-                                        @Html.ActionLink("Excluir","AlterarEndereco","Conta",new{Key=$"{item.Key}&Excluir"},new{@class="btn btn-sm btn-outline-dark"})
-                            
-                                     </div>
-                                  <!--   <small class="text-muted">9 mins</small>-->
-                                   </div>
-                                 </div>
-                               </div>
-                             </div>                           
-                        }else{
-                            <div class="col">
-                               <div class="card shadow-sm  border-warning boxEndereco" >             
-                                 <div class="card-body " >              
-                                   <p class="card-text">             
-                                       <strong>@item.Object.Nome </strong>                 <br />
-                                               @item.Object.Endereco, @item.Object.Numero  <br />
-                                               @item.Object.Cidade, @item.Object.UF        <br />
-                                               @item.Object.Cep                            <br />
-                                               @item.Object.Pais                           <br />
-                                               Telefone: @item.Object.Telefone  
-                                   </p>
-                                   <div class="d-flex justify-content-between align-items-center">
-                                     <div class="btn-group">
-                             
-                                        @Html.ActionLink("Alterar","AlterarEndereco","Conta",new{Key=$"{item.Key}&Alterar"},new{@class="btn btn-sm btn-outline-dark"})
-                                        @Html.ActionLink("Excluir","AlterarEndereco","Conta",new{Key=$"{item.Key}&Excluir"},new{@class="btn btn-sm btn-outline-dark"})
-                            
-                                     </div>
-                                  <!--   <small class="text-muted">9 mins</small>-->
-                                   </div>
-                                 </div>
-                               </div>
-                             </div>  
-                        }                      
-              }                 
+                 
+                          </div>
+                         <h6 class="bordaBottom PadraoEndereco" style="color:black">Endereço Padrão</h6>
+                        </div>
+                      </div>
+                    </div>
+                  </div>  
+                }
+             }
+             @foreach (var item in Model)
+             {   
+                @if(item.Object.Padrao == false)
+                {
+                   <div class="col">
+                     <div class="card shadow-sm  border-warning boxEndereco" >             
+                       <div class="card-body " >              
+                         <p class="card-text">             
+                             <strong>@item.Object.Nome </strong>                 <br />
+                                     @item.Object.Endereco, @item.Object.Numero  <br />
+                                     @item.Object.Cidade, @item.Object.UF        <br />
+                                     @item.Object.Cep                            <br />
+                                     @item.Object.Pais                           <br />
+                                     Telefone: @item.Object.Telefone  
+                         </p>
+                         <div class="d-flex justify-content-between align-items-center">
+                           <div class="btn-group">
+                   
+                              @Html.ActionLink("Alterar","AlterarEndereco","Conta",new{Key=$"{item.Key}&Alterar"},new{@class="btn btn-sm btn-outline-dark"})
+                              @Html.ActionLink("Excluir","AlterarEndereco","Conta",new{Key=$"{item.Key}&Excluir"},new{@class="btn btn-sm btn-outline-dark"})
+                   
+                           </div>
+                          @Html.ActionLink("Tornar Padrão","AlterarEndereco","Conta",new{Key=$"{item.Key}&Padrao"},new{@class="btn btn-sm btn-outline-dark"})
+                         </div>
+                       </div>
+                     </div>
+                   </div>                           
+                }                    
+             }                 
           </div>
         </div>
       </div>     
       <br />
    </div> 
 </div>
+<script>
+   $(document).ready(function(){
+    $('[data-bs-toggle="popover"]').popover();   
+});
+</script>

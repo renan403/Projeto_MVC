@@ -13,12 +13,12 @@
     
     <div class="mb-3 " style="width:60%;margin:auto;">
          <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a class="text-warning text-decoration-none" asp-action="SuaConta" asp-controller="Conta">Sua Conta</a></li>
-        <li class="breadcrumb-item"><a class="text-warning text-decoration-none" asp-action="Endereco" asp-controller="Conta">Endereço</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Novo endereço</li>
-      </ol>
-    </nav>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a class="text-warning text-decoration-none" asp-action="SuaConta" asp-controller="Conta">Sua Conta</a></li>
+            <li class="breadcrumb-item"><a class="text-warning text-decoration-none" asp-action="Endereco" asp-controller="Conta">Endereço</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Novo endereço</li>
+          </ol>
+        </nav>
       <div class="card border-info  mb-3" style="height:100%">
        <div class="card-header"><h3>Adicionar um novo endereço</h3></div>
            <div class="card-body">
@@ -36,10 +36,10 @@
               @Html.TextBoxFor(m => m.Cep, "", new { @id="cep", @class="form-control letraP", @TextMode="Text", @placeholder="Exemplo. 12345-000",@type="text", @Required ="Required",@autocomplete="off", maxlength="9", @onkeypress="Tipo(this,'CEP')"})  
 
               <label for="logradouro" class="form-label distTop"><strong>Endereço</strong></label>
-              @Html.TextBoxFor(m => m.Endereco, "", new {@id="logradouro", @class="form-control letraP", @TextMode="Text", @placeholder="Endereço, caixa postal, nome da empresa, A/C",@type="text", @Required ="Required",@oninvalid="setCustomValidity('Endereço de email inválido. Corrija e tente novamente.')",@oninput="setCustomValidity('')" ,@autocomplete="off"})  
+              @Html.TextBoxFor(m => m.Endereco, "", new {@id="logradouro", @class="form-control letraP", @TextMode="Text", @placeholder="Endereço, caixa postal, nome da empresa, A/C",@type="text", @Required ="Required",@oninvalid="setCustomValidity('Endereço inválido. Corrija e tente novamente.')",@oninput="setCustomValidity('')" ,@autocomplete="off"})  
               
               <label for="complemento" class="form-label distTop"><strong>Complemento (opcional)</strong></label>
-              @Html.TextBoxFor(m => m.Complemento, "", new {@id="complemento", @class="form-control letraP", @TextMode="Text", @placeholder="Apartamento, sala, conjunto, edifício, andar, etc.",@type="text",@oninvalid="setCustomValidity('Endereço de email inválido. Corrija e tente novamente.')",@oninput="setCustomValidity('')", @style="margin-top:0.5%",@autocomplete="off"})  
+              @Html.TextBoxFor(m => m.Complemento, "", new {@id="complemento", @class="form-control letraP", @TextMode="Text", @placeholder="Apartamento, sala, conjunto, edifício, andar, etc.",@type="text",@oninvalid="setCustomValidity('Informações inválidas. Corrija e tente novamente.')",@oninput="setCustomValidity('')", @style="margin-top:0.5%",@autocomplete="off"})  
                 
               <label for="numero" class="form-label distTop"><strong>Número</strong></label>
               @Html.TextBoxFor(m => m.Numero, "", new {@id="numero",@class="form-control letraP", @TextMode="Text", @placeholder="número ou s/n",@type="text", @Required ="Required",@autocomplete="off" })  

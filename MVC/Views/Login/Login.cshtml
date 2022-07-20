@@ -8,15 +8,33 @@
         @using (Html.BeginForm(FormMethod.Post ,new { enctype = "application/x-www-form-urlencoded"}))
          {
          @Html.ValidationSummary()  
-         if(Model.Ativo == false){
+         if(Model.Resposta == "INVALID_PASSWORD"){
              <div class="boxErroLogin  card border-info ">                            
                  <div style="margin: 2% 0 0 2%">
                     <h5 style="color:rgb(193,55,55)">  <img src="~/icones/exclamation-triangle.svg" style="width:30px; margin:0 0 0 2%"/> Houve um problema</h5>
-                    <p>E-mail ou Senha errada.</p>
+                    <p>Senha errada.</p>
                  </div>              
-             </div>
+            </div>
          }
-         <div class="card border-info  mb-3" style="height:100%">
+         else if(Model.Resposta == "EMAIL_NOT_FOUND")
+         {
+               <div class="boxErroLogin  card border-info ">                            
+                  <div style="margin: 2% 0 0 2%">
+                     <h5 style="color:rgb(193,55,55)">  <img src="~/icones/exclamation-triangle.svg" style="width:30px; margin:0 0 0 2%"/> Houve um problema</h5>
+                     <p>E-mail não encontrado.</p>
+                  </div>              
+            </div>
+         }
+         else if(Model.Resposta == "UNAUTHENTICATED")
+         {
+              <div class="boxErroLogin  card border-info ">                            
+                  <div style="margin: 2% 0 0 2%">
+                     <h5 style="color:rgb(193,55,55)">  <img src="~/icones/exclamation-triangle.svg" style="width:30px; margin:0 0 0 2%"/> Houve um problema</h5>
+                     <p>E-mail não autenticado</p>
+                  </div>              
+            </div>  
+         }
+            <div class="card border-info  mb-3" style="height:100%">
             <div class="card-header"> <h1 class="h3 mb-3 fw-normal">Login</h1></div>
             <div class="card-body">
               <div class="mb-3">                  
@@ -27,11 +45,12 @@
                    <div class="submit-line form-floating"> 
                        @Html.TextBoxFor(m => m.Senha, "", new {@id="passwordLogin",@class="form-control letraP",@type="password",@Required ="Required", @placeholder="Sua senha",@oninvalid="setCustomValidity('Campo senha vazio')",@oninput="setCustomValidity('')" })                           
                        <label for="passwordLogin">Password</label>
-                       <span class="submit-olho"><img id="olho" onmouseout="mostrar()" onmouseup="mostrar()" onmousedown="ocultar()" src="~/icones/eye.svg" alt="" /></span>                             
+                       <span class="submit-olho  "><img id="olho" onmouseout="mostrar()" onmouseup="mostrar()" onmousedown="ocultar()" src="~/icones/eye.svg" /></span>                             
                    </div>                                                                                                              
-                   <button type="submit" style="width:100%;" class="btn btn-primary btn-sm">Confirmar</button> 
-                   <p><br/>Ao continuar, você concorda com as <a href="#">Condições de uso</a> do APP.</p>
-                   <a href="#">Precisa de ajuda?</a>
+                   <button type="submit" style="width:100%;" class="btn btn-primary btn-sm">Confirmar</button>      
+                   <p><br />Esqueceu sua senha? <a class="text-decoration-none" asp-action="RecuperarSenha" asp-controller="Login">Clique aqui</a>
+                      <br/>Ao continuar, você concorda com as <a class="text-decoration-none" href="#">Condições de uso</a> do APP.</p>
+                   <a class="text-decoration-none" href="#">Precisa de ajuda?</a>
               </div>
             </div>
          </div>

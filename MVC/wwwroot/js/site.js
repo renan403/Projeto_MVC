@@ -114,18 +114,13 @@ function Avaliar(estrela) {
 
 // Produtos
 
-function img1() {
-    document.getElementById('img').src = '../img/galaxia/galaxia1.jpg';
+function alterarImagem(objeto, caminhoNovaImagem) {
+    document.getElementById(objeto).src = caminhoNovaImagem;
 
-}
-function img2() {
-    document.getElementById('img').src = '../img/galaxia/galaxia2.jpg';
-}
-function img3() {
-    document.getElementById('img').src = '../img/galaxia/galaxia3.jpg';
 }
 
 //Função olho
+
 
 //Login
 function mostrar() {
@@ -154,6 +149,7 @@ function ocultarConf() {
     document.getElementById('olhoConf').src = '../icones/eye-off.svg';
     document.getElementById('passwordConf').type = 'text';
 }
+
 function ValidaCriaConta() {
     var ObjNome = document.getElementById("nome");
     var ObjEmail = document.getElementById("email");
@@ -173,4 +169,6 @@ function ValidaCriaConta() {
 
 
 }
-
+function trocar(dir){
+    document.getElementById('bandeiracardi').src = dir;
+}

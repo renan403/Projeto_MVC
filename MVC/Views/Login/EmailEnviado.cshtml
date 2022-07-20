@@ -1,0 +1,30 @@
+﻿@{
+    ViewBag.title = "Confirmação de Email";
+  
+}
+@Html.AntiForgeryToken()
+<div style="width:auto;height:100%;margin-bottom:3%;margin-top:10%" > 
+    <main>
+
+      <div class="album py-5" >
+        <div class="container" >
+
+          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" >
+            <div class="col" style="margin:auto">
+              <div class="card shadow-sm">
+                  <div class="card-header">
+                    <h5>Email Enviado</h5> 
+                  </div>
+                <div class="card-body">
+                  <p class="card-text">Você ira receber no seu email: <a href="#" class="link-primary">@ViewData["ContaEmailEnviado"] </a> , verifique na caixa de spam caso não encontre.</p>
+                  <div class="d-flex justify-content-end align-items-center">
+                     <a asp-action="Home" asp-controller="Home" type="button" class="btn btn-primary btn-sm ">Entendi</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+</div>

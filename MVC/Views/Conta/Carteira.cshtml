@@ -1,5 +1,7 @@
-﻿@{
+﻿@model ModelCartao
+@{
     ViewBag.title = "Carteira";
+   
 }
 
 <div class="mb-3 " style="width:70%;margin:auto;">
@@ -12,7 +14,7 @@
 </nav>
 </div>
 <hr class="hrNav" />
-<div class="mb-3 " style="width:70%;margin:auto;">
+<div class="mb-3 " style="width:90%;margin:auto;">
      <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a class="text-warning text-decoration-none" asp-action="SuaConta" asp-controller="Conta">Sua Conta</a></li>
@@ -21,71 +23,237 @@
       </ol>
     </nav>
     <h4 style="color:orange">Carteira</h4>
-    <h5 style="color:orange">Cartões e contas</h5>
-<div style="display:flex;">
-    <div class="card" style="width: 20rem;">
-      <div class="card">
-       <div> 
-           <button type="button" class="btn btn-lg " style="display:flex;"  >           
-                 <img src="~/img/visa.jpg" width="110"/> 
-                 <div>
-                     <h6>Visa Debito Brasil</h6>
-                     <p style="font-size:12px">Cartão de crédito terminando em ••••5605 </p>
-                 </div>
-           </button>
-            <hr>          
-           <div class="BoxCard " style="display:flex;margin-left:4%;">      
-                 <a asp-action="AddEndereco" asp-controller="Conta" >
+    <h5 style="color:orange">Cartões</h5>   
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-1 g-3"> 
+    <div class="col">
+       <div class="card shadow-sm">
+         <div class="card-body">
+             <div class="BoxCard" style="display:flex;">      
+                 <a href="#" class="border-warning addCard" data-bs-toggle="modal" data-bs-target="#ModelAddCartao"  >
                       <div class="btn-group btn-group-sm" role="group" aria-label="...">
-                        <div class="card border-warning mb-3">                 
                           <div class="card-body imgAddCard" >
-                            <img style="margin-top:0" src="~/icones/plus.png"/>
-                          </div>
-                        </div>
+                            <img  src="~/icones/plus.png"/>
+                          </div>                      
                      </div>
                  </a>   
-                 <div style="margin-left:5%;margin-right:5%;">
-                    <a href="#" class="text-decoration-none">
-                         Adicione um método de pagamento
+                 <div id="ajuste" class="align-self-center " style="margin-left:3%;margin-right:5%;">
+                     <h5 style="margin:auto;color:red"> @Model.Erro</h5>
+                    <a href="#" class="text-decoration-none " data-bs-toggle="modal" data-bs-target="#ModelAddCartao" >
+                         <p class="link-cinza-laranja" style="font-size:large;">Adicionar método de pagamento</p>
                     </a>
                  </div>         
-           </div>    
-       </div>
-      </div>
-    </div>
-    <div class="card" style="width: 35rem;margin-left:5%;">
-        <div class="card-body">
-            <div style="display:flex;">
-                      <img src="~/img/visa.jpg" width="250"/>                              
-                 <div style="margin-left:2%">
-                     <h4>Visa Debito Brasil</h4>
-                     <p style="font-size:15px">Cartão de crédito terminando em ••••5605 </p>
-                     <a class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#exampleModal" href="#">Editar</a>
-                 </div>
-            </div>
-       </div>
-    </div>
-</div>
-</div>
+             </div>  
+             <hr>
+                    @if (ViewBag.CartaoPadrao != null)
+                    {
 
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="card border-success mb-3" style="max-width: 20rem;">
-              <div class="card-header bg-transparent border-success">Header</div>
-              <div class="card-body text-success">
-                <h5 class="card-title">Success card title</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              </div>
-              <div class="card-footer bg-transparent border-success">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary">Save changes</button>
+                       <div style="display:flex;">
+                             <img src="@ViewBag.CartaoPadrao.Object.CaminhoImgCartao" width="200" height="125"/>   
+                             <div style="margin-left:2%">
+                                <h4>@ViewBag.CartaoPadrao.Object.NomeCard</h4>
+                                <p style="font-size:15px">Cartão de crédito terminando em @ViewBag.CartaoPadrao.Object.QuatroDigCard </p>                              
+                                <a class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#@ViewBag.CartaoPadrao.Key" href="@ViewBag.CartaoPadrao.Key">Editar</a>
+                                <h6 class="bordaBottom py-1 cardPadrao">Cartão Padrão</h6>                           
+                            </div>  
+                           
+                       </div> 
+                        
+                    }
+                    
+             @foreach (var cartao in ViewBag.ArrayCartoes)
+             {
+
+                        
+                        @if (!cartao.Object.Padrao)
+                        {       
+                            <hr />
+                            <div style="display:flex;">
+                                  <img src="@cartao.Object.CaminhoImgCartao" width="200" height="125"/>                              
+                                  <div style="margin-left:2%">
+                                     <h4>@cartao.Object.NomeCard</h4>
+                                     <p style="font-size:15px">Cartão de crédito terminando em @cartao.Object.QuatroDigCard </p>
+                                     <a class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#@cartao.Key" href="@cartao.Key">Editar</a><br>
+                                     @Html.ActionLink("Tornar Padrão","AlterarCartao","Conta",new{Card = $"{cartao.Key}" },new{@class="text-decoration-none"})
+                                 </div>
+                            </div> 
+                        }
+                        
+
+                <form enctype="application/x-www-form-urlencoded" method="post">
+                 <div class="modal fade" id="@cartao.Key" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                     
+                        <div class="modal-content">
+                         <div class="modal-header">
+                            <h5 class="modal-title">Editar cartão</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                            <div class="col-12">
+                              <label for="cc-name" class="form-label">Nome no cartão</label>  
+                              @Html.TextBoxFor(m => m.NomeCard,"",new{@type="text", @class="form-control", @id="cc-name", @placeholder="",@autocomplete="off",@pattern="^([^0-9])+$",@oninvalid="this.setCustomValidity('Apenas letras')",@oninput="setCustomValidity('')" })
+                              <small class="text-muted">Nome completo conforme exibido no cartão</small>
+                              <div class="invalid-feedback">
+                                Nome no cartão requirido
+                              </div>
+                            </div>
+                             <div class="col-md-6">
+                                  <label for="cc-expiration" class="form-label">Data de expiração</label>
+                                  @Html.TextBoxFor(m => m.DataExpiracao,"",new{@type="month", @class="form-control", @id="cc-expiration", @placeholder="",@autocomplete="off"})
+                                  <div class="invalid-feedback">
+                                    Data de expiração requirido
+                                  </div>
+                             </div>
+                          </div>
+                          <div class="modal-body d-flex justify-content-between align-items-center">                             
+                            <button type="submit" value="remove%%@cartao.Key" name="btn" class="btn text-danger">Remover cartão</button>                          
+                            <div class="btn-group">
+                              <button type="button" class="btn" data-bs-dismiss="modal">Cancelar</button>
+                              <button type="submit" value="alterar%%@cartao.Key" name="btn" class="btn">Alterar</button>
+                            </div>
+                          </div>
+                        </div>                     
+                      </div>
+                  </div>
+                </form>
+            }   
+         </div>
+       </div>
+    </div>
+  </div>    
+</div>
+<!-------------------------------------------------------------------------------------------------------------------------------------------------->
+
+
+
+<form method="post" enctype="application/x-www-form-urlencoded">
+<div class="modal fade" id="ModelAddCartao" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Adicionar cartão</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <div class="row gy-3">
+            <div class="col-12">
+              <label for="cc-name" class="form-label">Nome no cartão</label>  
+              @Html.TextBoxFor(m => m.NomeCard,"",new{@type="text", @class="form-control", @id="cc-name", @placeholder="", @required="required",@autocomplete="off",@pattern="^([^0-9])+$",@oninvalid="this.setCustomValidity('Apenas letras')",@oninput="setCustomValidity('')" })
+              <small class="text-muted">Nome completo conforme exibido no cartão</small>
+              <div class="invalid-feedback">
+                Nome no cartão requirido
               </div>
             </div>
-          
-        
-        </div>
+
+            <div class="col-12">
+              <label for="cc-number" class="form-label">Número do cartão de crédito</label>
+              @Html.TextBoxFor(m => m.NumeroCard,"",new{@type="text", @class="form-control", @id="cc-number", @placeholder="", @required="required",@autocomplete="off",@pattern="^([^a-zA-Z])+$", @onkeypress="return event.charCode >= 48 && event.charCode <= 57",@oninvalid="this.setCustomValidity('Apenas números')",@oninput="setCustomValidity('')"})
+              <div class="invalid-feedback">
+                Número do cartão de crédito requirido
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <label for="cc-expiration" class="form-label">Data de expiração</label>
+              @Html.TextBoxFor(m => m.DataExpiracao,"",new{@type="month", @class="form-control", @id="cc-expiration", @placeholder="", @required="required",@autocomplete="off"})
+              <div class="invalid-feedback">
+                Data de expiração requirido
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <label for="cc-cvv" class="form-label">CVV   (<button type="button" class="ImagensPopOver link-primary "  onclick="PopOver()" onmouseover="PopOver()"
+                                              data-bs-toggle="popoverCvv" data-bs-placement="bottom"
+                                              data-trigger="focus" 
+                                              data-bs-custom-class="custom-popover"
+                                              data-bs-html="true"
+                                              title="CVV "
+                                              data-bs-content="<p>O número CVV é representado pelos três últimos dígitos no verso do seu cartão. Em cartões American Express, o CVV é um número de 4 dígitos na frente do cartão.</p><img src='../img/Cartoes/visacvv.gif'/><img src='../img/Cartoes/amexcvv.gif'/>">oque é isso?</button>)</label>
+              @Html.TextBoxFor(m => m.Cvv,"",new{@type="text", @class="form-control", @id="cc-cvv", @placeholder="", @required="required",@autocomplete="off",@pattern="^([0-9]{3}|[0-9]{4})$", @onkeypress="return event.charCode >= 48 && event.charCode <= 57",@oninvalid="this.setCustomValidity('Apenas números')",@oninput="setCustomValidity('')"})
+             
+              <div class="invalid-feedback">
+                Codigo de segurança requirido
+              </div>
+            </div>
+            <div class="col-12">
+                <label for="imgs-cards" class="form-label">Bandeiras aceitas:</label>
+                <div class="my-3 d-flex" >
+                    <div class="form-check" style="margin-right:5%">
+                      @Html.RadioButtonFor(m => m.Bandeira,"DinerClub",new {@id="credit", @name="paymentMethod" ,@type="radio", @class="form-check-input", @required="required"})
+                      <label class="form-check-label" for="credit"><img src="~/img/Cartoes/bandeira/dinerclub.png" width="50" title="DinerClub" alt="imagem da bandeira DinerClub"/></label>
+                    </div>
+                    <div class="form-check" style="margin-right:5%">
+                        @Html.RadioButtonFor(m => m.Bandeira,"MasterCard",new {@id="credit", @name="paymentMethod" ,@type="radio", @class="form-check-input", @required="required"})
+                     
+                      <label class="form-check-label" for="debit"><img src="~/img/Cartoes/bandeira/mastercard.png" width="50" title="MasterCard" alt="imagem da bandeira MasterCard"/></label>
+                    </div>
+                    <div class="form-check" style="margin-right:5%">
+                        @Html.RadioButtonFor(m => m.Bandeira,"Visa",new {@id="credit", @name="paymentMethod" ,@type="radio", @class="form-check-input", @required="required"})
+                      
+                      <label class="form-check-label" for="paypal"><img src="~/img/Cartoes/bandeira/Visa.png" width="50" title="Visa" alt="imagem da bandeira Visa"/> </label>
+                    </div>
+                     <div class="form-check" style="margin-right:1%">
+                         @Html.RadioButtonFor(m => m.Bandeira,"Amex",new {@id="credit", @name="paymentMethod" ,@type="radio", @class="form-check-input", @required="required"})
+                      
+                      <label class="form-check-label" for="paypal"><img src="~/img/Cartoes/bandeira/Amex.png" width="50" title="American express" alt="imagem da bandeira American Express"/></label>
+                    </div>
+               </div>
+           </div>
+         </div>  
       </div>
+      <h5 style="margin:auto;color:red"> @Model.Erro</h5>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Fechar</button>
+        <button type="submit" class="btn btn-outline-dark">Adicionar cartão</button>
+      </div>
+    </div>
   </div>
 </div>
+</form>
+                                 
+<script>
+
+function PopOver(){
+    $('[data-bs-toggle="popoverCvv"]').popover({ trigger:'focus'});   
+    };
+</script>
+@if(ViewBag.CartaoPadrao != null)
+{
+    <form enctype="application/x-www-form-urlencoded" method="post">
+                 <div class="modal fade" id="@ViewBag.CartaoPadrao.Key" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                     
+                        <div class="modal-content">
+                         <div class="modal-header">
+                            <h5 class="modal-title">Editar cartão</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                            <div class="col-12">
+                              <label for="cc-name" class="form-label">Nome no cartão</label>  
+                              @Html.TextBoxFor(m => m.NomeCard,"",new{@type="text", @class="form-control", @id="cc-name", @placeholder="",@autocomplete="off",@pattern="^([^0-9])+$",@oninvalid="this.setCustomValidity('Apenas letras')",@oninput="setCustomValidity('')" })
+                              <small class="text-muted">Nome completo conforme exibido no cartão</small>
+                              <div class="invalid-feedback">
+                                Nome no cartão requirido
+                              </div>
+                            </div>
+                             <div class="col-md-6">
+                                  <label for="cc-expiration" class="form-label">Data de expiração</label>
+                                  @Html.TextBoxFor(m => m.DataExpiracao,"",new{@type="month", @class="form-control", @id="cc-expiration", @placeholder="",@autocomplete="off"})
+                                  <div class="invalid-feedback">
+                                    Data de expiração requirido
+                                  </div>
+                             </div>
+                          </div>
+                          <div class="modal-body d-flex justify-content-between align-items-center">                             
+                            <button type="submit" value="remove%%@ViewBag.CartaoPadrao.Key" name="btn" class="btn text-danger">Remover cartão</button>                          
+                            <div class="btn-group">
+                              <button type="button" class="btn" data-bs-dismiss="modal">Cancelar</button>
+                              <button type="submit" value="alterar%%@ViewBag.CartaoPadrao.Key" name="btn" class="btn">Alterar</button>
+                            </div>
+                          </div>
+                        </div>                     
+                      </div>
+                  </div>
+                </form>
+}

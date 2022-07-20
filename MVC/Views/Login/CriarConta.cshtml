@@ -9,10 +9,18 @@
 
 
 @Html.AntiForgeryToken()
-
-<div style="width:auto;height:100%">
+ 
+<div style="width:auto;height:100%; margin-top:3%">
     @using(Html.BeginForm(FormMethod.Post,new { enctype = "application/x-www-form-urlencoded" }))
 {   @Html.ValidationSummary(true)
+    @if(Model.Erro == "Email ja Existe"){
+             <div class="boxErroLogin  card border-info ">                            
+                 <div style="margin: 2% 0 0 2%">
+                    <h5 style="color:rgb(193,55,55)">  <img src="~/icones/exclamation-triangle.svg" style="width:30px; margin:0 0 0 2%"/> Houve um problema</h5>
+                    <p>Email ja cadastrado.</p>
+                 </div>              
+            </div>
+ }
          <div class=" mb-3" style="width:40%;margin:auto">
            <div class="card border-info  mb-3" style="height:100%">
                <div class="card-header"><h3>Criar conta</h3></div>
@@ -49,9 +57,8 @@
                              @Html.ValidationMessageFor(m => m.ConfSenha, "",new {@class="text-danger"})
                          </div>                       
                     <br />
-                                 
-                    
-                    <button onclick="ValidaCriaConta()" style="width:100%;" class="btn btn-primary btn-sm mb-1"  >Confirmar</button>
+                               
+                    <button onclick="ValidaCriaConta()" style="width:100%;" class="btn btn-primary btn-sm mb-1" >Confirmar</button>
                     <span id="validacao" aria-hidden="true"></span>
                         <hr class="dropdown-divider"  style="width:100%" />
                         <p> Você já tem uma conta? &nbsp;<a asp-action="Login" asp-controller="Login" class="link-primary">Faça Login</a></p>     
@@ -61,6 +68,23 @@
     }
 </div>
 
+@*<div class="modal fade" id="EnvioEmailModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Email enviado</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Você ira receber email para validação da sua conta, verifique na caixa de spam caso nao encontre.</p>
+      </div>
+      <div class="modal-footer">
+        <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
+        <button type="button" asp-action="Home" asp-controller="Home" class="btn btn-primary">Entendi</button>
+      </div>
+    </div>
+  </div>
+</div>*@
 <!--
 
 

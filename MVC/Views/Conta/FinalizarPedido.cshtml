@@ -1,0 +1,32 @@
+﻿@model ModelEndereço
+@{
+}
+<div class="album py-5">
+    <div class="container">
+
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-1 g-3">
+        <div class="col">
+          <div class="card shadow-sm">
+            <div class="card-body border-none">
+              <p class="card-text"></p>
+             <div class="card border-none mb-3" style="max-width: 100%;">
+                  <div class="card-header bg-transparent border-none">
+                      <ul class="list-unstyled">
+                          <li><img src="~/icones/cyborg-ok-button.png" width="20" /> <span style="color:green"><strong>Pedido feito, obrigado!</strong></span></li>                    
+                          <li><strong>Envio para @Model.Nome</strong>, @Model.Endereco, @Model.Numero, @Model.Cidade, @Model.UF, @Model.Cep</li>
+                      </ul>
+                  </div>
+                  <div class="card-footer bg-transparent border-none" style="text-align: center;">
+                     <div class="btn-group">
+                       <a asp-action="Home" asp-controller="Home" class="btn-outline-dark btn btn-sm">Continuar comprando</a>
+                       <a asp-action="SeusPedidos" asp-controller="Conta" class="btn-outline-dark btn btn-sm">Vizualizar seus pedidos</a>
+                    </div>
+                     
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+   </div>
+</div>

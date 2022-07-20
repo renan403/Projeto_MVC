@@ -1,116 +1,198 @@
-﻿@{
-     ViewBag.title = "Pagamento";
+﻿@model ModelProduto
+@{
+        
 }
+<form>
+<div class="album py-5">
+    <div class="container">
+        
+     <div class="row row-cols-1 row-cols-sm-2 g-1">
+        <div class="col-sm-8 bg-light p-0 bordaPoucoRedonda">
+          <div class="card shadow-sm semBorda">
+            <div class="card-body">
+                 <div class="d-flex justify-content-between align-items-center">
+                   <div class="col-sm-4 p-1 align-self-start ">
+                       <h5>Endereço de entrega</h5>
+                   </div>
+                    <div class="col-sm-8  p-1 ">
+                        <div class="d-flex justify-content-between align-items-center">
+                             <div class="col-sm-9 ">
+                                  <a class="text-decoration-none text-dark" asp-action="Endereco" asp-controller="Conta" title="Seu endereço padrão">
+                                   <div class="boxEnderecoFinalizarCompra">
+                                       <div class="card">
+                                                    @if (ViewBag.RNCUC[0] == "Cadastre")
+                                                    {
+                                                        <div class="card-body" style="text-align:center">
+                                                            <h6>Cadastre um endereço </h6>       
+                                                        </div>
+                                                    } 
+                                                    else
+                                                    {
+                                                        <div class="card-body">
+                                                             <p  ><strong>@ViewBag.RNCUC[5]</strong><br>                      
+                                                               @ViewBag.RNCUC[0],<strong> @ViewBag.RNCUC[1]</strong><br>
+                                                               @ViewBag.RNCUC[2], @ViewBag.RNCUC[3] <br>
+                                                               @ViewBag.RNCUC[4]                    
+                                                               </p>
+                                                            <h6  style="text-align:start;"><span class="text-opacity-50 text-dark" style="margin-left: 10px;" >Endereço padrão</span></h6>
+                                                            </div>
+                                                    }
 
-<div class="mesmaLinha">
- 
-    
-    <div class="boxCarrinho">
-             
-        <div style="display:block;">
-            <!--Uma box do carrinho-->
-          <div class="container">
-              <div class="row">
-                 <div class="col order-first">
-                  <h5>Endereço de entrega</h5> 
-                </div>  
-                <div class="col">
-                  <p>informações do endereço aqui</p>
-                </div>
-                <div class="col order-last">
-                  <a href="#">alterar</a>
-                </div>  
-             </div>
-          </div>
-          <hr class="dropdown-divider">  
-          <div class="container">
-              <div class="row">
-                 <div class="col order-first">
-                  <h5>Método de pagamento</h5> 
-                </div>  
-                <div class="col">
-                  <p>informações de pagamento aqui</p>
-                </div>
-                <div class="col order-last">
-                  <a href="#">alterar</a>
-                </div>
-   
-             </div>
-         </div>
-         <hr class="dropdown-divider">  
-          <div class="container">
-              <div class="row">
-                 <div class="col order-first">
-                  <h5>Revisar Itens </h5> 
-                </div>  
-                <div class="col">
-                  <p>criar box de itens</p>
-                </div>
-                <div class="col order-last">
-                  <a href="#">alterar</a>
-                </div>
-   
-             </div>
-         </div>
-         <hr class="dropdown-divider">  
-         <div class="container">
-              <div class="row">
-                 <div class="col order-first" style="display:flex;">
-                  <h6 >Subtotal (1 item):</h6>
-                  <h6>&nbsp;80,00</h6>
-                </div> 
-                 <div class="col">
-                 
-                </div>
-                <div class="col order-last">
-                    <button  class="btn btn-outline-dark"> finalizar compra</button>
-                </div>
-                
-   
-             </div>
-         </div>
-
-        </div>
-         
-          <!--Uma box do valor total-->
-        <div class="mesmaLinha">
-            <hr class="dropdown-divider">         
-            
-            
-        </div>
-    </div>
-
-     <!--Uma box do carrinho lateral-->
-    <div class="boxValorTotal">
-      <div class="bordaCar">
-          <div class="botaoCarrinho">  
-              @if(true){
-                    <a asp-controller="Produtos" asp-action="ComprarProd" class="btn btn-outline-dark">Finalizar pedido</a>
-                    
-                }else{
-                    <a asp-controller="Login" asp-action="Login" class="btn btn-outline-dark">Finalizar pedido</a>
-                }
+                                          </div>
+                                        </div>                                   
+                                </a>                                               
+                             </div>
+                            <div class="col-sm-3 p-3 ">
+                               @Html.ActionLink("Alterar","Endereco","Conta",null, new {@class="text-decoration-none"})
+                             </div>
+                        </div>                           
+                    </div>
+                 </div>
             </div>
-           <div class="mesmaLinha ajustCarLat">
-          
-                <h5>Subtotal (1 item):</h5>
-                <h5><strong>80,00</strong></h5>
-                
+             <hr />
           </div>
-           <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-           <label class="form-check-label" for="flexCheckDefault">
-    Este pedido contém um presente
-  </label>
-          
+
+          <div class="card shadow-sm semBorda ">
+            <div class="card-body">
+                 <div class="d-flex justify-content-between align-items-center ">
+                   <div class="col-sm-4 p-3 align-self-start">
+                       <h5>Método de pagamento</h5>
+                   </div>
+                    <div class="col-sm-8  p-3 ">
+                        <div class="d-flex justify-content-between align-items-center">
+                             <div class="col-sm-9">                         
+                                    <p><strong>@ViewBag.Cartao.Bandeira (Crédito)</strong> termina em @ViewBag.Cartao.QuatroDigCard </p>                         
+                             </div>
+                            <div class="col-sm-3 p-3 ">
+                               <a href="#" data-bs-toggle="modal" data-bs-target="#modalCartoes" class="text-decoration-none"> Alterar</a>
+                             </div>
+                        </div>                           
+                    </div>
+                    <script>
+                        
+                        
+                    </script>
+                 </div>
+            </div>
+            <hr />
+          </div>
+          <div class="card shadow-sm semBorda">
+            <div class="card-body">
+                <h5>Revisar itens e envio</h5>
+              <div class="card" style="border:none">                
+                 @foreach(var produto in ViewBag.Carrinho)
+                 {   
+                    ViewBag.Title = $"Comprar {@produto[0].NomeProd}" ; 
+                   <div class="d-flex justify-content-between align-items-center">
+                       <div class="col-md-4" >
+                          <a href="~/Produtos/Produtos/@produto[0].IdProduto"> 
+                             <div class="card " style="width:auto;max-width:260px">                  
+                                <img src="@produto[0].UrlImg" class="img-fluid border" style="border-radius:5px;min-height:200px;max-height:201px;" alt="img"/>  
+                             </div> 
+                          </a>   
+                       </div>                      
+                        <div class="col" style="min-height:150px;max-height:151px;">
+                           <div class="d-flex justify-content-between align-items-center">
+                               <h5 style="margin-left:2%"><a href="~/Produtos/Produtos/@produto[0].IdProduto" class="text-decoration-none">@produto[0].NomeProd</a></h5>
+                               <h5 style="margin-right:2%">R$ @produto[0].PrecoProd</h5>
+                           </div>
+                           <span style="margin-left:2%">Vendido por : @produto[0].NomeVendedor </span><br />
+                           <div class="d-flex">
+                              <span style="margin-left:2%">Qtd:</span>
+                              <select onclick="redirect()" id="@produto[0].IdProduto" class="bg-white btn-sm" style="width:40px;margin-right:2%;margin-left:0.5%;border-radius:5px" aria-label="Default select example">             
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                              </select>
+                              
+                              <div class="vr"></div>
+                              @Html.ActionLink("Excluir","AlterarCompraProd","Produtos",new{Excluir = $"{produto[2]}", quantia = 6},new {@class="text-decoration-none",@style="margin-left:2%"})
+                              <a href="#" class="text-decoration-none" style="margin-left:2%"> </a>                         
+                           </div>
+                         </div>                                          
+                   </div>  
+                   <hr > 
+                   <script type="text/javascript">
+                       
+                       var selectElement = document.querySelector("#@produto[0].IdProduto");   
+                       var num = @produto[1]
+                       selectElement.value = num.toString();    
+                       	
+                       function redirect(){
+                             selectElement = document.querySelector("#@produto[0].IdProduto").addEventListener('change',function(){                           
+                                  var url = '@Url.Action("AlterarCompraProd", "Produtos", new {Excluir = $"unico--{produto[0].IdProduto}"})' + '***' + this.value ;
+                                  window.location = url;
+                                  });
+                       }
+                    </script>
+                 }                 
+                 <div style="text-align:end">   
+                      @if(@Model.Qtd == 0)
+                      {
+                          <span style="font-size:larger">Subtotal (@Model.Qtd item) : <strong>Carrinho vazio</strong></span>
+                      }else if(@Model.Qtd < 2)
+                      {
+                          <span style="font-size:larger">Subtotal (@Model.Qtd item) : <strong>@Model.ValorTotal</strong></span>
+                      }else
+                      {
+                          <span style="font-size:larger">Subtotal (@Model.Qtd itens) : <strong>@Model.ValorTotal</strong></span>
+                      }                            
+                 </div>
+               </div> 
+            </div>
+          </div>
+
+         
+
+        </div>
+        <div class="col-sm-3 p-1 ">
+             <div class="card shadow-sm">
+            <div class="card-body">
+              <p class="card-text"><span style="font-size:larger">Subtotal (@Model.Qtd itens) : <strong>@Model.ValorTotal</strong></span></p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">  
+                   
+                    <button type="submit" name="finalizar" id="finalizar" value="finalizar-@Model.Qtd-@Model.ValorTotal" class="btn btn-sm btn-outline-dark">Finalizar pedido</button>
+                  
+                </div>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+     </div>
+   </div>
+</div>
+</form>
+<div class="modal fade" id="modalCartoes" tabindex="-1" aria-labelledby="modalCartoes" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Cartões</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <form enctype="application/x-www-form-urlencoded">
+         @foreach (var cartao in ViewBag.ArrayCartoes)
+             {
+                 
+                 <div style="display:flex;">
+                      <img src="@Url.Content($"~/{@cartao.Object.CaminhoImgCartao}")" width="200" height="125"/>                              
+                      <div style="margin-left:2%">
+                         <h4>@cartao.Object.NomeCard</h4>
+                         <p style="font-size:15px">Cartão de crédito terminando em @cartao.Object.QuatroDigCard </p>
+                         <button type="submit" id="cardTrocar" name="cardTrocar"  class=" btn-sm btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#@cartao.Key" value="@cartao.Key">Selecionar</button>
+                     </div>
+                </div> 
+                <br />
+            } 
+            </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class=" btn-sm btn btn-outline-dark " data-bs-dismiss="modal">Fechar</button> 
       </div>
     </div>
+  </div>
 </div>
-
-
-        
-
-
-
-
-
-

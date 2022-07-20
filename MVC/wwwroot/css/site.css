@@ -1,3 +1,17 @@
+#backurl {
+   background-image: url(plus.png);
+}
+.tamanhoPadrao {
+    min-height: 250px;
+    max-height: 300px;
+    border-radius: 5px;
+}
+.border-none{
+    border:none
+}
+.bg-white {
+    background-color: white
+}
 .bordarParaTest {
     border: dotted;
     border-color: red;
@@ -26,11 +40,45 @@ fontsmall{
 .hrNav {
     border-bottom: 1px solid orange;
 }
-/* adaptação bootstrap*/
-:root {
-    --bs-teste-rgb: 0, 0, 0;
+
+.link-cinza-laranja{
+    color:rgba(0, 0 ,0 ,0.7);
+    text-decoration:none;
+}
+    .link-cinza-laranja:hover {
+        color:darkorange;
+        text-decoration: none;
+    }
+
+.link-laranja-cinza {
+   
+    color: darkorange;
+    text-decoration: none;
 }
 
+.link-laranja-cinza:hover {
+    color: rgba(0, 0,0,0.7);
+    text-decoration: none;
+}
+    /* adaptação bootstrap*/
+    :root {
+        --bs-teste-rgb: 0, 0, 0;
+    }
+.semBorda{
+    border:none;
+}
+.bordaPoucoRedonda{
+    border:solid 1px black;
+    border-radius:10px;
+    color : black;
+
+}
+.bordaPoucoRedonda:hover {
+    border: solid 1px black;
+    border-radius: 10px;
+    background-color:lightgrey;
+    color: black;
+}
 .bg-dark {
     --bs-bg-opacity: 1;
     background-color: rgba(var(--bs-teste-rgb), var(--bs-bg-opacity)) !important;
@@ -115,24 +163,24 @@ fontsmall{
         color: black;
         background-color: rgb(240,140,9);
         border-color: rgba(0,0,0,0.25);
-        box-shadow: 0 0 0 0.25rem rgba(0, 0, 0, 0.5);
+        box-shadow: 0 0 0 0.01rem rgba(0, 0, 0, 0.5);
     }
 .btn-check:checked + .btn-outline-primary, .btn-check:active + .btn-outline-primary, .btn-outline-primary:active, .btn-outline-primary.active, .show > .btn-outline-primary.dropdown-toggle {
         color: black;
         background-color: rgb(240,140,9);
-        box-shadow: 0 0 0 0.25rem rgba(0, 0, 0, 0.5);
+        box-shadow: 0 0 0 0.01rem rgba(0, 0, 0, 0.5);
     }
 .btn-check:focus + .btn-outline-primary, .btn-outline-primary:focus {
         color: black;
         background-color: rgb(240,140,9);
         border-color: rgba(0,0,0,0.25);
-        box-shadow: 0 0 0 0.25rem rgba(0, 0, 0, 0.5);
+        box-shadow: 0 0 0 0.01rem rgba(0, 0, 0, 0.5);
     }
 .btn-outline-primary:disabled, .btn-outline-primary.disabled {
         color: black;
         background-color: rgb(240,140,9);
         border-color: rgba(0,0,0,0.25);
-        box-shadow: 0 0 0 0.25rem rgba(0, 0, 0, 0.5);
+        box-shadow: 0 0 0 0.01rem rgba(0, 0, 0, 0.5);
     }
 
 
@@ -148,7 +196,7 @@ fontsmall{
         box-shadow: 0 0 0 0.25rem rgba(0, 0, 0, 0.5);
     }
     .btn-outline-info:focus {
-        box-shadow: 0 0 0 0.25rem rgba(0, 0, 0, 0.5);
+        box-shadow: 0 0 0 0.01rem rgba(0, 0, 0, 0.5);
     }
     .text-Laranja{
         --bs-text-opacity: 1;
@@ -168,13 +216,13 @@ fontsmall{
         color: rgba(var(--bs-teste-rgb), var(--bs-bg-opacity)) !important;
     }
 
-.form-control:focus { 
+.form-control:focus {
     border-color: rgba(232,163,0, 0.30);
-    box-shadow: 0 0 0 0.25rem rgba(232,163,0, 0.30);
+    box-shadow: 0 0 0 0.08rem rgba(232,163,0, 0.30);
 }
 .form-select:focus {
     border-color: rgba(232,163,0, 0.30);
-    box-shadow: 0 0 0 0.25rem rgba(232,163,0, 0.30);
+    box-shadow: 0 0 0 0.08rem rgba(232,163,0, 0.30);
 }
 
 .rodape {
@@ -184,13 +232,14 @@ fontsmall{
     text-align:center
 }
 .cardConta {
-    width: 20rem;
-    height: 10rem;
+    width: 23rem;
+    height: 8rem;
 }
-footer {
-    position:center;
+footer.fixar-rodape {
+    position: relative;
     bottom: 0;
-    
+    width: 100%;
+    height: 2.5rem;
 }
    
 /* adaptação bootstrap*/
@@ -204,10 +253,9 @@ footer {
 }
 
 body {
-    background-attachment:fixed;
+    background-attachment: fixed;
     background-color: black;
     background-image: linear-gradient( to bottom,transparent,rgba(79,79,79,0.100), rgba(255,140,0,0.20),rgba(255,140,0,0.30));
-    
 }
 
 .mesmaLinha {
@@ -218,9 +266,17 @@ body {
 } 
 /* Pagamentos */
 
-.BoxCard {
-    width: 100%;
+.cardPadrao {
+    width: 90px;
+    text-align: center;
+    padding-top: 20px;
+    color:black;
+
     
+}
+
+.BoxCard {
+    width: 100%; 
     margin-bottom:1%
 }
 .BoxCardCad {
@@ -241,9 +297,23 @@ body {
     width: 250px;
     
 }
-
+.addCard {
+    border-radius: 10px;
+    background-color: white;
+    border: solid 1px;
+    width: 110px;
+    height: 52px
+}
 
 /* Endereço */
+
+.PadraoEndereco{
+    position:relative;
+    z-index:1;
+    top:-158px;
+    right:35%;
+    font-size:small
+}
 .botaoEnderecoInicio {
     width: 200px
 }
@@ -251,6 +321,12 @@ body {
     border: 1px solid orange; 
     background-color:rgb(254,248,242);
     border-radius:5px;
+    
+}
+.boxEnderecoFinalizarCompra {
+    border: 1px solid orange;
+    background-color: rgb(254,248,242);
+    border-radius: 5px;
     
 }
 .bot {
@@ -341,6 +417,7 @@ body {
 }
 /********************************/
 /* Home */
+
 .semBordaEsquerda {
     border-radius: 0 5px 5px 0;   
 }
@@ -352,7 +429,7 @@ body {
     }
 
 .columnHome {
-    width: 22rem;
+    width: 24em;
     margin-left: auto;
     margin-right: auto
 }
@@ -388,7 +465,39 @@ body {
 
 /**********************************/
 /*   Produtos   */
+.precoProd{
+    position:relative;
+    z-index:1;
+    bottom:1px;
+    left:13px;
+    font-family:'Cambria Math';
+    font-size:large;
+}
+.custom-popover {
+    --bs-popover-max-width: 250px;
+    --bs-popover-border-color: var(--bs-warning);
+    --bs-popover-header-bg: var(--bs-dark);
+    --bs-popover-header-color: var(--bs-white);
+    --bs-popover-body-padding-x: 1rem;
+    --bs-popover-body-padding-y: .5rem;
+}
+.ImagensPopOver {
+    background-color: transparent;
+    border-radius: 100px;
+    border:none;
+    margin:auto;
+}
+.DivPopOver {
+    text-align: center;
+    margin: auto
+}
 
+
+.miniImg {
+    max-height:50px;
+    width:auto;
+    margin-left:1.3px
+}
 .botoesProd {
     padding-top: 97%;
     text-align: center;
@@ -440,22 +549,16 @@ body {
 }
     
 .boxImgProdGrande {
-    margin: 0 0 0 5px;
+   
     width: 100%;
     height: 100%;
 }
-    .boxImgProdGrande img {
-        border: solid;
-        background-color: white;
-        border-width: 3px;
-        border-radius: 20px;
-        width: 100%;
-        height: 100%;
-    }
+    
 
 .boxImgProdPequena {
-    max-width: 15.4%;
+    max-width: 100%;
     max-height: 10%;
+    margin-right:6%
 }
     .boxImgProdPequena img {
         display: block;
@@ -465,7 +568,7 @@ body {
         border-color: rgb(255, 106, 0,.60);
         border-width: 2px;
         margin: 0 0 2px 2px;
-        border-radius: 20px;
+        border-radius: 10px;
     }
 
 /**********************************/
@@ -496,7 +599,11 @@ body {
     margin-right: auto;
     text-align: center
 }
-
+.ajusteModalCep {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center
+}
 .adpHr {
     display: flex;
     align-items: center;
@@ -504,7 +611,7 @@ body {
 
     .adpHr hr {
         flex: 1;
-        border-color: red;
+        border-color: white;
     }
 
 
@@ -559,8 +666,9 @@ html {
     position: relative;
     min-height: 100%;
 }
-
-
+.popoverButtonEndereco{
+    border:solid 1px orange
+}
 /* responsivo do bootstrap*/
 .bd-placeholder-img {
     font-size: 1.125rem;
@@ -611,3 +719,6 @@ svg[aria-label="Facebook"] {
    
     fill: white;
 }
+
+
+
