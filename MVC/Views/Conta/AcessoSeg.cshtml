@@ -18,26 +18,28 @@
             <div class="card-header">
                 <h4>Acesso e Segurança</h4>
             </div>
+           
             <div class="card-body">
               <p class="card-text"><strong>Nome:&nbsp;</strong> @Model.Nome</p>
               <div class="d-flex justify-content-end align-items-center">               
-                <small class="text-muted"><button type="button" class="btn btn-sm btn-primary">Editar</button></small>
+                <small class="text-muted"><button type="submit" name="botao" value="Nome" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#Nome">Editar</button></small>
               </div>
-              <hr />
-              <p class="card-text"><strong>E-mail:&nbsp;</strong> @Model.Email</p>
-              <div class="d-flex justify-content-end align-items-center">               
-                <small class="text-muted"><button type="button" class="btn btn-sm btn-primary">Editar</button></small>
-              </div>
-              <hr />
+              <hr />         
               <p class="card-text"><strong>Telefone:&nbsp;</strong> [número]</p>
               <div class="d-flex justify-content-end align-items-center">               
                 <small class="text-muted"><button type="button" class="btn btn-sm btn-primary">Editar</button></small>
               </div>
               <hr />
+              <p class="card-text"><strong>Deletar conta</strong></p>
+              <div class="d-flex justify-content-end align-items-center">               
+                <small class="text-muted"><button type="submit" name="botao" value="Email" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#delete">Deletar</button></small>
+              </div>
+              <hr />
               <div class="d-grid gap-2 col-6 mx-auto">
-                  <button class="btn btn-primary btn-sm me-md-2">Concluído</button>
+                  <a asp-action="SuaConta" asp-controller="Conta" class="btn btn-primary btn-sm me-md-2">Concluído</a>
               </div>
             </div>
+            
           </div>
         </div>         
       </div>
@@ -45,4 +47,48 @@
   </div>
 </main>
 
-
+ <form method="post">
+     <div class="modal fade" id="Nome" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Editar nome</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="form-floating mb-3">
+              <input type="text" name="nome" class="form-control" id="floatingInput" placeholder="nome" required autocomplete="off">
+              <label for="floatingInput">Nome</label>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn " data-bs-dismiss="modal">Fechar</button>
+            <button type="submit" name="botao" value="nome" class="btn ">Alterar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+ </form>
+ <form method="post">
+    <div class="modal fade" id="delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Deletar conta</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <p class="card-text"><strong>Tem certeza que deseja deletar sua conta ?</strong> </p>
+            <div class="form-floating mb-3">
+            
+ 
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn " data-bs-dismiss="modal">Cancelar</button>
+            <button type="submit" name="botao" value="excluir" class="btn ">Deletar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+</form>

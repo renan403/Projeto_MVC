@@ -15,7 +15,7 @@
             string[] separar2 = separar1[2].Split("?");
             return separar2[0];
         }
-        public async Task SubirImg(IWebHostEnvironment _iweb, ModelProduto p ,string idUser , int opcao)
+        public async Task SubirImg(IWebHostEnvironment _iweb, ModelProduto p ,string idUser , int opcao, string email, string senha)
         {
             using (Auth auth = new())
             {
@@ -35,7 +35,7 @@
                             throw;
                         }
                         using Auth storage = new();
-                        var url = await storage.UploadImage(_iweb, p.ImgArquivo, idUser);
+                        var url = await storage.UploadImage(_iweb, p.ImgArquivo, idUser, email, senha);
                         using Data data = new();
                         string nomeVendedor = await data.RetornaNome(idUser);
                         p.NomeVendedor = nomeVendedor;

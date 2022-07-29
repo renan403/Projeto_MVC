@@ -30,30 +30,52 @@ namespace MVC.Models.Service
         }
         public async Task Teste()
         {
-            var card = await RetornarNotaFiscal("NVjR6VeORB2hOTeZBdOcbTLq6MC5dkfD8tETNuHd");
-           // var test = await PegarItemUnico("-N6Aj_d2ZbUlbF-2iXeh");
-        
+            //var test = DeletarConta("1Kt2TQqFJNhLKP1H2AHLKrW58yYiG6CSN1IvGYte", "renancporto94@gmail.com","12345678");
+            //var card = await PegarNotaFiscal("-N6Aj_d2ZbUlbF-2iXeh", "X3FYK0CE-P6C2W5SF");
+            // await TrocarNome("tjK32B8OwMmiBUXoilfOZwjwvqby3EwW8fVnkoPX","");
+
         }
         public async Task<Array> RetornarNotaFiscal(string userId)
         {
             var key = await GetUserKey(userId);
             var notas = await client.Child($"Usuarios/{key}/NotaFiscal").OnceAsync<ModelNotaFiscal>();
-            return notas.ToArray();
+            return notas.OrderByDescending(m => m.Object.Registro).ToArray();
         }
         public async Task<bool> GerarNotaFiscal(string userId,ModelNotaFiscal notaFiscal)
         {
+            float? total = 0;
             Gerador gera = new();
             for (int i = 0; i < notaFiscal.Produto.Count; i++)
             {
-                notaFiscal.Produto[i].Data = DateTime.Now.ToString("dd/MM/yyyy");
+                notaFiscal.Produto[i].Data = DateTime.Now.ToString("dd 'de' MMMM 'de' yyyy");
                 notaFiscal.Produto[i].Enviado = true;
                 notaFiscal.Produto[i].Recebido = false;
+                total += notaFiscal.Produto[i].ValorTotal;
             }
-            
+            notaFiscal.Produto[0].ValorTotal = (float?)Math.Round((decimal)total, 2);
+            notaFiscal.Registro = DateTime.Now;
             string numPedido = $"{ gera.aleatoriosComprarProd() }-{ gera.aleatoriosComprarProd()}";
             var key = await GetUserKey(userId);
-            await client.Child($"Usuarios/{key}/NotaFiscal/Pedido-{numPedido}").PatchAsync(notaFiscal);
+            await client.Child($"Usuarios/{key}/NotaFiscal/{numPedido}").PatchAsync(notaFiscal);
             return true;
+        }
+        public async Task<ModelNotaFiscal> PegarNotaFiscal(string userId, string nota)
+        {
+            var key = await GetUserKey(userId);
+
+            return await client.Child($"Usuarios/{key}/NotaFiscal/{nota}").OnceSingleAsync<ModelNotaFiscal>();
+        }
+        public async Task ConfirmarPedido(string userId, string nota, string nome)
+        {
+            var key = await GetUserKey(userId);
+            var produtos = await PegarNotaFiscal(userId, nota);
+            ModelDestinatario destinatario = new ModelDestinatario {Nome= nome , Data = DateTime.Now.ToString("dd 'de' MMMMM 'de' yyyy") }; 
+            foreach (var produto in produtos.Produto)
+            {
+                produtos.Destinatario = destinatario;
+                produto.Recebido = true;
+            }
+            await client.Child($"Usuarios/{key}/NotaFiscal/{nota}").PatchAsync(produtos);
         }
         //-----------------------------------------------------------------------------------------------------------------------------------------------------------
         //               Compra
@@ -87,9 +109,9 @@ namespace MVC.Models.Service
 
         //----------------------------------------------------------------------------------------------------------------------------------------------------------------
         //               Cartão
-        public async Task<string> SalvarCard(string userId,ModelCartao model)
+        public async Task<string> SalvarCard(string userId, ModelCartao model)
         {
-            string cvvstring =model.Cvv.ToString();
+            string cvvstring = model.Cvv.ToString();
             if (model.Bandeira == "Amex" && cvvstring.Length < 3)
             {
                 return "⚠️ Cartão não adicionado CVV Faltando 1 número.";
@@ -111,28 +133,37 @@ namespace MVC.Models.Service
                     {
                         if (!cartoes[i].Key.Contains($"Cartao{i + 1}"))
                         {
-                            await client.Child($"Usuarios/{key}/Card/Cartao{i + 1}").PatchAsync(model);
-                            return "sucesso";
+                            if (await VerificaCardPadrao(userId))
+                            {
+                                await client.Child($"Usuarios/{key}/Card/Cartao{i + 1}").PatchAsync(model);
+                                return "sucesso";
+                            }
+                            else
+                            {
+                                model.Padrao = true;
+                                await client.Child($"Usuarios/{key}/Card/Cartao{i + 1}").PatchAsync(model);
+                                return "sucesso";
+                            }
                         }
 
                     }
                     catch
                     {
-                        if(await VerificaCardPadrao(userId))
+                        if (await VerificaCardPadrao(userId))
                         {
                             await client.Child($"Usuarios/{key}/Card/Cartao{i + 1}").PatchAsync(model);
                             return "sucesso";
                         }
                         else
                         {
-                            model.Padrao = false;
+                            model.Padrao = true;
                             await client.Child($"Usuarios/{key}/Card/Cartao{i + 1}").PatchAsync(model);
                             return "sucesso";
                         }
-                       
+
                     }
 
-                }          
+                }
             }
             return "falha";
         }
@@ -145,7 +176,17 @@ namespace MVC.Models.Service
         public async Task DeleteCard(string userId, string cartao)
         {
           var key = await GetUserKey(userId);
+            
             await client.Child($"Usuarios/{key}/Card/{cartao}").DeleteAsync();
+            if(await VerificaCardPadrao(userId) is false)
+            {
+                var cart = (await client.Child($"Usuarios/{key}/Card").OnceAsync<ModelCartao>()).FirstOrDefault();
+                if(cart != null)
+                {
+                    cart.Object.Padrao = true;
+                    await client.Child($"Usuarios/{key}/Card/{cart.Key}").PatchAsync(cart.Object);
+                }
+            }
         }
         public async Task<bool> AlterarCard(string userId, string cartao, string nome, string data)
         {
@@ -245,9 +286,14 @@ namespace MVC.Models.Service
                     .PostAsync(new ModelUsuario()
                     {
                         IdUser = id,
-                        Nome = name,
                         Email = email
                     });
+                var key = await GetUserKey(id);
+                await client.Child($"Usuarios/{key}/InfoUser").PatchAsync(new ModelUsuario
+                {
+                    Nome = name,
+                });
+                
                 return true;
             }
             else
@@ -275,8 +321,9 @@ namespace MVC.Models.Service
                 .FirstOrDefault();
             if (user != null)
             {
-                var nome = (await client.Child("Usuarios").OnceAsync<ModelUsuario>()).Where(u => u.Object.IdUser == idUser).FirstOrDefault().Object.Nome;
-                return nome ?? "";
+                var key = await GetUserKey(idUser);
+                var nome = (await client.Child($"Usuarios/{key}/InfoUser").OnceSingleAsync<ModelUsuario>());
+                return nome.Nome ?? "";
             }
 
 
@@ -286,7 +333,7 @@ namespace MVC.Models.Service
         {
             try
             {
-                var user = (await client.Child("Usuarios").OnceAsync<ModelUsuario>()).Where(u => u.Object.Email == email).FirstOrDefault().Object.Email;
+                var user = (await client.Child($"Usuarios").OnceAsync<ModelUsuario>()).Where(u => u.Object.Email == email).FirstOrDefault().Object.Email;
                 if (user != null)
                 {
                     var id = (await client.Child("Usuarios").OnceAsync<ModelUsuario>()).Where(u => u.Object.Email == email).FirstOrDefault().Object.IdUser;
@@ -299,11 +346,44 @@ namespace MVC.Models.Service
             }
             return string.Empty;
         }
-        
+        public async Task TrocarNome(string userId, string nome)
+        {
+            var key = await GetUserKey(userId);
+            var info = await client.Child($"Usuarios/{key}/InfoUser").OnceSingleAsync<ModelUsuario>();
+            info.Nome = nome;
+            await client.Child($"Usuarios/{key}/InfoUser").PatchAsync(info);
 
+        }
+        public async Task DeletarConta(string userId,string email,string senha)
+        {
+            using(Auth auth = new ())
+            {               
+                var produtos = await RetornarObjProdutosVendedor(userId);
+                try
+                {
+                    foreach (var i in produtos)
+                    {
+                        using ProdutoService p = new();
+                        try
+                        {
+                            await auth.DeleteOneImage(userId, email, senha, ProdutoService.PegarNomeUrl(i.Object.UrlImg));
+                            await DeleteUmProduto(i.Key);
+                        }
+                        catch
+                        {
+                            continue;
+                        }
+                    }
+                }
+                finally
+                {
+                    await auth.DeleteUser(email, senha);
+                }            
+            }
+        }
         //------------------------------------------------------------------------------------------------------------------------------------------------------------------
         //              Endereço
-        public async Task<FirebaseObject<ModelEndereço>?> RetornaEnderecoPadrao(string? idUser)
+        public async Task<FirebaseObject<ModelEndereco>?> RetornaEnderecoPadrao(string? idUser)
         {
 
             var user = (await client.Child("Usuarios").OnceAsync<ModelUsuario>())
@@ -323,7 +403,7 @@ namespace MVC.Models.Service
             }
             return null;
         }
-        public async Task<bool> SalvarEndereco(string userId,ModelEndereço model)
+        public async Task<bool> SalvarEndereco(string userId,ModelEndereco model)
         {
             if (userId == "" || model.Pais == "" || model.Nome == "" || model.Telefone == "" || model.Cep == "" || model.Endereco == "" || model.Numero == 0 || model.Bairro == "" || model.Cidade == "" || model.Estado == "" || model.UF == "")
             {
@@ -383,7 +463,7 @@ namespace MVC.Models.Service
             }
             return true;
         }
-        public async Task<bool> AlterarEndereco(string? key, string userId, string? pais, string? nome, string? telefone, string? cep, string? endereco, int numResid, string? complemento, string? bairro, string? cidade, string? estado, bool padrao, string? uf)
+        public async Task<bool> AlterarEndereco(string? key, string userId, ModelEndereco objEnd)
         {
             if (key == null || userId == String.Empty)
                 return false;
@@ -392,20 +472,20 @@ namespace MVC.Models.Service
             var end = puxarEnd?.Where(m => m.Key == key).FirstOrDefault();
             if (end == null)
                 return false;
-            await client.Child($"Usuarios/{chave}/Endereco/{end.Key}").PatchAsync(new ModelEndereço()
+            await client.Child($"Usuarios/{chave}/Endereco/{end.Key}").PatchAsync(new ModelEndereco()
             {
-                Nome = nome ?? end.Object.Nome,
-                Telefone = telefone ?? end.Object.Telefone,
-                Cep = cep ?? end.Object.Cep,
-                Endereco = endereco ?? end.Object.Endereco,
-                Pais = pais ?? end.Object.Pais,
-                Numero = numResid == 0 ? end.Object.Numero : numResid,
-                Complemento = complemento ?? end.Object.Complemento,
-                Bairro = bairro ?? end.Object.Bairro,
-                Cidade = cidade ?? end.Object.Cidade,
-                Estado = estado ?? end.Object.Estado,
+                Nome = objEnd.Nome ?? end.Object.Nome,
+                Telefone = objEnd.Telefone ?? end.Object.Telefone,
+                Cep = objEnd.Cep ?? end.Object.Cep,
+                Endereco = objEnd.Endereco ?? end.Object.Endereco,
+                Pais = objEnd.Pais ?? end.Object.Pais,
+                Numero = objEnd.Numero == 0 ? end.Object.Numero : objEnd.Numero,
+                Complemento = objEnd.Complemento ?? end.Object.Complemento,
+                Bairro = objEnd.Bairro ?? end.Object.Bairro,
+                Cidade = objEnd.Cidade ?? end.Object.Cidade,
+                Estado = objEnd.Estado ?? end.Object.Estado,
                 Padrao = end.Object.Padrao,
-                UF = uf ?? end.Object.UF
+                UF = objEnd.UF ?? end.Object.UF
             });
             return true;
         }
@@ -422,12 +502,12 @@ namespace MVC.Models.Service
                 return false;
             }
         }
-        public async Task<IReadOnlyCollection<FirebaseObject<ModelEndereço>>?> PuxarEndereco(string userId)
+        public async Task<IReadOnlyCollection<FirebaseObject<ModelEndereco>>?> PuxarEndereco(string? userId)
         {
             if (userId != String.Empty)
             {
                 var chave = await GetUserKey(userId);
-                var enderecoResult = (await client.Child($"Usuarios/{chave}/Endereco").OnceAsync<ModelEndereço>());
+                var enderecoResult = (await client.Child($"Usuarios/{chave}/Endereco").OnceAsync<ModelEndereco>());
 
                 return enderecoResult;
             }
@@ -457,10 +537,18 @@ namespace MVC.Models.Service
         }
         public async Task<bool> DeleteUser(string email)
         {
-            var key = (await client.Child("Usuarios").OnceAsync<ModelLogin>()).Where(m => m.Object.Email == email).FirstOrDefault().Key;
-            await client.Child($"Usuarios/{key}").DeleteAsync();
+            try
+            {
+                var key = (await client.Child("Usuarios").OnceAsync<ModelLogin>()).Where(m => m.Object.Email == email).FirstOrDefault().Key;
+                await client.Child($"Usuarios/{key}").DeleteAsync();
 
-            return true;
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+            
         }
         public async Task<bool> MudarPadrao(string userId, string key)
         {
@@ -509,6 +597,10 @@ namespace MVC.Models.Service
         public async Task<Array> RetornarArrayProdutosVendedor(string idUser)
         {
             return (await client.Child("Produtos").OnceAsync<ModelProduto>()).Where(m => m.Object.IdUser == idUser).ToArray();           
+        }
+        public async Task<System.Collections.Generic.IEnumerable<FirebaseObject<ModelProduto>>> RetornarObjProdutosVendedor(string idUser)
+        {
+            return (await client.Child("Produtos").OnceAsync<ModelProduto>()).Where(m => m.Object.IdUser == idUser);
         }
         public async Task<bool> DeleteProdutos(string userId)
         {

@@ -11,7 +11,7 @@ namespace MVC.Controllers
     public class LoginController : Controller
     {
         [HttpGet]
-        public ActionResult Login( string? Tela)
+        public IActionResult Login( string? Tela)
         {
             using (GeralService geral = new())
             {
@@ -27,7 +27,7 @@ namespace MVC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(ModelLogin user)
+        public async Task<IActionResult> Login(ModelLogin user)
         {
 
             var tela = TempData["Tela"] as string;
@@ -60,7 +60,7 @@ namespace MVC.Controllers
                     }
                 }
                 HttpContext.Session.SetString("IdUsuario", idUsuario);
-                
+                HttpContext.Session.SetString("Senha", user.Senha ?? "");
                 HttpContext.Session.SetString("SessaoEmail", user.Email ?? "");
                 HttpContext.Session.SetString("SessaoNome", nome);
 

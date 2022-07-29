@@ -60,18 +60,25 @@
                    </div>
                     <div class="col-sm-8  p-3 ">
                         <div class="d-flex justify-content-between align-items-center">
-                             <div class="col-sm-9">                         
-                                    <p><strong>@ViewBag.Cartao.Bandeira (Crédito)</strong> termina em @ViewBag.Cartao.QuatroDigCard </p>                         
-                             </div>
-                            <div class="col-sm-3 p-3 ">
-                               <a href="#" data-bs-toggle="modal" data-bs-target="#modalCartoes" class="text-decoration-none"> Alterar</a>
-                             </div>
+                            @if(ViewBag.Cartao != null)
+                            {
+                                <div class="col-sm-9">    
+                                   <p><strong>@ViewBag.Cartao.Bandeira (Crédito)</strong> termina em @ViewBag.Cartao.QuatroDigCard </p>                                       
+                                </div>
+                                <div class="col-sm-3 p-3 ">
+                                  <a href="#" data-bs-toggle="modal" data-bs-target="#modalCartoes" class="text-decoration-none"> Alterar</a>
+                                </div>
+                             }
+                             else{
+                                  <div class="col-sm-9">    
+                                   <p><strong>Nenhum cartao salvo</strong> </p>                                       
+                                </div>
+                                <div class="col-sm-3 p-3 ">
+                                  <a asp-action="Carteira" asp-controller="Conta" > Cadastrar</a>
+                                </div>
+                             }
                         </div>                           
                     </div>
-                    <script>
-                        
-                        
-                    </script>
                  </div>
             </div>
             <hr />
@@ -153,9 +160,26 @@
               <p class="card-text"><span style="font-size:larger">Subtotal (@Model.Qtd itens) : <strong>@Model.ValorTotal</strong></span></p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">  
-                   
-                    <button type="submit" name="finalizar" id="finalizar" value="finalizar-@Model.Qtd-@Model.ValorTotal" class="btn btn-sm btn-outline-dark">Finalizar pedido</button>
-                  
+                   @if(ViewBag.Cartao != null)
+                   {
+                       @if (ViewBag.RNCUC[0] == "Cadastre")
+                       {   <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-placement="bottom"  data-bs-trigger="hover focus" data-bs-content="Necessario um endereço para prosseguir">
+                             <button class="btn btn-sm btn-outline-dark" disabled>Finalizar pedido</button>
+                           </span>
+                       }   
+                       else
+                       {
+                           <button type="submit" name="finalizar" id="finalizar" value="finalizar-@Model.Qtd-@Model.ValorTotal" class="btn btn-sm btn-outline-dark">Finalizar pedido</button>
+                       }
+                                           
+                    }
+                    else
+                    {
+                         <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-placement="bottom"  data-bs-trigger="hover focus" data-bs-content="Necessario um cartão para prosseguir">
+                             <button class="btn btn-sm btn-outline-dark" disabled>Finalizar pedido</button>
+                           </span>
+                        
+                    }
                 </div>
                 
               </div>
@@ -196,3 +220,9 @@
     </div>
   </div>
 </div>
+<script>
+$(document).ready(function(){
+    $('[data-bs-toggle="popover"]').popover();
+});
+
+</script>

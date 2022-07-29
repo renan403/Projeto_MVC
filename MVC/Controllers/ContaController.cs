@@ -5,8 +5,6 @@ using MVC.Models;
 using MVC.Models.Service;
 using Newtonsoft.Json;
 using System.Drawing;
-using ZXing;
-using ZXing.Common;
 
 namespace MVC.Controllers
 {
@@ -25,12 +23,6 @@ namespace MVC.Controllers
                 ViewBag.nomeUser = geral.RetornaNomeNull(HttpContext.Session.GetString("nomeFormatado") ?? "");
                 ViewBag.RNCUC = geral.RetornoRNCUC(HttpContext.Session.GetString("Endereço") ?? "");
             }
-
-            using (GeralService end = new())
-            {
-                ViewBag.RNCUC = end.RetornoRNCUC(HttpContext.Session.GetString("Endereço") ?? "");
-            }
-
             return View();
         }
         public async Task<IActionResult> Endereco()
@@ -40,22 +32,8 @@ namespace MVC.Controllers
                 ViewBag.nomeUser = geral.RetornaNomeNull(HttpContext.Session.GetString("nomeFormatado") ?? "");
                 ViewBag.RNCUC = geral.RetornoRNCUC(HttpContext.Session.GetString("Endereço") ?? "");
             }
-
-            using (Data data = new())
-            {
-                var retorno = await data.PuxarEndereco(HttpContext.Session.GetString("IdUsuario") ?? "");
-                if (retorno == null)
-                {
-                    ViewData["EnderecoCadastrado"] = "Não";
-                    return View();
-                }
-                else
-                {
-                    ViewData["EnderecoCadastrado"] = "Sim";
-
-                    return View(retorno);
-                }
-            }
+            using Data data = new();
+            return View(await data.PuxarEndereco(HttpContext.Session.GetString("IdUsuario")));
 
         }
         [HttpGet("/SuaConta/AlterarEndereco/{Key}")]
@@ -66,6 +44,7 @@ namespace MVC.Controllers
                 ViewBag.nomeUser = geral.RetornaNomeNull(HttpContext.Session.GetString("nomeFormatado") ?? "");
                 ViewBag.RNCUC = geral.RetornoRNCUC(HttpContext.Session.GetString("Endereço") ?? "");
             }
+
             var opcao = Key.Split("&");
             if (opcao[1] == "Alterar")
             {
@@ -82,7 +61,6 @@ namespace MVC.Controllers
                 using (Data data = new Data())
                 {
                      await data.DeleteEndereco(opcao[0] ?? "erro", HttpContext.Session.GetString("IdUsuario"));
-
 
                     //Retornar Endereço Padrao atualizado
                      var end = await data.RetornaEnderecoPadrao(HttpContext.Session.GetString("IdUsuario"));
@@ -102,7 +80,7 @@ namespace MVC.Controllers
             return View();
         }
         [HttpPost("/SuaConta/AlterarEndereco/{Key}")]
-        public async Task<IActionResult> AlterarEndereco(ModelEndereço model)
+        public async Task<IActionResult> AlterarEndereco(ModelEndereco model)
         {
             var Key = TempData["KeyOpcaoEnd"].ToString();
             if (Key != string.Empty)
@@ -111,8 +89,7 @@ namespace MVC.Controllers
                 {
                     using (Data data = new())
                     {
-                        await data.AlterarEndereco(Key, HttpContext.Session.GetString("IdUsuario") ?? "", model.Pais, model.Nome, model.Telefone, model.Cep,
-                        model.Endereco, model.Numero, model.Complemento, model.Bairro, model.Cidade, model.Estado, model.Padrao, model.UF);
+                        await data.AlterarEndereco(Key, HttpContext.Session.GetString("IdUsuario") ?? "", model);
 
                         //Retornar Endereço Padrao atualizado
                         var end = await data.RetornaEnderecoPadrao(HttpContext.Session.GetString("IdUsuario"));
@@ -126,8 +103,6 @@ namespace MVC.Controllers
                         }
                     }
                 }
-                
-
                 return RedirectToAction("Endereco", "Conta");
             }
             return RedirectToAction("Endereco", "Conta");
@@ -144,7 +119,7 @@ namespace MVC.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> AddEndereco(ModelEndereço model)
+        public async Task<IActionResult> AddEndereco(ModelEndereco model)
         {
             if (ModelState.IsValid)
             {
@@ -169,19 +144,48 @@ namespace MVC.Controllers
             }
             return View();
         }
-        public IActionResult Reembolso()
-        {
 
-            return View();
-        }
         public IActionResult AcessoSeg()
         {
-            var model = new ModelLogin();
-            model.Email = HttpContext.Session.GetString("SessaoEmail");
-            model.Nome = HttpContext.Session.GetString("SessaoNome");
-            
+            using (GeralService geral = new())
+            {
+                ViewBag.nomeUser = geral.RetornaNomeNull(HttpContext.Session.GetString("nomeFormatado") ?? "");
+                ViewBag.RNCUC = geral.RetornoRNCUC(HttpContext.Session.GetString("Endereço") ?? "");
+            }
+            var model = new ModelLogin
+            {
+                Email = HttpContext.Session.GetString("SessaoEmail"),
+                Nome = HttpContext.Session.GetString("SessaoNome")
+            };
+
             return View(model);
-        }       
+        }    
+        [HttpPost]
+        public async Task<IActionResult> AcessoSeg(string botao, string nome, string email)
+        {
+           
+            switch (botao)
+            {
+                case "nome":
+                    using (Data data = new())
+                    {
+                        await data.TrocarNome(HttpContext.Session.GetString("IdUsuario"), nome);
+                        HttpContext.Session.SetString("SessaoNome", nome);
+                        using GeralService end = new();
+                        HttpContext.Session.SetString("nomeFormatado", end.FormatarNomeNav(HttpContext.Session.GetString("SessaoNome") ?? ""));
+                    }
+                        break;
+                case "excluir":
+                    using (Data data = new())
+                    {
+                        await data.DeletarConta(HttpContext.Session.GetString("IdUsuario"), HttpContext.Session.GetString("SessaoEmail"), HttpContext.Session.GetString("Senha"));
+                    }
+                    return RedirectToAction("HomeSair","Home");   
+            }
+           
+
+                return RedirectToAction("AcessoSeg", "Conta");
+        }
         public async Task<IActionResult> Carteira(string erro)
         {
             using (GeralService geral = new())
@@ -202,7 +206,8 @@ namespace MVC.Controllers
         [HttpPost]
         public async Task<IActionResult> Carteira(ModelCartao model, string btn)
         {
-            if (!string.IsNullOrEmpty(btn)){
+            if (!string.IsNullOrEmpty(btn))
+            {
                 var separador = btn.Split("%%");
                 btn = separador[0];
                 switch (btn)
@@ -212,14 +217,14 @@ namespace MVC.Controllers
                             await data.DeleteCard(HttpContext.Session.GetString("IdUsuario"), separador[1]);
                         break;
                     case "alterar":
-                            using (Data data = new())
-                            await data.AlterarCard(HttpContext.Session.GetString("IdUsuario"), separador[1],model.NomeCard, model.DataExpiracao);
+                        using (Data data = new())
+                            await data.AlterarCard(HttpContext.Session.GetString("IdUsuario"), separador[1], model.NomeCard, model.DataExpiracao);
                         break;
                 }
             }
 
 
-            if(!string.IsNullOrEmpty(model.Bandeira) || !string.IsNullOrEmpty(model.NumeroCard))
+            if (!string.IsNullOrEmpty(model.Bandeira) || !string.IsNullOrEmpty(model.NumeroCard))
             {
                 using (Card card = new())
                 {
@@ -250,20 +255,20 @@ namespace MVC.Controllers
                         using (Data data = new())
                         {
                             var resp = await data.SalvarCard(HttpContext.Session.GetString("IdUsuario"), model);
-                            if(resp.Contains("sucesso"))
-                                return RedirectToAction("Carteira", "Conta");
+
+                            if (resp.Contains("sucesso"))                                                           
+                                return RedirectToAction("Carteira", "Conta");                                 
                             else
-                            {
                                 return RedirectToAction("Carteira", "Conta", new { erro = resp });
-                            }
+
                         }
-                    }              
-                    return RedirectToAction("Carteira", "Conta", new {erro = "Cartão inválido ⚠️" });
+                    }
+                    return RedirectToAction("Carteira", "Conta", new { erro = "Cartão inválido ⚠️" });
                 }
             }
-           
-            return RedirectToAction("Carteira","Conta");
-        }  
+
+            return RedirectToAction("Carteira", "Conta");
+        }
         public async Task<IActionResult> AlterarCartao(string card)
         {
             using(Data data = new())
@@ -280,40 +285,19 @@ namespace MVC.Controllers
                 ViewBag.RNCUC = geral.RetornoRNCUC(HttpContext.Session.GetString("Endereço") ?? "");
             }
             var model = new ModelProduto();
-            List<dynamic> ProdutosEqtd = new();
 
             using (Data data = new())
             {
-                float? valorTotal = 0;
-                int? quantiaTotal = 0;
-                List<int?> qtdProdutos = new List<int?>();
-
+           
                 List<ModelProduto> prod = new();
+
                 var Produtos = await data.RetornaCarrinho(HttpContext.Session.GetString("IdUsuario"));
-                foreach (var idProduto in Produtos)
-                {
-                    var ID = idProduto.Object.IdProduto;
-                    ModelProduto item = await data.RetornaProdutoPorID(ID) ?? new ModelProduto { };
-                    valorTotal += item.PrecoProd * idProduto.Object.QtdPorProd;
-                    quantiaTotal += idProduto.Object.QtdPorProd;
+                ContaService contaService = new ();
+                var final = await contaService.FinalizarCompra(Produtos);
+                ViewBag.Carrinho = final.ProdutosEqtd;
+                model.ValorTotal = final.ValorTotal;
+                model.Qtd = final.QuantiaTotal;
 
-                    List<dynamic> unirLista = new();
-                    unirLista.Add(item);
-                    unirLista.Add(idProduto.Object.QtdPorProd);
-                    unirLista.Add(idProduto.Key);
-                    ProdutosEqtd.Add(unirLista);
-
-                    // Implementar na model para gerar nota
-
-                    item.Qtd = idProduto.Object.QtdPorProd;
-                    item.ValorTotal = (float)Math.Round((decimal)((decimal)item.PrecoProd * idProduto.Object.QtdPorProd), 2);
-                    item.Cancelado = false;
-                    item.Data = DateTime.Now.ToString("dd/MM/yyyy");
-                    prod.Add(item);
-                }
-                ViewBag.Carrinho = ProdutosEqtd;
-                model.ValorTotal = (float)Math.Round((decimal)valorTotal, 2);
-                model.Qtd = quantiaTotal;
                 if (cardTrocar == null)
                 {
                     ViewBag.Cartao = await data.Cartao(HttpContext.Session.GetString("IdUsuario"), HttpContext.Session.GetString("cartao"));
@@ -328,8 +312,8 @@ namespace MVC.Controllers
                     var notaFiscal = new ModelNotaFiscal
                     {
                         Cartao = ViewBag.Cartao,
-                        Endereço = (await data.RetornaEnderecoPadrao(HttpContext.Session.GetString("IdUsuario"))).Object,
-                        Produto = prod
+                        Endereco = (await data.RetornaEnderecoPadrao(HttpContext.Session.GetString("IdUsuario"))).Object,
+                        Produto = final.Prod
                     };
 
 
@@ -379,7 +363,12 @@ namespace MVC.Controllers
         }
         public IActionResult FinalizarPedido(List<string> endereco)
         {
-            ModelEndereço model = new();
+            using (GeralService geral = new())
+            {
+                ViewBag.nomeUser = geral.RetornaNomeNull(HttpContext.Session.GetString("nomeFormatado") ?? "");
+                ViewBag.RNCUC = geral.RetornoRNCUC(HttpContext.Session.GetString("Endereço") ?? "");
+            }
+            ModelEndereco model = new();
             model.Endereco = endereco[0];
             model.Numero = Convert.ToInt32(endereco[1]);
             model.Cidade = endereco[2];
@@ -388,42 +377,74 @@ namespace MVC.Controllers
             model.Nome = endereco[5];
             return View(model);
         }
-        public IActionResult Transacoes()
+        public async Task<IActionResult> Transacoes()
         {
             using (GeralService geral = new())
             {
                 ViewBag.nomeUser = geral.RetornaNomeNull(HttpContext.Session.GetString("nomeFormatado") ?? "");
                 ViewBag.RNCUC = geral.RetornoRNCUC(HttpContext.Session.GetString("Endereço") ?? "");
             }
+            using(Data data = new())
+            {
+               ViewBag.Transacoes = await data.RetornarNotaFiscal(HttpContext.Session.GetString("IdUsuario"));
+            }
             return View();
         }
-        public IActionResult SeusPedidos()
+        public async  Task<IActionResult> SeusPedidos()
         {
             using (GeralService geral = new())
             {
                 ViewBag.nomeUser = geral.RetornaNomeNull(HttpContext.Session.GetString("nomeFormatado") ?? "");
                 ViewBag.RNCUC = geral.RetornoRNCUC(HttpContext.Session.GetString("Endereço") ?? "");
+            }
+            using(Data data = new())
+            {
+               ViewBag.NotasFiscais = await data.RetornarNotaFiscal(HttpContext.Session.GetString("IdUsuario"));
+                
             }
 
             return View();
         }
-        public IActionResult DetalhePedido()
+        public async Task<IActionResult> ConfirmarSeusPedidos(string pedido, string nome)
         {
-            using (GeralService geral = new())
+            using(Data data = new())
             {
-                ViewBag.nomeUser = geral.RetornaNomeNull(HttpContext.Session.GetString("nomeFormatado") ?? "");
-                ViewBag.RNCUC = geral.RetornoRNCUC(HttpContext.Session.GetString("Endereço") ?? "");
+                await data.ConfirmarPedido(HttpContext.Session.GetString("IdUsuario"), pedido, nome);
             }
-            return View();
+            return RedirectToAction("SeusPedidos", "Conta");
         }
-        public IActionResult ExibirRecibo()
+        public async Task<IActionResult> DetalhePedido(string nota)
         {
             using (GeralService geral = new())
             {
                 ViewBag.nomeUser = geral.RetornaNomeNull(HttpContext.Session.GetString("nomeFormatado") ?? "");
                 ViewBag.RNCUC = geral.RetornoRNCUC(HttpContext.Session.GetString("Endereço") ?? "");
+
             }
-            return View();
+            using(Data data = new())
+            {
+                ViewBag.Cartao = await data.Cartao(HttpContext.Session.GetString("IdUsuario"), HttpContext.Session.GetString("cartao"));
+                ViewBag.NotasFiscais = await data.PegarNotaFiscal(HttpContext.Session.GetString("IdUsuario"), nota);
+                var notafisc = await data.PegarNotaFiscal(HttpContext.Session.GetString("IdUsuario"), nota);
+                return View(notafisc);
+            }
+            
+           
+        }
+        public async Task<IActionResult> ExibirRecibo(string nota)
+        {
+            ModelNotaFiscal notafisc;
+            using (GeralService geral = new())
+            {
+                ViewBag.nomeUser = geral.RetornaNomeNull(HttpContext.Session.GetString("nomeFormatado") ?? "");
+                ViewBag.RNCUC = geral.RetornoRNCUC(HttpContext.Session.GetString("Endereço") ?? "");
+            }
+            using (Data data = new())
+            {
+                notafisc =  await data.PegarNotaFiscal(HttpContext.Session.GetString("IdUsuario"), nota);
+                notafisc.IdNota = nota;
+            }
+                return View(notafisc);
         }
         public IActionResult VendaNoApp()
         {
@@ -442,10 +463,10 @@ namespace MVC.Controllers
             {
                 using(ProdutoService prod = new())
                 {
-                   await prod.SubirImg(_env, p, idUser,0);
+                   await prod.SubirImg(_env, p, idUser,0, HttpContext.Session.GetString("SessaoEmail"), HttpContext.Session.GetString("Senha"));
                 }
-
-                    return RedirectToAction("SuaConta", "Conta");
+        
+                return RedirectToAction("SuaConta", "Conta");
             }
 
             return RedirectToAction("Home", "Home");
@@ -464,9 +485,9 @@ namespace MVC.Controllers
                         using (ProdutoService prod = new())
                         {
                            
-                            await prod.SubirImg(_env, p, HttpContext.Session.GetString("IdUsuario"), 1);
+                            await prod.SubirImg(_env, p, HttpContext.Session.GetString("IdUsuario"), 1, HttpContext.Session.GetString("SessaoEmail"), HttpContext.Session.GetString("Senha"));
                         }
-                        await auth.DeleteOneImage(HttpContext.Session.GetString("IdUsuario"), Img);
+                        await auth.DeleteOneImage(HttpContext.Session.GetString("IdUsuario"), HttpContext.Session.GetString("SessaoEmail"), HttpContext.Session.GetString("Senha"), Img);
                     }
                 }
             }
@@ -512,14 +533,13 @@ namespace MVC.Controllers
                     using (Data data = new())
                         await data.DeleteUmProduto(ChaveProd);
                     using (Auth auth = new())
-                        await auth.DeleteOneImage(HttpContext.Session.GetString("IdUsuario"), foto);
+                        await auth.DeleteOneImage(HttpContext.Session.GetString("IdUsuario"), HttpContext.Session.GetString("SessaoEmail"), HttpContext.Session.GetString("Senha"), foto);
                     return RedirectToAction("SeusProdutos","Conta");
                 case "Alterar":
                     return RedirectToAction("AlterarProduto", "Conta", new {Img = foto,Id = separador[3] });
             }
             return View();
         }
-        
 
     }
 }

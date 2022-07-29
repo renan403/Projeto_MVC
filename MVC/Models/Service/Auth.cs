@@ -14,16 +14,16 @@ namespace MVC.Models.Service
         {                 
             auth = new FirebaseAuthProvider(new FirebaseConfig("AIzaSyC6L9Knos384ZHZPfVOsaTU5wFldlB1JMs"));
         }   
-        public async Task<string> UploadImage(IWebHostEnvironment env, IFormFile? file, string userID)
+        public async Task<string> UploadImage(IWebHostEnvironment env, IFormFile? file, string userID,string email,string senha)
         {
             if(file.Length < 1)
             {
-                return String.Empty;                                                                      //////         //////
-            }                                                                                             //////         //////
-            string? downloadUrl = null;                                                                   //////         //////
-            var token = await auth.SignInWithEmailAndPasswordAsync("renancporto94@gmail.com", "12345678");////// arrumar //////
-            var path = Path.Combine(env.WebRootPath, $"img\\Temp\\{file.FileName}");                      //////         //////
-            var canc = new CancellationTokenSource();                                                     //////         //////
+                return String.Empty;                                                                      
+            }                                                                                             
+            string? downloadUrl = null;                                                                   
+            var token = await auth.SignInWithEmailAndPasswordAsync(email, senha);
+            var path = Path.Combine(env.WebRootPath, $"img\\Temp\\{file.FileName}");                      
+            var canc = new CancellationTokenSource();                                                     
             using (FileStream fs = new(path, FileMode.Open))
             {
                 var storage = new FirebaseStorage("projetoport-50b66.appspot.com",
@@ -50,13 +50,13 @@ namespace MVC.Models.Service
                 return $"Exception was thrown: {ex}";
             }
         }
-        public async Task  DeleteImage(Array produtos, string IdUser)
+        public async Task  DeleteImage(Array produtos, string IdUser, string email, string senha)
         {
             try
             {
                 foreach (var NomeDaFoto in produtos)
                 {
-                    var token = await auth.SignInWithEmailAndPasswordAsync("renancporto94@gmail.com", "12345678");
+                    var token = await auth.SignInWithEmailAndPasswordAsync(email, senha);
                     var storage = new FirebaseStorage("projetoport-50b66.appspot.com",
                               new FirebaseStorageOptions
                               {
@@ -76,11 +76,11 @@ namespace MVC.Models.Service
             
 
         }
-        public async Task DeleteOneImage(string userId,string nomeImg )
+        public async Task DeleteOneImage(string userId,string email, string senha ,string nomeImg )
         {
             try
             {
-                var token = await auth.SignInWithEmailAndPasswordAsync("renancporto94@gmail.com", "12345678");
+                var token = await auth.SignInWithEmailAndPasswordAsync(email, senha);
                 TimeSpan time = new TimeSpan(0, 0,15);
                 var canc = new CancellationTokenSource();
                 var storage = new FirebaseStorage("projetoport-50b66.appspot.com",
@@ -221,7 +221,6 @@ namespace MVC.Models.Service
             using (Data data = new())
             {
                 var id = await data.RetornaID(email);
-                await data.DeleteProdutos(id);
                 await data.DeleteUser(email);
             }
             await auth.DeleteUserAsync(idToken.FirebaseToken);

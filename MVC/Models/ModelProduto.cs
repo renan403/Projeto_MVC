@@ -25,8 +25,17 @@
     }
     public class ModelNotaFiscal
     {
-        public ModelCartao Cartao { get; set; }
-        public List<ModelProduto> Produto { get; set; }
-        public ModelEndereço Endereço { get; set; }
+        public string? IdNota { get; set; }
+        public DateTime? Registro { get; set; }
+        public ModelDestinatario Destinatario { get; set;}
+        public ModelCartao? Cartao { get; set; }
+        public List<ModelProduto>? Produto { get; set; }
+        public ModelEndereco? Endereco { get; set; }
+    }
+    public class ModelDestinatario
+    {
+      
+        public string? Nome { get; set; }
+        public string? Data { get; set; }
     }
 }

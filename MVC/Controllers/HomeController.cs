@@ -11,12 +11,14 @@ namespace MVC.Controllers
         public async Task<IActionResult> Home()
         {
 
-            //return RedirectToAction("FinalizarPedido", "Conta");
+            //return RedirectToAction("DetalhePedido", "Conta");
             using Auth auth = new();
          
 
             using (Data data = new())
             {
+               
+                
                 await data.Teste();
                 ViewBag.Produtos = await data.RetornaArrayProdutos();
 
@@ -36,6 +38,7 @@ namespace MVC.Controllers
             HttpContext.Session.SetString("Endereço", "");
             HttpContext.Session.SetString("nomeFormatado", "");
             HttpContext.Session.SetString("IdUsuario", "");
+            HttpContext.Session.SetString("Senha", "");
             return RedirectToAction("Home", "Home");
         }
 

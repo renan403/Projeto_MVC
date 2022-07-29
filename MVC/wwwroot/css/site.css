@@ -1,3 +1,85 @@
+.progress {
+    height: 5px;
+    background-color: white;
+    position: relative;
+}
+
+    .progress .progress-bar {
+        position: absolute;
+        height: 100%;
+        background-color: orange;
+        animation-name: progress-animation;
+        animation-duration: 4s;
+        animation-delay: 0s;
+    }
+.bola {
+    position:relative;
+    z-index:2;
+    border-radius: 20px;
+    height: 50px;
+    width: 15px;
+    border: 1px solid #000000;
+    background-color: honeydew;
+}
+
+@keyframes progress-animation {
+    0% {
+        width: 0
+    }
+    15% {
+        width: 15%;
+        background-color: red;
+        
+    }
+    45% {
+        width: 45%;
+        background-color: yellow;
+    }
+
+   65%{
+        width: 65%;
+        background-color: orange;
+    }
+}
+.progress1 {
+    height: 5px;
+    background-color: white;
+    position: relative;
+}
+    .progress1 .progress-bar {
+        position: absolute;
+        height: 100%;
+        background-color: green;
+        animation-name: progress-animation1;
+        animation-duration: 4s;
+        animation-delay: 0s;
+    }
+
+
+@keyframes progress-animation1 {
+    0% {
+        width: 0
+    }
+
+    15% {
+        width: 15%;
+        background-color: red;
+    }
+
+    43% {
+        width: 43%;
+        background-color: yellow;
+    }
+
+    65% {
+        width: 65%;
+        background-color: orange;
+    }
+    100% {
+        width: 100%;
+        background-color: green;
+    }
+}
 #backurl {
    background-image: url(plus.png);
 }

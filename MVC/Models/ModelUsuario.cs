@@ -23,7 +23,7 @@ namespace MVC.Models
         public string? Erro { get; set; }
 
     }
-    public class ModelEndereço
+    public class ModelEndereco
     {
         [Required]
         public string? Pais { get; set; }

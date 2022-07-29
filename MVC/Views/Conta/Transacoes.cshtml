@@ -24,18 +24,21 @@
     <div class="card text-dark bg-light mb-3" style="width: 100%;">
       <div class="card-header ">Concluído</div>
       <div class="card-body ">
-            <table class="table table-striped">            
-              <tbody>
+            <table class="table table-striped">                      
+                @foreach(var item in ViewBag.Transacoes)
+              { 
+                <tbody>
                 <tr>
-                  <td scope="row">[dia] de [mes] de [ano]</td>  
+                  <td scope="row">@item.Object.Produto[0].Data</td>  
                   <td scope="row"></td> 
                 </tr>
                 <tr>
-                  <td scope="row"><h6>[cartão] ****[ultimos 4 digitos]</h6>
-                      <a href="#" class="text-decoration-none text-orange">Número do pedido [numero do pedido]</a></td>
-                  <td style="text-align:right;" scope="row"><h6>-R$ [valor]</h6></td>
+                  <td scope="row"><h6>@item.Object.Cartao.Bandeira ****@item.Object.Cartao.QuatroDigCard</h6>
+                      <a href="#" class="text-decoration-none text-orange">Número do pedido @item.Key</a></td>
+                  <td style="text-align:right;" scope="row"><h6>-R$ @item.Object.Produto[0].ValorTotal</h6></td>
                 </tr>            
               </tbody>
+              }
             </table>
 
       </div>

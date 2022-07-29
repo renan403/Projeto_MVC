@@ -128,7 +128,7 @@ namespace MVC.Controllers
                     var notafiscal = new ModelNotaFiscal
                     {
                         Cartao = ViewBag.Cartao,
-                        Endereço = (await data.RetornaEnderecoPadrao(HttpContext.Session.GetString("IdUsuario"))).Object,
+                        Endereco = (await data.RetornaEnderecoPadrao(HttpContext.Session.GetString("IdUsuario"))).Object,
                         Produto = prod
                     };
                     await data.GerarNotaFiscal(HttpContext.Session.GetString("IdUsuario"), notafiscal);

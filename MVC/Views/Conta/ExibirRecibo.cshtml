@@ -1,22 +1,23 @@
-﻿@{
+﻿@model ModelNotaFiscal
+@{
     Layout = "LayoutNota";
     
 }
 
 <div class="Box">
  <div class="bordaBox">
-        <h6> Detalhes do pedido nº [numero do pedido ]</h6>
+        <h6> Detalhes do pedido @Model.IdNota</h6>
         <a href="#" onClick="window.print()">Imprima esta página para seus registros.</a>
  </div>   
     <p style="top:2%">
-        Pedido feito: [data do pedido]                       <br />
-        Número de pedido: [numero do pedido] <br />
-        Total do pedido: R$ [valor]
+        Pedido feito: @Model.Produto[0].Data <br />
+        Pedido: @Model.IdNota <br />
+        Total do pedido: R$ @Model.Produto[0].ValorTotal
          
     </p>
 
 <div class="card border-dark text-dark bg-light mb-3" style="width: 100%;">
-  <div  class="BoxRecibo"><h6 style="margin:0.5% 0 0.5% 0">Enviado em [dia que foi enviado]</h6></div>
+  <div  class="BoxRecibo"><h6 style="margin:0.5% 0 0.5% 0">Enviado em @Model.Produto[0].Data</h6></div>
  
   <div >
    <table class="table table-borderless">
@@ -27,25 +28,39 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td scope="row">
-               <p><small>[n°] unidade(s) de:[nome do produto]</small></p> 
-               <small>Vendido por: [nome do vendedor] <a class="text-decoration-none">(perfil do vendedor)</a></small>
-               <p ><small>Condição: [condiçao]</small></p>
-          </td>
-          <td style="text-align:right;">
-              R$ [valor]
-          </td>     
-        </tr>
+        @foreach(var item in @Model.Produto)
+         {
+            <tr>
+            
+              <td scope="row">
+            
+                  <ul class="list-unstyled ">
+                      <li><small>@item.Qtd unidade(s) de:&nbsp;<span class="text-capitalize">@item.NomeProd</span></small></li>
+                      <li> <small>Vendido por:&nbsp;<span class="text-capitalize">@item.NomeVendedor </span> <a class="text-decoration-none">(perfil do vendedor)</a></small></li>   
+                  </ul>                        
+              </td>
+              <td  style="text-align:right;">
+                  <ul class="list-unstyled ">
+                   
+                      <li>R$ @item.PrecoProd</li>    
+                  </ul>                
+              </td>  
+            </tr>
+        }
         <tr class="bordered"></tr>
         <tr>
-          <td scope="row"><p><strong>Endereço de envio:</strong> <br />
-            <small>[nome do user]</small> <br />
-            <small>[rua e numero]</small><br />
-            <small>[cidade , uf cep]</small><br />
-            <small>[pais]</small></p>
-            <p><strong>Opção de entrega:</strong> <br />
-            <small>[tipo de envio]</small></td>  
+          <td scope="row"><ul class="list-unstyled ">
+                                <li><strong>Endereço de envio:</strong></li>
+                                <li><small class="text-capitalize">@Model.Endereco.Nome</small></li>
+                                <li><small>@Model.Endereco.Endereco, @Model.Endereco.Numero</small></li>
+                                <li><small>@Model.Endereco.Cidade , @Model.Endereco.UF @Model.Endereco.Cep</small></li>
+                                <li><small>@Model.Endereco.Pais</small></li>
+                                <li></li>
+                                <li><strong>Opção de entrega:</strong></li>
+                                <li><small>Envio Padrao</small></li>
+                                
+                       </ul>
+            </td>  
         </tr>
       </tbody>
     </table>     
@@ -60,28 +75,35 @@
       <thead>
         <tr >
           <th scope="col">Método de pagamento:</th>
-          <th style="text-align:right;" scope="col">Preço</th>     
+          <th style="text-align:right;" scope="col">Preço</th>   
+          
+        </tr>
+        <tr >
+          <td scope="col">(Crédito) @Model.Cartao.Bandeira | Últimos dígitos: @Model.Cartao.QuatroDigCard </td>      
         </tr>
       </thead>
       <tbody>
+
         <tr>
+
           <td scope="row">
-            <p><strong>Endereço de cobrança:</strong> <br />
-            <small>[nome do user]</small> <br />
-            <small>[rua e numero]</small><br />
-            <small>[cidade , uf cep]</small><br />
-            <small>[pais]</small></p>
-            <p class="BoxRecibo"><strong>Opção de entrega:</strong> <br />
-            <small>[tipo de envio]</small>
+              <ul class="list-unstyled ">
+                                <li><strong>Endereço de cobrança:</strong></li>
+                                <li><small class="text-capitalize">@Model.Endereco.Nome</small></li>
+                                <li><small>@Model.Endereco.Endereco, @Model.Endereco.Numero</small></li>
+                                <li><small>@Model.Endereco.Cidade , @Model.Endereco.UF @Model.Endereco.Cep</small></li>
+                                <li><small>@Model.Endereco.Pais</small></li>
+              </ul>     
           </td>
           <td style="text-align:right;">
             <p>
-            <small>Subtotal do(s) item(ns):[valor]</small> <br />
-            <small>Frete e manuseio:R$ [valor]</small><br />
+            
+             <small>Subtotal do(s) item(ns): @Model.Produto[0].ValorTotal</small> <br />                
+            <small>Frete e manuseio:R$ 0</small><br />
             <small>-----</small><br />
-            <small>Total:R$[valor]</small><br />
+            <small>Total:R$@Model.Produto[0].ValorTotal</small><br />
             <small>-----</small><br />
-            <small>Total geral:R$[valor]</small>
+            <small><strong>Total geral:R$@Model.Produto[0].ValorTotal</strong></small>
             </p>            
           </td>     
         </tr>     
@@ -93,7 +115,7 @@
           <tbody>
             <tr>
               <th scope="row">Transações</th>
-              <td style="text-align:right;">[forma de pagamento]: [dia do pagamento]: R$ [valor]</td>     
+              <td style="text-align:right;">(Crédito) @Model.Cartao.Bandeira terminando em @Model.Cartao.QuatroDigCard: @Model.Produto[0].Data: R$ @Model.Produto[0].ValorTotal</td>     
             </tr>
             <tr>  
           </tbody>
