@@ -50,7 +50,7 @@
    <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow border-bottom">
 
           <div class="navbar-brand col-md-3 col-lg-2 me-0 px-3">
-               <a style="margin-left:30%;border-radius:100%; " title="Inicio" asp-area="" asp-controller="Home" asp-action="Home"><img style="border-radius:100%;" class="bordaTerra" src="https://images.vexels.com/media/users/3/152418/isolated/lists/098366e6994dd75ab46b47cd27b2c9d4-icone-do-planeta-terra.png" width = "50" /></a>
+               <a style="margin-left:30%;border-radius:100%; " title="Inicio" asp-area="" asp-controller="Home" asp-action="Home"><img style="border-radius:100%;" class="bordaTerra" src="https://images.vexels.com/media/users/3/152418/isolated/lists/098366e6994dd75ab46b47cd27b2c9d4-icone-do-planeta-terra.png" width = "70" /></a>
           </div>
           <button class="navbar-toggler d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -135,13 +135,13 @@
           </div>
     </header>
 
-    <div>
-        <main role="main" class="pb-3">
+    <div class="conteudo">
+        <main role="main" class="pb-3" >
             @RenderBody()
         </main>
     </div>        
-      <footer class="text-white mt-3 py-5 fixar-rodape">
-          <div class="container border-top py-2">
+      <footer class="text-white mt-3 py-0 fixar-rodape">
+          <div class="container py-2">
             <p class="float-end mb-1">     
                  <!-- <li class="ms-3"><a class="link-light social-svg" href="#"><svg role="img" class="bi" width="30" height="30" aria-label="Twitter"><title>Twitter</title><use xlink:href="#twitter"/></svg></a></li> -->
                   <a class="link-light social-svg" href="https://github.com/renan403"><svg role="img" class="bi" width="30" height="30" aria-label="Github"><title>Github</title> <use xlink:href="#github" /></svg></a>
@@ -151,6 +151,7 @@
             <p class="mb-0">Desenvolvido por mim <a href="https://github.com/renan403">Renan</a> com intuito de aprimorar meus conhecimentos em C# principalmente.</p>
           </div>
         </footer>
+
 
     
     <script src="/docs/5.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
