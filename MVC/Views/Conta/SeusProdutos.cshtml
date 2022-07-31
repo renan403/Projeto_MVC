@@ -28,8 +28,12 @@
             <div class="card-header" style="text-align:center"> 
                <h1 class="h3 mb-2 fw-normal">Seu produto</h1>
             </div>
-            <div class="card-body " >              
-               <form enctype="multipart/form-data" method="post" >       
+            <div class="card-body " > 
+                    @if(@ViewBag.Produtos.Length == 0)
+                    {
+                        <h5 style="text-align:center">Não há produto a venda</h5>
+                    }
+                    <form enctype="multipart/form-data" method="post" >       
                    @foreach ( var produto in ViewBag.Produtos)
                    {         
                      <div class="card shadow-sm">         
@@ -48,7 +52,7 @@
                          </div>
                          <div class="btn-group" role="group" aria-label="Basic example">
                           <button type="submit" name="botao" value="Deletar&&@produto.Key&&@produto.Object.UrlImg" class="btn btn-outline-dark btn-sm">Deletar</button>
-                          <button type="submit" name="botao" value="Alterar&&@produto.Key&&@produto.Object.UrlImg&&@produto.Object.IdProduto" class="btn btn-outline-dark btn-sm">Alterar</button>
+                          <button type="submit" name="botao" value="Alterar&&@produto.Key&&@produto.Object.UrlImg&&@produto.Object.IdProduto&&@produto.Object.Path" class="btn btn-outline-dark btn-sm">Alterar</button>
                        
                         </div>
                      </div> 

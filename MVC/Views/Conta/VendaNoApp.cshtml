@@ -1,7 +1,7 @@
 ﻿@model ModelProduto
 @{
     ViewBag.Title = "Venda no app";
-    List<string> categorias = new List<string>{"Computadores e informática", "Eletrônicos, TV e Áudio","Games e Consoles"};
+    List<string> categorias = new List<string>{"Computadores e informática", "Eletrônicos, TV e Áudio","Games e Consoles","Galáxia"};
 }
 
 @Html.AntiForgeryToken()
@@ -43,6 +43,10 @@
                 <div class="form-floating py-1"> 
                       @Html.TextBoxFor(m => m.ModeloProd, "", new {@id="ModeloProd",@class="form-control form-control-sm letraP",@type="text",@Required ="Required", @placeholder="#" ,@title="Modelo de produto", @autocomplete="off" })                           
                       <label class="letraP" for="ModeloProd">Modelo</label>                                                
+                </div> 
+                <div class="form-floating py-1"> 
+                      @Html.TextBoxFor(m => m.Fabricante, "", new {@id="Fabricante",@class="form-control form-control-sm letraP",@type="text",@Required ="Required", @placeholder="#" ,@title="Fabricante do produto", @autocomplete="off" })                           
+                      <label class="letraP" for="Fabricante">Fabricante</label>                                                
                 </div> 
                 <div class="form-floating py-1">                  
                       @Html.TextBoxFor(m => m.Qtd, "", new {@id="QtdProd",@class="form-control form-control-sm letraP",@type="text", @placeholder="#",@Required ="Required", @title="Quantidade do estoque" ,@onkeypress="return event.charCode >= 48 && event.charCode <= 57", @autocomplete="off"})                   

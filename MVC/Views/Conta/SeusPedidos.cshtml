@@ -19,6 +19,10 @@
 <div class="card text-dark bg-light mb-3" style="max-width:80%;margin:auto;border-radius:5px">   
      <div class="card" style="border:none">
           <div class="row justify-content-md-center">
+              @if(ViewBag.NotasFiscais != null)
+                    {
+                        <h5 style="text-align:center">Não há produto no seu historico de compra</h5>
+                    }
               @foreach(var item in ViewBag.NotasFiscais)
               {             
                  <div class="border-dark">

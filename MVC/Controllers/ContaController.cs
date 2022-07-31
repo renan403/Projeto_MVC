@@ -18,6 +18,8 @@ namespace MVC.Controllers
         [HttpGet]
         public IActionResult SuaConta()
         {
+            if (HttpContext.Session.GetString("IdUsuario") == "" || HttpContext.Session.GetString("IdUsuario") == null)
+                return RedirectToAction("HomeSair", "Home");
             using (GeralService geral = new())
             {
                 ViewBag.nomeUser = geral.RetornaNomeNull(HttpContext.Session.GetString("nomeFormatado") ?? "");
@@ -463,7 +465,8 @@ namespace MVC.Controllers
             {
                 using(ProdutoService prod = new())
                 {
-                   await prod.SubirImg(_env, p, idUser,0, HttpContext.Session.GetString("SessaoEmail"), HttpContext.Session.GetString("Senha"));
+                    using Data data = new();
+                   await prod.SubirImg(_env, p, idUser,0, HttpContext.Session.GetString("SessaoEmail"), HttpContext.Session.GetString("Senha"), (await data.RetornarArrayProdutosVendedor(idUser)).Length.ToString());
                 }
         
                 return RedirectToAction("SuaConta", "Conta");
@@ -472,7 +475,7 @@ namespace MVC.Controllers
             return RedirectToAction("Home", "Home");
         }
         [HttpPost]
-        public async Task<IActionResult> AlterarProduto(ModelProduto p, string Img,string id)
+        public async Task<IActionResult> AlterarProduto(ModelProduto p, string Img,string id, string path)
         {
             p.IdProduto = id;
             if (p.ImgArquivo != null)
@@ -485,9 +488,9 @@ namespace MVC.Controllers
                         using (ProdutoService prod = new())
                         {
                            
-                            await prod.SubirImg(_env, p, HttpContext.Session.GetString("IdUsuario"), 1, HttpContext.Session.GetString("SessaoEmail"), HttpContext.Session.GetString("Senha"));
+                            await prod.SubirImg(_env, p, HttpContext.Session.GetString("IdUsuario"), 1, HttpContext.Session.GetString("SessaoEmail"), HttpContext.Session.GetString("Senha"), path);
                         }
-                        await auth.DeleteOneImage(HttpContext.Session.GetString("IdUsuario"), HttpContext.Session.GetString("SessaoEmail"), HttpContext.Session.GetString("Senha"), Img);
+                        await auth.DeleteOneImage(HttpContext.Session.GetString("IdUsuario"), HttpContext.Session.GetString("SessaoEmail"), HttpContext.Session.GetString("Senha"), Img,path);
                     }
                 }
             }
@@ -516,6 +519,8 @@ namespace MVC.Controllers
             }
             using (Data data = new())
             {
+               var test = await data.RetornarArrayProdutosVendedor(HttpContext.Session.GetString("IdUsuario"));
+                var tes = test.Length;
                 ViewBag.Produtos = await data.RetornarArrayProdutosVendedor(HttpContext.Session.GetString("IdUsuario"));
             }
             return View();
@@ -527,16 +532,15 @@ namespace MVC.Controllers
             string opcao = separador[0];
             string ChaveProd = separador[1];
             string foto = ProdutoService.PegarNomeUrl(separador[2]);
+            
             switch (opcao)
             {
                 case "Deletar":
                     using (Data data = new())
                         await data.DeleteUmProduto(ChaveProd);
-                    using (Auth auth = new())
-                        await auth.DeleteOneImage(HttpContext.Session.GetString("IdUsuario"), HttpContext.Session.GetString("SessaoEmail"), HttpContext.Session.GetString("Senha"), foto);
                     return RedirectToAction("SeusProdutos","Conta");
                 case "Alterar":
-                    return RedirectToAction("AlterarProduto", "Conta", new {Img = foto,Id = separador[3] });
+                    return RedirectToAction("AlterarProduto", "Conta", new {Img = foto,Id = separador[3], Path= separador[4] });
             }
             return View();
         }

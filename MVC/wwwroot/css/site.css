@@ -112,6 +112,7 @@ footer.fixar-rodape {
     background-color: white
 }
 .bordarParaTest {
+ 
     border: dotted;
     border-color: red;
     border-width: 1px
@@ -332,7 +333,7 @@ fontsmall{
 }
 .cardConta {
     width: 23rem;
-    height: 8rem;
+    height: 10rem;
 }
 
    
@@ -528,7 +529,7 @@ body {
     margin-right: auto
 }
 .boxConta {
-    margin-top: 5%
+    margin-top: 9%
 }
 /* Home fim */
 /* Carrinho */

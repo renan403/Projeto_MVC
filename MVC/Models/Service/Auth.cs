@@ -14,12 +14,13 @@ namespace MVC.Models.Service
         {                 
             auth = new FirebaseAuthProvider(new FirebaseConfig("AIzaSyC6L9Knos384ZHZPfVOsaTU5wFldlB1JMs"));
         }   
-        public async Task<string> UploadImage(IWebHostEnvironment env, IFormFile? file, string userID,string email,string senha)
+        public async Task<string> UploadImage(IWebHostEnvironment env, IFormFile? file, string userID,string email,string senha, string caminho)
         {
             if(file.Length < 1)
             {
                 return String.Empty;                                                                      
-            }                                                                                             
+            }
+            using Data data = new();        
             string? downloadUrl = null;                                                                   
             var token = await auth.SignInWithEmailAndPasswordAsync(email, senha);
             var path = Path.Combine(env.WebRootPath, $"img\\Temp\\{file.FileName}");                      
@@ -33,6 +34,7 @@ namespace MVC.Models.Service
                               ThrowOnCancel = true
                           }).Child("products")
                             .Child(userID)
+                            .Child(caminho)
                             .Child(file.FileName)
                             .PutAsync(fs, canc.Token);
               downloadUrl = await storage;
@@ -76,7 +78,7 @@ namespace MVC.Models.Service
             
 
         }
-        public async Task DeleteOneImage(string userId,string email, string senha ,string nomeImg )
+        public async Task DeleteOneImage(string userId,string email, string senha ,string nomeImg,string path )
         {
             try
             {
@@ -88,7 +90,7 @@ namespace MVC.Models.Service
                           {
                               AuthTokenAsyncFactory = () => Task.FromResult(token.FirebaseToken),
                               ThrowOnCancel = true
-                          }).Child("products").Child(userId).Child(nomeImg).DeleteAsync();
+                          }).Child("products").Child(userId).Child(path).Child(nomeImg).DeleteAsync();
                 storage.Wait();
             }
             catch (Exception ex)

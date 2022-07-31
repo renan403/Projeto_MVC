@@ -22,6 +22,8 @@
         public bool? Cancelado { get; set; }
         public bool? Enviado { get; set; }
         public bool? Recebido { get; set; }
+        public string? Fabricante { get; set; }
+        public string? Path { get; set; }
     }
     public class ModelNotaFiscal
     {

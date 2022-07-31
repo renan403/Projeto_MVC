@@ -44,6 +44,10 @@
                        <label class="letraP" for="ModeloProd">Modelo</label>
                                                  
                    </div> 
+                   <div class="form-floating py-1"> 
+                      @Html.TextBoxFor(m => m.Fabricante, "", new {@id="Fabricante",@class="form-control form-control-sm letraP",@type="text", @placeholder="#" ,@title="Fabricante do produto", @autocomplete="off" })                           
+                      <label class="letraP" for="Fabricante">Fabricante</label>                                                
+                   </div> 
                    <div class="form-floating py-1">                  
                        @Html.TextBoxFor(m => m.QtdPorProd, "", new {@id="QtdProd",@class="form-control form-control-sm letraP",@type="text", @placeholder="#",@title="Quantidade do estoque" ,@onkeypress="return event.charCode >= 48 && event.charCode <= 57", @autocomplete="off"})                   
                       <label class="letraP" for="QtdProd">Quantidade em estoque</label>

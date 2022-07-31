@@ -12,10 +12,10 @@
         {
             string separar = url;
             string[] separar1 = separar.Split("%2F");
-            string[] separar2 = separar1[2].Split("?");
+            string[] separar2 = separar1[3].Split("?");
             return separar2[0];
         }
-        public async Task SubirImg(IWebHostEnvironment _iweb, ModelProduto p ,string idUser , int opcao, string email, string senha)
+        public async Task SubirImg(IWebHostEnvironment _iweb, ModelProduto p ,string idUser , int opcao, string email, string senha, string caminho)
         {
             using (Auth auth = new())
             {
@@ -35,7 +35,7 @@
                             throw;
                         }
                         using Auth storage = new();
-                        var url = await storage.UploadImage(_iweb, p.ImgArquivo, idUser, email, senha);
+                        var url = await storage.UploadImage(_iweb, p.ImgArquivo, idUser, email, senha, caminho);
                         using Data data = new();
                         string nomeVendedor = await data.RetornaNome(idUser);
                         p.NomeVendedor = nomeVendedor;
@@ -44,10 +44,12 @@
                         
                         switch (opcao)
                         {
-                            case 0:                                
+                            case 0: 
+                                p.Path = caminho;
                                 await data.AddProduto(idUser,p);
                                 break;
                             case 1:
+                                p.Path = caminho;
                                 await data.AlterarProduto(idUser,p);
                                 break;
                         }

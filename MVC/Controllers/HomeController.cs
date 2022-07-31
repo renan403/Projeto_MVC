@@ -10,15 +10,14 @@ namespace MVC.Controllers
 
         public async Task<IActionResult> Home()
         {
-
             //return RedirectToAction("DetalhePedido", "Conta");
             using Auth auth = new();
          
 
             using (Data data = new())
             {
-               
-                
+
+               //var quant = (await data.RetornarArrayProdutosVendedor("aK8aShCLmIjmRRerc1ErIl7THjjmPTOG1GH7cPFT")).Length;
                 await data.Teste();
                 ViewBag.Produtos = await data.RetornaArrayProdutos();
 

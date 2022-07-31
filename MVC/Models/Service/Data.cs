@@ -112,13 +112,13 @@ namespace MVC.Models.Service
         public async Task<string> SalvarCard(string userId, ModelCartao model)
         {
             string cvvstring = model.Cvv.ToString();
-            if (model.Bandeira == "Amex" && cvvstring.Length < 3)
+            if (model.Bandeira == "Amex" && cvvstring.Length < 4)
             {
-                return "⚠️ Cartão não adicionado CVV Faltando 1 número.";
+                return "⚠️ Cartão não adicionado, CVV Faltando 1 número.";
             }
             else if (model.Bandeira != "Amex" && cvvstring.Length > 3)
             {
-                return "⚠️ Cartão não adicionado CVV está com 1 número a mais.";
+                return "⚠️ Cartão não adicionado, CVV está com 1 número a mais.";
             }
             else
             {
@@ -362,11 +362,10 @@ namespace MVC.Models.Service
                 try
                 {
                     foreach (var i in produtos)
-                    {
-                        using ProdutoService p = new();
+                    {                      
                         try
                         {
-                            await auth.DeleteOneImage(userId, email, senha, ProdutoService.PegarNomeUrl(i.Object.UrlImg));
+                            await auth.DeleteOneImage(userId, email, senha, ProdutoService.PegarNomeUrl(i.Object.UrlImg), i.Object.Path);
                             await DeleteUmProduto(i.Key);
                         }
                         catch
@@ -638,6 +637,8 @@ namespace MVC.Models.Service
             objt.UrlImg = model.UrlImg ?? objt.UrlImg;
             objt.NomeProd = model.NomeProd ?? objt.NomeProd;
             objt.ModeloProd = model.ModeloProd ?? objt.ModeloProd;
+            objt.Fabricante = model.Fabricante ?? objt.Fabricante;
+            objt.Path = model.Path ?? objt.Path;
 
             await client.Child($"Produtos/{retorno}").PatchAsync(objt);
             return false;

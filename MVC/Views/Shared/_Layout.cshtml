@@ -58,12 +58,19 @@
 
         
 
-          <div class="d-flex" >
-              <input size="90" type="text" class="form-control form-control-dark semBordaDireita" placeholder="Pesquisar " aria-label="Search" aria-describedby="BarraDePesquisa">
-              <a href="#">
-              <span class="input-group-text semBordaEsquerda" id="BarraDePesquisa"  style="background:orange; border-color:orange;"><img src="~/icones/search.svg" style="width:22px;height:23px" alt="" /></span>
-              </a>
+          <div >
+              <span class="d-flex"  data-bs-container="body" data-bs-trigger="focus" data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Não desenvolvido">
+                 <input size="90" type="text" class="form-control form-control-dark semBordaDireita" placeholder="Pesquisar " aria-label="Search" aria-describedby="BarraDePesquisa"> 
+                 <a href="#">
+                     <span class="input-group-text semBordaEsquerda" id="BarraDePesquisa"  style="background:orange; border-color:orange;"><img src="~/icones/search.svg" style="width:22px;height:23px" alt="" /></span>
+                 </a>
+              </span>
           </div>
+          <script type="text/javascript">
+              $(document).ready(function(){
+                  $('[data-bs-toggle="popover"]').popover();
+              });
+          </script>
           @if(ViewBag.nomeUser == null)
             {
                 <a  class="nav-link bordaBottomLogin px-5 py-2 text-Laranja " style="width:150px" data-bs-toggle="modal" data-bs-target="#ModalEndereco">           
@@ -106,11 +113,11 @@
                <div class="dropdown ">                       
                   @if(ViewBag.nomeUser != null)
                   {
-                      @Html.ActionLink($"{@ViewBag.nomeUser}","SuaConta","Conta",null, new {@class="nav-link bordaBottomLogin dropdown-toggle px-5 text-Laranja",@style="margin-right:20px",@id="dropdownMenuButton2",@aria_expanded="false"})
+                      @Html.ActionLink($"{@ViewBag.nomeUser}","SuaConta","Conta",null, new {@class="nav-link bordaBottomLogin dropdown-toggle px-5 text-Laranja",@style="margin-right:25px",@id="dropdownMenuButton2",@aria_expanded="false"})
                   }                           
                   else
                   {
-                      @Html.ActionLink("Fazer Login","Login","Login",null, new {@class="nav-link bordaBottomLogin dropdown-toggle px-5 text-Laranja",@style="margin-right:20px",@id="dropdownMenuButton2",@aria_expanded="false"})
+                      @Html.ActionLink("Fazer Login","Login","Login",null, new {@class="nav-link bordaBottomLogin dropdown-toggle px-5 text-Laranja",@style="margin-right:25px",@id="dropdownMenuButton2",@aria_expanded="false"})
                   }                  
                   @if(ViewBag.nomeUser!= null)
                   {                                                 
