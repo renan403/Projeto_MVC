@@ -1,5 +1,6 @@
 # Projeto_MVC_OLD
 
+### Estou atualizando esse mesmo projeto em outro repositorio segue o link https://github.com/renan403/Projeto_cSharp
 
 O objetivo que tenho é praticar a linguagem C# para desenvolver um pequeno site de compra utilizando firebase realtime, authenticator e storage, ainda não é a conclusão dele, com o tempo que eu for mexendo irei atualizando e melhorando.
 
